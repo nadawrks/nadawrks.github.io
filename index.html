@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>nada_works</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html, body {
+      height: 100%;
+      background: #0a0a0a;
+      color: #b0b0b0;
+      font-family: 'Space Mono', 'Courier New', monospace;
+      font-size: 16px;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    body {
+      display: flex;
+      align-items: center;
+      min-height: 100vh;
+      position: relative;
+    }
+
+    .scanlines {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 10;
+      background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(0, 120, 0, 0.04) 2px,
+        rgba(0, 120, 0, 0.04) 3px
+      );
+    }
+
+    .phosphor {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9;
+      background: radial-gradient(
+        ellipse at 50% 0%,
+        rgba(0, 160, 50, 0.10) 0%,
+        transparent 55%
+      );
+    }
+
+    .glyph-field {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      display: grid;
+      grid-template-columns: repeat(18, 1fr);
+      padding: 20px 30px;
+      font-family: 'Courier New', monospace;
+      font-size: 11px;
+      line-height: 1.9;
+      color: #0a140a;
+      user-select: none;
+      pointer-events: none;
+      align-content: start;
+      overflow: hidden;
+    }
+
+    .content {
+      position: relative;
+      z-index: 1;
+      padding: 60px 40px 60px 40px;
+      max-width: 640px;
+    }
+
+    .org-name {
+      font-size: 28px;
+      color: #D4AF37;
+      margin-bottom: 10px;
+      text-shadow: 0 0 8px rgba(212, 175, 55, 0.3);
+      letter-spacing: 0.5px;
+    }
+
+    .tagline {
+      font-size: 14px;
+      color: #4a7a4a;
+      text-shadow: 0 0 4px rgba(0, 120, 40, 0.2);
+      margin-bottom: 56px;
+    }
+
+    .product-name {
+      font-size: 17px;
+      color: #888888;
+      margin-bottom: 6px;
+    }
+
+    .product-desc {
+      font-size: 12px;
+      color: #557755;
+    }
+
+    .product-note {
+      font-size: 10px;
+      color: #3a5a3a;
+      margin-top: 4px;
+    }
+
+    @media (max-width: 768px) {
+      .glyph-field { display: none; }
+      .content { padding: 40px 24px 40px 24px; }
+      .org-name { font-size: 22px; }
+      .tagline { margin-bottom: 44px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .glyph-field { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="scanlines"></div>
+  <div class="phosphor"></div>
+  <div class="glyph-field" id="glyph-field"></div>
+
+  <div class="content">
+    <div class="org-name">nada_works</div>
+    <div class="tagline">we are here.</div>
+    <div class="product-name">nadatrade</div>
+    <div class="product-desc">fix/ws matching engine</div>
+    <div class="product-note">[ site pending ]</div>
+  </div>
+
+  <script>
+    (function () {
+      const COLS = 18;
+      const ROWS = 14;
+      const CHARS = '!@#$%^&*()-_=+[]{}|;:,.<>?/~`0123456789abcdefABCDEF';
+      const MIN_INTERVAL = 200;
+      const MAX_INTERVAL = 800;
+      const CHARS_PER_TICK = 3;
+
+      const field = document.getElementById('glyph-field');
+      if (!field) return;
+
+      const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+      if (mq.matches) return;
+
+      const cells = [];
+      for (let i = 0; i < COLS * ROWS; i++) {
+        const span = document.createElement('span');
+        span.textContent = CHARS[Math.floor(Math.random() * CHARS.length)];
+        field.appendChild(span);
+        cells.push(span);
+      }
+
+      function tick() {
+        for (let i = 0; i < CHARS_PER_TICK; i++) {
+          const idx = Math.floor(Math.random() * cells.length);
+          cells[idx].textContent = CHARS[Math.floor(Math.random() * CHARS.length)];
+        }
+        schedule();
+      }
+
+      function schedule() {
+        const delay = MIN_INTERVAL + Math.random() * (MAX_INTERVAL - MIN_INTERVAL);
+        setTimeout(tick, delay);
+      }
+
+      schedule();
+    })();
+  </script>
+</body>
+</html>
