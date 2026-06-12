@@ -3,28 +3,102 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="nada_works — software engineering collective. FIX/WS matching engines, exchange infrastructure, and trading systems.">
+  <meta property="og:title" content="nada_works">
+  <meta property="og:description" content="FIX/WS matching engines, exchange infrastructure, and trading systems.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://nada.works">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="nada_works">
+  <meta name="twitter:description" content="FIX/WS matching engines, exchange infrastructure, and trading systems.">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <title>nada_works</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Mono&display=swap" rel="stylesheet">
   <style>
-    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
-    html, body {
-      height: 100%;
-      background: #0a0a0a;
-      color: #b0b0b0;
-      font-family: 'Space Mono', 'Courier New', monospace;
-      font-size: 16px;
-      line-height: 1.6;
-      overflow-x: hidden;
+    @font-face {
+      font-family: 'IBM VGA 9x16';
+      src: url(WebPlus_IBM_VGA_9x16.woff) format('woff');
+    }
+    @font-face {
+      font-family: 'IBM VGA 8x16';
+      src: url(WebPlus_IBM_VGA_8x16.woff) format('woff');
     }
 
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --c-bg:       #000000;
+      --c-text:     #AAAAAA;
+      --c-bright:   #FFFFFF;
+      --c-dim:      #888888;
+      --c-dark:     #555555;
+      --c-green:    #00AA00;
+      --c-brgreen:  #55FF55;
+      --c-cyan:     #00AAAA;
+      --c-yellow:   #FFFF55;
+      --ff-vga9:    'IBM VGA 9x16', monospace;
+      --ff-vga8:    'IBM VGA 8x16', monospace;
+      --cell-h:     16px;
+      --cell-w:     8px;
+      --cols:       80;
+    }
+
+    html {
+      height: 100%;
+      overflow-x: hidden;
+      overflow-y: auto;
+      background: var(--c-bg);
+      scrollbar-color: var(--c-dark) var(--c-bg);
+      scrollbar-width: thin;
+    }
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: var(--c-bg); }
+    ::-webkit-scrollbar-thumb { background: var(--c-dark); }
+    ::-webkit-scrollbar-thumb:hover { background: #666666; }
+
     body {
+      min-height: 100dvh;
       display: flex;
-      align-items: center;
-      min-height: 100vh;
+      align-items: safe center;
+      justify-content: safe center;
+      background: var(--c-bg);
+      font-family: var(--ff-vga8);
+      font-size: var(--cell-h);
+      line-height: 1;
+      color: var(--c-text);
+      -webkit-font-smoothing: none;
+      -moz-osx-font-smoothing: unset;
+      font-smooth: never;
+      image-rendering: pixelated;
       position: relative;
+      animation: crt-power-on 0.7s ease-out;
+    }
+
+    @keyframes crt-power-on {
+      0%   { filter: brightness(0) blur(2px); }
+      3%   { filter: brightness(12) blur(1.5px); }
+      10%  { filter: brightness(1.5) blur(0.5px); }
+      25%  { filter: brightness(1.08); }
+      50%  { filter: brightness(1.02); }
+      100% { filter: brightness(1) blur(0); }
+    }
+
+    .crt-noise {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 8;
+      opacity: 0.045;
+      mix-blend-mode: overlay;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-size: 256px 256px;
+    }
+
+    .crt-vignette {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 5;
+      background: radial-gradient(ellipse at center, transparent 55%, rgba(0,0,0,0.50) 85%, rgba(0,0,0,0.85) 100%);
     }
 
     .scanlines {
@@ -33,24 +107,38 @@
       pointer-events: none;
       z-index: 10;
       background: repeating-linear-gradient(
-        0deg,
-        transparent,
-        transparent 2px,
-        rgba(0, 120, 0, 0.04) 2px,
-        rgba(0, 120, 0, 0.04) 3px
+        to bottom,
+        transparent 0px,
+        transparent 15px,
+        rgba(0,0,0,0.09) 15px,
+        rgba(0,0,0,0.09) 16px
       );
     }
 
-    .phosphor {
+    .crt-flicker {
       position: fixed;
       inset: 0;
       pointer-events: none;
       z-index: 9;
-      background: radial-gradient(
-        ellipse at 50% 0%,
-        rgba(0, 160, 50, 0.10) 0%,
-        transparent 55%
-      );
+      background: rgba(255,255,255,0.008);
+      animation: flicker 8s infinite;
+      opacity: 0;
+    }
+    @keyframes flicker {
+      0%,100%{opacity:0} 2%{opacity:.05} 3%{opacity:0} 49%{opacity:0} 50%{opacity:.03} 51%{opacity:0} 87%{opacity:0} 88%{opacity:.04} 89%{opacity:0}
+    }
+
+    .cursor-glow {
+      position: fixed;
+      pointer-events: none;
+      z-index: 4;
+      width: 500px; height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(200,200,200,.015) 0%, rgba(140,140,140,.008) 40%, transparent 65%);
+      transform: translate(-50%,-50%);
+      transition: opacity 1.5s ease;
+      will-change: left, top;
+      opacity: 0;
     }
 
     .glyph-field {
@@ -58,119 +146,201 @@
       inset: 0;
       z-index: 0;
       display: grid;
-      grid-template-columns: repeat(18, 1fr);
-      padding: 20px 30px;
-      font-family: 'Courier New', monospace;
-      font-size: 11px;
-      line-height: 1.9;
-      color: #0a140a;
+      grid-template-columns: repeat(24, 1fr);
+      padding: 16px 24px;
+      font-family: var(--ff-vga8);
+      font-size: 9px;
+      line-height: 1;
+      color: #080808;
       user-select: none;
       pointer-events: none;
       align-content: start;
       overflow: hidden;
     }
 
-    .content {
+    .screen {
       position: relative;
-      z-index: 1;
-      padding: 60px 40px 60px 40px;
-      max-width: 640px;
+      z-index: 2;
+      width: min(calc(var(--cols) * var(--cell-w)), 100vw - 2rem);
+      border: 2px solid;
+      border-color: var(--c-bright) var(--c-dark) var(--c-dark) var(--c-bright);
+      outline: 1px solid #222222;
+      outline-offset: 2px;
+      padding: 2em 2ch 1em;
+      font-family: var(--ff-vga8);
+      font-size: var(--cell-h);
+      line-height: 1;
+      background: var(--c-bg);
     }
 
-    .org-name {
-      font-size: 28px;
-      color: #D4AF37;
-      margin-bottom: 10px;
-      text-shadow: 0 0 8px rgba(212, 175, 55, 0.3);
-      letter-spacing: 0.5px;
-    }
+    .t-name    { color: var(--c-bright);    text-shadow: 0 0 1px rgba(255,255,255,0.30); }
+    .t-tagline { color: var(--c-bright);    text-shadow: 0 0 2px rgba(255,255,255,0.45); }
+    .t-label   { color: var(--c-bright);    text-shadow: 0 0 1px rgba(255,255,255,0.30); }
+    .t-desc    { color: var(--c-text); }
+    .t-dim     { color: var(--c-dim); }
+    .t-rule    { color: var(--c-dark); }
+    .t-link    { color: var(--c-cyan); text-decoration: none; cursor: pointer; transition: background-color 0.12s, color 0.12s; }
+    .t-link:hover { color: var(--c-bg); background: var(--c-cyan); text-shadow: none; }
+    .t-link:focus-visible { outline: 2px solid var(--c-cyan); outline-offset: 2px; }
+    .t-ok       { color: var(--c-bright);   text-shadow: 0 0 2px rgba(255,255,255,0.40); }
 
-    .tagline {
-      font-size: 14px;
-      color: #4a7a4a;
-      text-shadow: 0 0 4px rgba(0, 120, 40, 0.2);
-      margin-bottom: 56px;
+    .blink-cursor {
+      display: inline-block;
+      width: 1ch;
+      height: var(--cell-h);
+      position: relative;
+      vertical-align: baseline;
     }
-
-    .product-name {
-      font-size: 17px;
-      color: #888888;
-      margin-bottom: 6px;
+    .blink-cursor::after {
+      content: '';
+      position: absolute;
+      bottom: 1px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: var(--c-bright);
+      box-shadow: 0 0 2px rgba(255,255,255,0.5);
+      animation: cursor-blink 1s step-end infinite;
     }
+    @keyframes cursor-blink { 0%,100%{opacity:1} 49.9%{opacity:0} }
 
-    .product-desc {
-      font-size: 12px;
-      color: #557755;
-    }
-
-    .product-note {
+    .power-led {
+      position: fixed;
+      bottom: 12px; right: 20px;
+      z-index: 11;
       font-size: 10px;
-      color: #3a5a3a;
-      margin-top: 4px;
+      font-family: var(--ff-vga8);
+      color: #002200;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      user-select: none;
+      letter-spacing: 1px;
+    }
+    .power-led::before {
+      content: '';
+      display: block;
+      width: 5px; height: 5px;
+      background: var(--c-brgreen);
+      box-shadow: 0 0 5px rgba(85,255,85,.7);
+      animation: led-pulse 4s ease-in-out infinite;
+    }
+    @keyframes led-pulse {
+      0%,100%{opacity:1}
+      50%{opacity:0.75}
     }
 
     @media (max-width: 768px) {
       .glyph-field { display: none; }
-      .content { padding: 40px 24px 40px 24px; }
-      .org-name { font-size: 22px; }
-      .tagline { margin-bottom: 44px; }
+      .screen { padding: 1em 1ch 0.5em; outline-offset: 1px; }
     }
-
     @media (prefers-reduced-motion: reduce) {
-      .glyph-field { display: none; }
+      .glyph-field, .crt-flicker { display: none; }
+      body { animation: none; }
+      .power-led::before { animation: none; }
+      .blink-cursor::after { animation: none; opacity: 1; }
     }
   </style>
 </head>
 <body>
-  <div class="scanlines"></div>
-  <div class="phosphor"></div>
-  <div class="glyph-field" id="glyph-field"></div>
+  <div class="crt-vignette" aria-hidden="true"></div>
+  <div class="scanlines" aria-hidden="true"></div>
+  <div class="crt-flicker" aria-hidden="true"></div>
+  <div class="crt-noise" aria-hidden="true"></div>
+  <div class="cursor-glow" id="cursor-glow" aria-hidden="true"></div>
+  <div class="glyph-field" id="glyph-field" aria-hidden="true"></div>
 
-  <div class="content">
-    <div class="org-name">nada_works</div>
-    <div class="tagline">we are here.</div>
-    <div class="product-name">nadatrade</div>
-    <div class="product-desc">fix/ws matching engine</div>
-    <div class="product-note"><a href="https://nada.works/trade" style="color: #6a9a6a; text-decoration: none; border-bottom: 1px solid #335533;">nada.works/trade</a></div>
+  <main>
+  <div class="screen">
+
+    <span class="t-dim">Phoenix 80286 ROM BIOS PLUS Version 1.10 00</span><br><br>
+
+    <span class="t-dim">00640 KB Base Memory</span>  <span class="t-dim"> — </span>  <span class="t-dim">OK</span><br>
+    <span class="t-dim">02048 KB Extended</span>     <span class="t-dim"> — </span>  <span class="t-dim">OK</span><br><br>
+
+    <span class="t-dim">Fixed Disk 0 : Type 47 — 20 MB</span><br>
+    <span class="t-dim">Floppy Diskette A : 1.44M, 3.5 in.</span><br><br>
+
+    <span class="t-dim">Starting MS-DOS...</span><br><br>
+
+    <span class="t-dim">C:\&gt;nadaworks</span><br><br>
+
+    <span class="t-dim">┌─────────────────────┐</span><br>
+    <span class="t-dim">│</span><span class="t-name"> n a d a _ w o r k s </span><span class="t-dim">│</span><br>
+    <span class="t-dim">└─────────────────────┘</span><br>
+
+    <span class="t-dim">(c) 2026 nada.works — all rights reversed.</span><br>
+    <span class="t-dim">640K RAM OK • DOS 3.30 • System ready.</span><br><br>
+
+    <span class="t-label">Products</span><br>
+    <span class="t-rule">──────────────────────────────────────────────────────────────────</span><br><br>
+
+    <span class="t-name">nadatrade</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="t-desc">FIX/WS matching engine</span><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="t-link" href="https://nada.works/trade">nada.works/trade</a><br><br>
+
+    <span class="t-dim">C:\&gt;</span> <span class="t-tagline" id="tagline"></span><span class="blink-cursor" id="tagline-cursor"></span><br>
+    &nbsp;
   </div>
+  </main>
+
+  <div class="power-led">POWER</div>
 
   <script>
     (function () {
-      const COLS = 18;
-      const ROWS = 14;
-      const CHARS = '!@#$%^&*()-_=+[]{}|;:,.<>?/~`0123456789abcdefABCDEF';
-      const MIN_INTERVAL = 200;
-      const MAX_INTERVAL = 800;
-      const CHARS_PER_TICK = 3;
-
-      const field = document.getElementById('glyph-field');
+      var COLS = 24, ROWS = 18;
+      var CP = '\u2591\u2592\u2593\u2588\u2580\u2584\u258C\u2590\u2500\u2502\u250C\u2510\u2514\u2518\u251C\u2524\u252C\u2534\u253C\u2550\u2551!@#$%^&*()-_=+[]{}|;:,.<>?/~`0123456789abcdefABCDEF';
+      var MIN_I = 150, MAX_I = 650, PER_TICK = 4;
+      var field = document.getElementById('glyph-field');
       if (!field) return;
-
-      const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
-      if (mq.matches) return;
-
-      const cells = [];
-      for (let i = 0; i < COLS * ROWS; i++) {
-        const span = document.createElement('span');
-        span.textContent = CHARS[Math.floor(Math.random() * CHARS.length)];
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      var cells = [];
+      for (var i = 0; i < COLS * ROWS; i++) {
+        var span = document.createElement('span');
+        span.textContent = CP[Math.floor(Math.random() * CP.length)];
         field.appendChild(span);
         cells.push(span);
       }
-
       function tick() {
-        for (let i = 0; i < CHARS_PER_TICK; i++) {
-          const idx = Math.floor(Math.random() * cells.length);
-          cells[idx].textContent = CHARS[Math.floor(Math.random() * CHARS.length)];
+        for (var i = 0; i < PER_TICK; i++) {
+          var idx = Math.floor(Math.random() * cells.length);
+          cells[idx].textContent = CP[Math.floor(Math.random() * CP.length)];
         }
-        schedule();
+        setTimeout(tick, MIN_I + Math.random() * (MAX_I - MIN_I));
+      }
+      tick();
+
+      var glow = document.getElementById('cursor-glow');
+      if (glow && !('ontouchstart' in window)) {
+        var raf, mx = -1000, my = -1000;
+        document.addEventListener('mousemove', function (e) {
+          mx = e.clientX; my = e.clientY;
+          if (!raf) raf = requestAnimationFrame(function () {
+            glow.style.left = mx + 'px';
+            glow.style.top = my + 'px';
+            glow.style.opacity = '1';
+            raf = null;
+          });
+        });
+        document.addEventListener('mouseleave', function () {
+          glow.style.opacity = '0';
+        });
       }
 
-      function schedule() {
-        const delay = MIN_INTERVAL + Math.random() * (MAX_INTERVAL - MIN_INTERVAL);
-        setTimeout(tick, delay);
-      }
-
-      schedule();
+      (function typewriter() {
+        var el = document.getElementById('tagline');
+        var cur = document.getElementById('tagline-cursor');
+        if (!el) return;
+        var text = ' we are here.';
+        var i = 0;
+        function type() {
+          if (i < text.length) {
+            el.textContent += text[i];
+            i++;
+            setTimeout(type, 80 + Math.random() * 60);
+          }
+        }
+        setTimeout(type, 1200);
+      })();
     })();
   </script>
 </body>

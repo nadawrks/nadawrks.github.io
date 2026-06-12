@@ -35,7 +35,7 @@
             const path_to_root = "../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../searchindex-8fb08360.js";
+            window.path_to_searchindex_js = "../searchindex-9bfa27cc.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="../toc-00c5fce9.js"></script>
@@ -242,19 +242,21 @@ using custom tags 553 (Username) and 554 (Password).</p>
 <h3 id="configuring-credentials"><a class="header" href="#configuring-credentials">Configuring Credentials</a></h3>
 <p>FIX credentials are checked against a <code>HashMap&lt;String, String&gt;</code> on the
 <code>FixSession</code>. When credentials are configured, logon is rejected for unknown
-usernames or wrong passwords. When credentials are empty (default), all logon
-attempts succeed.</p>
+usernames or wrong passwords. When credentials are empty, logon is <strong>rejected</strong>
+unless <code>allow_no_auth</code> is explicitly set to <code>true</code>.</p>
 <p>In code (from <code>nadatrade-fix</code>):</p>
 <pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
-</span>// Empty = open access (dev mode)
+</span>// Dev mode — must opt in
 session.credentials = HashMap::new();
+session.allow_no_auth = true;
 
-// Restricted = only these users
+// Production — require credentials
 session.credentials = {
     "alice".into() =&gt; "alice-pass".into(),
     "bob".into()   =&gt; "bob-fix-key".into(),
 };
+session.allow_no_auth = false; // default
 <span class="boring">}</span></code></pre>
 <h3 id="password-best-practices"><a class="header" href="#password-best-practices">Password Best Practices</a></h3>
 <ul>

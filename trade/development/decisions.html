@@ -35,7 +35,7 @@
             const path_to_root = "../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../searchindex-8fb08360.js";
+            window.path_to_searchindex_js = "../searchindex-9bfa27cc.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="../toc-00c5fce9.js"></script>
@@ -385,6 +385,108 @@ only, per spec §8.2.</p>
 auction, which could produce unexpected fills. Market and stop orders have no
 meaningful auction behavior.</p>
 <p><strong>Impact:</strong> <code>nadatrade-matching</code> (engine order gating).</p>
+<hr>
+<h2 id="2026-06-12-settlement-cash-deferred-to-sweep-only"><a class="header" href="#2026-06-12-settlement-cash-deferred-to-sweep-only">2026-06-12: Settlement cash deferred to sweep only</a></h2>
+<p><strong>Decision:</strong> <code>settle_trade()</code> no longer adjusts cash immediately. Cash moves
+only during <code>sweep_settlements()</code> when the T+N obligation matures.</p>
+<p><strong>Rationale:</strong> The previous code adjusted cash both at trade time AND at
+settlement time, double-counting every trade’s cash impact. Deferring cash
+movement to settlement sweep matches real-world T+N settlement where cash
+isn’t available until the obligation clears.</p>
+<p><strong>Impact:</strong> <code>nadatrade-postrade</code> (settlement).</p>
+<hr>
+<h2 id="2026-06-12-messagestore-append-only-architecture"><a class="header" href="#2026-06-12-messagestore-append-only-architecture">2026-06-12: MessageStore append-only architecture</a></h2>
+<p><strong>Decision:</strong> The store O(n²) rewrite-on-every-record pattern replaced with
+append-only writes. Header (<code>last_seq_in</code>, <code>last_seq_out</code>) lives in a
+separate <code>&lt;identity&gt;.fixheader</code> file.</p>
+<p><strong>Rationale:</strong> Rewriting the entire log file on every inbound/outbound record
+is O(n²) I/O and corrupts the entire store on crash. Append-only entries with
+a separate small header file eliminates both problems. All <code>expect()</code> panics
+removed; I/O errors handled gracefully.</p>
+<p><strong>Impact:</strong> <code>nadatrade-fix</code> (store).</p>
+<hr>
+<h2 id="2026-06-12-acceleratedclock-rwlock-replaces-unsafecell"><a class="header" href="#2026-06-12-acceleratedclock-rwlock-replaces-unsafecell">2026-06-12: AcceleratedClock RwLock replaces UnsafeCell</a></h2>
+<p><strong>Decision:</strong> <code>UnsafeCell&lt;f64&gt;</code> + <code>unsafe impl Sync</code> replaced with
+<code>RwLock&lt;f64&gt;</code>. <code>paused_at</code> field stores the time when paused instead of
+returning <code>sim_start</code>.</p>
+<p><strong>Rationale:</strong> The <code>UnsafeCell&lt;f64&gt;</code> had a data race (undefined behavior) on
+concurrent <code>set_factor()</code> and <code>now()</code> calls. <code>RwLock</code> provides safe interior
+mutability. Returning <code>sim_start</code> when paused caused backwards time travel;
+returning the paused-at time preserves monotonicity.</p>
+<p><strong>Impact:</strong> <code>nadatrade-simulation</code> (clock).</p>
+<hr>
+<h2 id="2026-06-12-pretradeactor-active_order_ids-lifecycle"><a class="header" href="#2026-06-12-pretradeactor-active_order_ids-lifecycle">2026-06-12: PretradeActor active_order_ids lifecycle</a></h2>
+<p><strong>Decision:</strong> Background task now removes <code>(participant, instrument, client_order_id)</code> tuples on <code>OrderFilled</code> and <code>OrderExpired</code> events, not just
+<code>OrderCancelled</code>.</p>
+<p><strong>Rationale:</strong> Previously, once an order filled or expired, its ClOrdID was
+permanently stuck in the active set, causing all future orders with that ID
+to be falsely rejected as <code>DuplicateClOrdId</code>.</p>
+<p><strong>Impact:</strong> <code>nadatrade-pretrade</code> (actor).</p>
+<hr>
+<h2 id="2026-06-12-fix-auth--require-explicit-allow_no_auth"><a class="header" href="#2026-06-12-fix-auth--require-explicit-allow_no_auth">2026-06-12: FIX auth — require explicit allow_no_auth</a></h2>
+<p><strong>Decision:</strong> <code>FixSession.allow_no_auth: bool</code> (default <code>false</code>). When
+<code>credentials</code> is empty and <code>allow_no_auth</code> is false, logon is rejected.</p>
+<p><strong>Rationale:</strong> The previous code silently accepted all logons when credentials
+were unset, creating an implicit auth bypass. The flag makes the intent
+explicit — empty credentials without opt-in is a configuration error, not a
+dev mode.</p>
+<p><strong>Impact:</strong> <code>nadatrade-fix</code> (session).</p>
+<hr>
+<h2 id="2026-06-12-ws-is_subscribed--empty-set-no-longer-broadcasts"><a class="header" href="#2026-06-12-ws-is_subscribed--empty-set-no-longer-broadcasts">2026-06-12: WS is_subscribed — empty set no longer broadcasts</a></h2>
+<p><strong>Decision:</strong> <code>is_subscribed()</code> changed from <code>empty || contains(...)</code> to
+<code>!empty &amp;&amp; contains(...)</code>. A client with no subscriptions receives no
+market data.</p>
+<p><strong>Rationale:</strong> Previously, every WebSocket client received the full market
+data feed until making at least one subscription. This leaked data to
+clients who hadn’t explicitly subscribed.</p>
+<p><strong>Impact:</strong> <code>nadatrade-ws</code> (server).</p>
+<hr>
+<h2 id="2026-06-12-replace-order-qty-semantics"><a class="header" href="#2026-06-12-replace-order-qty-semantics">2026-06-12: Replace order qty semantics</a></h2>
+<p><strong>Decision:</strong> Three fixes to <code>process_replace</code>:</p>
+<ol>
+<li>Default <code>new_qty</code> to <code>remaining_qty</code>, not <code>original_qty</code>.</li>
+<li>Match only <code>new_qty - filled_qty</code> incrementally on increase/price-change.</li>
+<li>Emit <code>BookUpdated</code> on decrease-only path.</li>
+</ol>
+<p><strong>Rationale:</strong> Defaulting to <code>original_qty</code> caused previously-filled shares
+to be re-matched. Matching full <code>new_qty</code> instead of the incremental amount
+caused double-counting prior fills. Omitting <code>BookUpdated</code> left subscribers
+with stale book depth.</p>
+<p><strong>Impact:</strong> <code>nadatrade-matching</code> (engine).</p>
+<hr>
+<h2 id="2026-06-12-event-sequence-per-event-increment"><a class="header" href="#2026-06-12-event-sequence-per-event-increment">2026-06-12: Event sequence per-event increment</a></h2>
+<p><strong>Decision:</strong> <code>global_seq</code> now increments inside the per-event loop, not once
+per batch. Every event gets a unique monotonically increasing sequence.</p>
+<p><strong>Rationale:</strong> A single trade producing 8 events previously got 8 rows with
+the identical sequence number, making replay ordering impossible and
+violating the PRIMARY KEY uniqueness constraint.</p>
+<p><strong>Impact:</strong> <code>nadatrade-bin</code> (main loop).</p>
+<hr>
+<h2 id="2026-06-12-utcnow-removal-from-business-logic"><a class="header" href="#2026-06-12-utcnow-removal-from-business-logic">2026-06-12: Utc::now removal from business logic</a></h2>
+<p><strong>Decision:</strong> <code>chrono::Utc::now()</code> removed from <code>MatchingEngine::new()</code>
+(epoch init) and <code>FixSession::parse_new_order()</code> (accepts <code>sim_time</code> param).
+FIX acceptor tracks <code>current_sim_time</code> from <code>ClockTick</code>.</p>
+<p><strong>Rationale:</strong> Wall-clock time in business logic breaks deterministic replay
+and produces incorrect GTD expiry times under accelerated simulation.
+All time must flow through <code>SimClock</code>.</p>
+<p><strong>Impact:</strong> <code>nadatrade-matching</code>, <code>nadatrade-fix</code>.</p>
+<hr>
+<h2 id="2026-06-12-orderrouter-deprecated"><a class="header" href="#2026-06-12-orderrouter-deprecated">2026-06-12: OrderRouter deprecated</a></h2>
+<p><strong>Decision:</strong> <code>OrderRouter</code> in <code>nadatrade-matching</code> marked <code>#[deprecated]</code>.
+Routing is handled directly in <code>main.rs</code> via <code>HashMap&lt;InstrumentId, MatchingEngine&gt;</code>.</p>
+<p><strong>Rationale:</strong> The struct had zero references outside its own tests.
+Marking it deprecated rather than removing avoids breaking downstream
+consumers.</p>
+<p><strong>Impact:</strong> <code>nadatrade-matching</code> (router).</p>
+<hr>
+<h2 id="2026-06-12-enginesnapshot-dep-inversion-deferred"><a class="header" href="#2026-06-12-enginesnapshot-dep-inversion-deferred">2026-06-12: EngineSnapshot dep-inversion deferred</a></h2>
+<p><strong>Decision:</strong> <code>EngineSnapshot</code> remains in <code>nadatrade-persist</code> despite the
+clean-architecture violation. Moving it to <code>nadatrade-core</code> is deferred.</p>
+<p><strong>Rationale:</strong> The snapshot serialization chain is tightly coupled to
+persistence types. A clean extraction requires significant refactoring.
+The matching engine’s <code>serialize_snapshot()</code> now returns <code>Result</code> — session
+state serialization failures propagate rather than silently corrupting.</p>
+<p><strong>Impact:</strong> <code>nadatrade-persist</code>, <code>nadatrade-matching</code>.</p>
 
                     </main>
 

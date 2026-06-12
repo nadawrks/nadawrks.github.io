@@ -36,7 +36,7 @@
             const path_to_root = "";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "searchindex-8fb08360.js";
+            window.path_to_searchindex_js = "searchindex-9bfa27cc.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="toc-00c5fce9.js"></script>
@@ -286,7 +286,7 @@ developers over your LAN or the internet.</li>
 <li><strong><a href="#config-keys">Config Keys</a></strong> — every configuration option</li>
 </ul>
 <h2 id="status"><a class="header" href="#status">Status</a></h2>
-<p><strong>v0.1.2</strong> — 15 crates, 482 tests, 62%+ line coverage. All spec sections &gt;= 70%
+<p><strong>v0.1.4</strong> — 15 crates, 488 tests, 62%+ line coverage. All spec sections &gt;= 70%
 compliance. Binary starts, accepts FIX/WS connections, processes orders through
 the matching engine, persists events to PostgreSQL, and recovers state on restart.</p>
 <div style="break-before: page; page-break-before: always;"></div>
@@ -511,7 +511,7 @@ nadatrade --config config/nadatrade.toml
 <tr><td><code>tui.enabled</code></td><td><code>false</code></td></tr>
 <tr><td><code>logging.level</code></td><td><code>info</code></td></tr>
 <tr><td><code>logging.format</code></td><td><code>pretty</code></td></tr>
-<tr><td><code>ws_jwt_secret</code></td><td><code>changeme</code></td></tr>
+<tr><td><code>ws_jwt_secret</code></td><td><code>""</code> (empty — must be set via env)</td></tr>
 </tbody>
 </table>
 </div>
@@ -1637,7 +1637,7 @@ ws_jwt_secret = "my-secret-key"
 </tbody>
 </table>
 </div>
-<p>Only valid on the <code>/v1/marketdata</code> endpoint. The server responds immediately with <code>subscribed</code>. Subscription tracking is per-connection; multiple subscriptions for the same instrument+channel are idempotent. When no subscriptions are active, all public events are broadcast (empty-subscription-set = subscribed to everything).</p>
+<p>Only valid on the <code>/v1/marketdata</code> endpoint. The server responds immediately with <code>subscribed</code>. Subscription tracking is per-connection; multiple subscriptions for the same instrument+channel are idempotent. When no subscriptions are active, <strong>no</strong> events are forwarded — you must explicitly subscribe to each instrument and channel.</p>
 <h3 id="unsubscribe"><a class="header" href="#unsubscribe"><code>unsubscribe</code></a></h3>
 <p>Stop receiving market data for an instrument and channel.</p>
 <pre><code class="language-json">{
@@ -3908,7 +3908,7 @@ first.</p>
 <h2 id="tab-1--instruments"><a class="header" href="#tab-1--instruments">Tab 1 — Instruments</a></h2>
 <p>A sortable table of every instrument the exchange knows about, one row per
 instrument. Rows are sorted alphabetically by symbol.</p>
-<pre><code>┌─ NadaTrade v0.1.3 ───────────────────────────────────────────────────────────┐
+<pre><code>┌─ NadaTrade v0.1.4 ───────────────────────────────────────────────────────────┐
 │  Instruments │ Order Book │ Events │ Clock │ Ledger │ Admin                  │
 ├──────────────────────────────────────────────────────────────────────────────┤
 │                                                                              │
@@ -3954,7 +3954,7 @@ initializes empty and populates as instruments become active.</p>
 <p>Shows the top 5 price levels for each instrument. Uses a vertical layout —
 instruments stack top to bottom, each showing bids on the left (green) and asks
 on the right (red).</p>
-<pre><code>┌─ NadaTrade v0.1.3 ───────────────────────────────────────────────────────────┐
+<pre><code>┌─ NadaTrade v0.1.4 ───────────────────────────────────────────────────────────┐
 │  Instruments │ Order Book │ Events │ Clock │ Ledger │ Admin                  │
 ├──────────────────────────────────────────────────────────────────────────────┤
 │                                                                              │
@@ -3983,7 +3983,7 @@ so switching instruments does not lose state.</p>
 <h2 id="tab-3--events"><a class="header" href="#tab-3--events">Tab 3 — Events</a></h2>
 <p>A scrolling event log showing the last 200 events in real time. New events
 appear at the bottom; older events scroll off the top when the cap is reached.</p>
-<pre><code>┌─ NadaTrade v0.1.3 ───────────────────────────────────────────────────────────┐
+<pre><code>┌─ NadaTrade v0.1.4 ───────────────────────────────────────────────────────────┐
 │  Instruments │ Order Book │ Events │ Clock │ Ledger │ Admin                  │
 ├──────────────────────────────────────────────────────────────────────────────┤
 │                                                                              │
@@ -4046,7 +4046,7 @@ shows a <code>⚠ DROPPED N events</code> entry. This happens when the terminal 
 (50 ms poll interval) cannot keep up with the event rate.</p>
 <h2 id="tab-4--clock"><a class="header" href="#tab-4--clock">Tab 4 — Clock</a></h2>
 <p>Displays live clock and session information.</p>
-<pre><code>┌─ NadaTrade v0.1.3 ───────────────────────────────────────────────────────────┐
+<pre><code>┌─ NadaTrade v0.1.4 ───────────────────────────────────────────────────────────┐
 │  Instruments │ Order Book │ Events │ Clock │ Ledger │ Admin                  │
 ├──────────────────────────────────────────────────────────────────────────────┤
 │                                                                              │
@@ -4080,7 +4080,7 @@ reflects the event stream’s view of time — not wall-clock time.</p>
 precision is not displayed in the TUI.</p>
 <h2 id="tab-5--ledger"><a class="header" href="#tab-5--ledger">Tab 5 — Ledger</a></h2>
 <p>A participant-position matrix showing trade activity and P&amp;L.</p>
-<pre><code>┌─ NadaTrade v0.1.3 ───────────────────────────────────────────────────────────┐
+<pre><code>┌─ NadaTrade v0.1.4 ───────────────────────────────────────────────────────────┐
 │  Instruments │ Order Book │ Events │ Clock │ Ledger │ Admin                  │
 ├──────────────────────────────────────────────────────────────────────────────┤
 │                                                                              │
@@ -4115,7 +4115,7 @@ counted for the <code>LedgerRow</code> on both sides of each trade.</p>
 the display shows a placeholder message.</p>
 <h2 id="health-strip"><a class="header" href="#health-strip">Health Strip</a></h2>
 <p>The top bar spans the full terminal width and shows:</p>
-<pre><code>NadaTrade v0.1.3
+<pre><code>NadaTrade v0.1.4
 </code></pre>
 <p>Bordered block rendered in cyan. This strip is static and always visible,
 regardless of which tab is selected.</p>
@@ -4165,7 +4165,7 @@ Run <code>reset</code> or <code>stty sane</code> to recover.</p>
 <h2 id="tab-6--admin"><a class="header" href="#tab-6--admin">Tab 6 — Admin</a></h2>
 <p>The Admin tab provides form-based management of instruments and participants.</p>
 <p>Layout: two panels side by side — Instruments on the left, Participants on the right.</p>
-<pre><code>┌─ NadaTrade v0.1.3 ───────────────────────────────────────────────────────────┐
+<pre><code>┌─ NadaTrade v0.1.4 ───────────────────────────────────────────────────────────┐
 │  Instruments │ Order Book │ Events │ Clock │ Ledger │ Admin                  │
 ├──────────────────────────────────────────────────────────────────────────────┤
 │                                                                              │
@@ -4942,19 +4942,21 @@ using custom tags 553 (Username) and 554 (Password).</p>
 <h3 id="configuring-credentials"><a class="header" href="#configuring-credentials">Configuring Credentials</a></h3>
 <p>FIX credentials are checked against a <code>HashMap&lt;String, String&gt;</code> on the
 <code>FixSession</code>. When credentials are configured, logon is rejected for unknown
-usernames or wrong passwords. When credentials are empty (default), all logon
-attempts succeed.</p>
+usernames or wrong passwords. When credentials are empty, logon is <strong>rejected</strong>
+unless <code>allow_no_auth</code> is explicitly set to <code>true</code>.</p>
 <p>In code (from <code>nadatrade-fix</code>):</p>
 <pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
-</span>// Empty = open access (dev mode)
+</span>// Dev mode — must opt in
 session.credentials = HashMap::new();
+session.allow_no_auth = true;
 
-// Restricted = only these users
+// Production — require credentials
 session.credentials = {
     "alice".into() =&gt; "alice-pass".into(),
     "bob".into()   =&gt; "bob-fix-key".into(),
 };
+session.allow_no_auth = false; // default
 <span class="boring">}</span></code></pre>
 <h3 id="password-best-practices"><a class="header" href="#password-best-practices">Password Best Practices</a></h3>
 <ul>
@@ -7440,9 +7442,9 @@ let token = encode(&amp;Header::default(), &amp;claims,
     "token": "&lt;jwt&gt;"
 }
 </code></pre>
-<p>Success → the server responds with a welcome message (error type, code
-<code>"connected"</code>) and begins processing messages. Failure (invalid token,
-missing field, parse error) → the server sends an error and closes.</p>
+<p>Success → the server responds with a <code>"welcome"</code> message and begins
+processing messages. Failure (invalid token, missing field, parse error) →
+the server sends an error and closes.</p>
 <p>This message is <strong>not</strong> a ClientMessage variant; it is parsed as raw JSON
 before the normal message dispatch loop.</p>
 <h2 id="4-client-messages"><a class="header" href="#4-client-messages">4. Client Messages</a></h2>
@@ -7649,7 +7651,20 @@ confirmations, errors) use <code>seq=0</code> and wall-clock <code>sim_time</cod
 <p>The <code>seq</code> field provides total ordering guarantees across all connected
 clients. A gap in <code>seq</code> (or a <code>RecvError::Lagged</code> broadcast error)
 indicates the client is falling behind and must resubscribe.</p>
-<h3 id="51-order_accepted"><a class="header" href="#51-order_accepted">5.1 <code>order_accepted</code></a></h3>
+<h3 id="51-welcome"><a class="header" href="#51-welcome">5.1 <code>welcome</code></a></h3>
+<pre><code class="language-json">{
+    "type": "welcome",
+    "code": "connected",
+    "message": "Welcome BOT001, you are connected to NadaTrade",
+    "seq": 0,
+    "sim_time": "2026-01-01T12:00:00Z"
+}
+</code></pre>
+<p>Sent immediately after successful authentication (JWT token verified).
+Not a broadcast message — only the connecting client receives it.
+Prior to v0.1.4, this was sent as an <code>"error"</code> type with code
+<code>"connected"</code>; it is now its own <code>"welcome"</code> variant.</p>
+<h3 id="52-order_accepted"><a class="header" href="#52-order_accepted">5.2 <code>order_accepted</code></a></h3>
 <pre><code class="language-json">{
     "type": "order_accepted",
     "req_id": "r1",
@@ -7665,7 +7680,7 @@ indicates the client is falling behind and must resubscribe.</p>
     "sim_time": "2026-01-01T12:00:00Z"
 }
 </code></pre>
-<h3 id="52-order_rejected"><a class="header" href="#52-order_rejected">5.2 <code>order_rejected</code></a></h3>
+<h3 id="53-order_rejected"><a class="header" href="#53-order_rejected">5.3 <code>order_rejected</code></a></h3>
 <pre><code class="language-json">{
     "type": "order_rejected",
     "req_id": "r1",
@@ -7683,7 +7698,7 @@ enum. Possible values: <code>UnknownInstrument</code>, <code>UnknownParticipant<
 <code>FatFingerProtection</code>, <code>DuplicateClOrdId</code>, <code>StpCancelled</code>,
 <code>SessionNotAcceptingOrders</code>, <code>InstrumentHalted</code>,
 <code>IncompatibleOrderTypeAndTif</code>, <code>MarketOrderNoLiquidity</code>.</p>
-<h3 id="53-fill--unified-partial-and-final-fill"><a class="header" href="#53-fill--unified-partial-and-final-fill">5.3 <code>fill</code> — unified partial and final fill</a></h3>
+<h3 id="54-fill--unified-partial-and-final-fill"><a class="header" href="#54-fill--unified-partial-and-final-fill">5.4 <code>fill</code> — unified partial and final fill</a></h3>
 <pre><code class="language-json">{
     "type": "fill",
     "order_id": "550e8400-e29b-41d4-a716-446655440000",
@@ -7702,12 +7717,13 @@ enum. Possible values: <code>UnknownInstrument</code>, <code>UnknownParticipant<
 <p>Same variant is used for both partial fills (<code>is_final: false</code>) and final
 fills (<code>is_final: true</code>). Check <code>remaining_qty</code> or <code>is_final</code> to
 determine fill completion.</p>
-<h3 id="54-order_cancelled"><a class="header" href="#54-order_cancelled">5.4 <code>order_cancelled</code></a></h3>
+<h3 id="55-order_cancelled"><a class="header" href="#55-order_cancelled">5.5 <code>order_cancelled</code></a></h3>
 <pre><code class="language-json">{
     "type": "order_cancelled",
     "order_id": "550e8400-e29b-41d4-a716-446655440000",
     "instrument": "PETR4",
     "reason": "ClientRequested",
+    "client_order_id": "cl-ord-001",
     "seq": 45,
     "sim_time": "2026-01-01T12:00:02Z"
 }
@@ -7715,19 +7731,21 @@ determine fill completion.</p>
 <p>The <code>reason</code> field is the <code>Debug</code> representation of <code>CancelReason</code>:
 <code>ClientRequested</code>, <code>StpCancelAggressive</code>, <code>StpCancelResting</code>,
 <code>StpCancelBoth</code>, <code>InstrumentDelisted</code>, <code>SessionEnd</code>, <code>Replaced</code>,
-<code>Scenario</code>.</p>
-<h3 id="55-order_expired"><a class="header" href="#55-order_expired">5.5 <code>order_expired</code></a></h3>
+<code>Scenario</code>. <code>client_order_id</code> is the ClOrdID assigned when the
+order was first submitted.</p>
+<h3 id="56-order_expired"><a class="header" href="#56-order_expired">5.6 <code>order_expired</code></a></h3>
 <pre><code class="language-json">{
     "type": "order_expired",
     "order_id": "550e8400-e29b-41d4-a716-446655440000",
     "instrument": "PETR4",
+    "client_order_id": "cl-ord-002",
     "seq": 46,
     "sim_time": "2026-01-01T23:59:59Z"
 }
 </code></pre>
 <p>Generated for IOC not filled, FOK not filled, GTD expiry, day-end GTC
 purge, auction unfilled, and stops never triggered.</p>
-<h3 id="56-order_replaced"><a class="header" href="#56-order_replaced">5.6 <code>order_replaced</code></a></h3>
+<h3 id="57-order_replaced"><a class="header" href="#57-order_replaced">5.7 <code>order_replaced</code></a></h3>
 <pre><code class="language-json">{
     "type": "order_replaced",
     "order_id": "550e8400-e29b-41d4-a716-446655440000",
@@ -7739,7 +7757,7 @@ purge, auction unfilled, and stops never triggered.</p>
 </code></pre>
 <p>On success, <code>order_id</code> is the original order and <code>new_order_id</code> is the
 replacement. Both are UUIDs.</p>
-<h3 id="57-cancel_rejected"><a class="header" href="#57-cancel_rejected">5.7 <code>cancel_rejected</code></a></h3>
+<h3 id="58-cancel_rejected"><a class="header" href="#58-cancel_rejected">5.8 <code>cancel_rejected</code></a></h3>
 <pre><code class="language-json">{
     "type": "cancel_rejected",
     "req_id": "r1",
@@ -7752,7 +7770,7 @@ replacement. Both are UUIDs.</p>
 <p>The <code>reason</code> field is the <code>Debug</code> representation of <code>CancelRejectReason</code>:
 <code>UnknownOrder</code>, <code>AlreadyClosed</code>, <code>SessionNotAcceptingCancels</code>,
 <code>DuplicateClOrdId</code>, <code>InvalidReplaceParams</code>.</p>
-<h3 id="58-order_status--orderstatusreport"><a class="header" href="#58-order_status--orderstatusreport">5.8 <code>order_status</code> — OrderStatusReport</a></h3>
+<h3 id="59-order_status--orderstatusreport"><a class="header" href="#59-order_status--orderstatusreport">5.9 <code>order_status</code> — OrderStatusReport</a></h3>
 <pre><code class="language-json">{
     "type": "order_status",
     "req_id": "r1",
@@ -7771,7 +7789,7 @@ replacement. Both are UUIDs.</p>
 </code></pre>
 <p>Returned in response to a client <code>order_status</code> request. <code>price</code> is
 optional (absent for market orders). <code>status</code> is a lowercase string.</p>
-<h3 id="59-subscribed"><a class="header" href="#59-subscribed">5.9 <code>subscribed</code></a></h3>
+<h3 id="510-subscribed"><a class="header" href="#510-subscribed">5.10 <code>subscribed</code></a></h3>
 <pre><code class="language-json">{
     "type": "subscribed",
     "req_id": "r1",
@@ -7783,7 +7801,7 @@ optional (absent for market orders). <code>status</code> is a lowercase string.<
 </code></pre>
 <p>Synchronous acknowledgement to a <code>subscribe</code> request. Sent before any
 data events for the subscription.</p>
-<h3 id="510-orderbook_snapshot"><a class="header" href="#510-orderbook_snapshot">5.10 <code>orderbook_snapshot</code></a></h3>
+<h3 id="511-orderbook_snapshot"><a class="header" href="#511-orderbook_snapshot">5.11 <code>orderbook_snapshot</code></a></h3>
 <pre><code class="language-json">{
     "type": "orderbook_snapshot",
     "instrument": "PETR4",
@@ -7796,7 +7814,7 @@ data events for the subscription.</p>
 <p>Each entry in <code>bids</code> and <code>asks</code> is a <code>[price_string, qty_string]</code> tuple.
 Ordered best-to-worst (bids descending, asks ascending). Sent on every
 <code>BookUpdated</code> exchange event to subscribers of the <code>"orderbook"</code> channel.</p>
-<h3 id="511-orderbook_update"><a class="header" href="#511-orderbook_update">5.11 <code>orderbook_update</code></a></h3>
+<h3 id="512-orderbook_update"><a class="header" href="#512-orderbook_update">5.12 <code>orderbook_update</code></a></h3>
 <pre><code class="language-json">{
     "type": "orderbook_update",
     "instrument": "PETR4",
@@ -7813,7 +7831,7 @@ tuples indicating removed levels (side is <code>"buy"</code> or <code>"sell"</co
 <p>This variant exists in the message enum but is not currently emitted by
 <code>event_to_server_message</code>; the server uses <code>orderbook_snapshot</code> for all
 book updates. Check future releases for incremental update support.</p>
-<h3 id="512-trade"><a class="header" href="#512-trade">5.12 <code>trade</code></a></h3>
+<h3 id="513-trade"><a class="header" href="#513-trade">5.13 <code>trade</code></a></h3>
 <pre><code class="language-json">{
     "type": "trade",
     "instrument": "PETR4",
@@ -7826,7 +7844,7 @@ book updates. Check future releases for incremental update support.</p>
 </code></pre>
 <p>Emitted to <code>"trades"</code> channel subscribers for every <code>TradePrinted</code> event.
 <code>side</code> is the aggressor side (the side that initiated the trade).</p>
-<h3 id="513-ticker"><a class="header" href="#513-ticker">5.13 <code>ticker</code></a></h3>
+<h3 id="514-ticker"><a class="header" href="#514-ticker">5.14 <code>ticker</code></a></h3>
 <pre><code class="language-json">{
     "type": "ticker",
     "instrument": "PETR4",
@@ -7842,7 +7860,7 @@ book updates. Check future releases for incremental update support.</p>
 aggregation (<code>last</code>, <code>bid</code>, <code>ask</code>, <code>volume</code>) but is <strong>not currently
 emitted</strong> by the server event dispatch loop. <code>bid</code>/<code>ask</code> are optional;
 <code>last</code> and <code>volume</code> are required. Planned for future release.</p>
-<h3 id="514-session"><a class="header" href="#514-session">5.14 <code>session</code></a></h3>
+<h3 id="515-session"><a class="header" href="#515-session">5.15 <code>session</code></a></h3>
 <pre><code class="language-json">{
     "type": "session",
     "instrument": "PETR4",
@@ -7857,7 +7875,7 @@ events. <code>state</code> is the <code>snake_case</code> representation of <cod
 <code>reopening_auction</code>, <code>closing_auction</code>.</p>
 <p>For <code>trading_halt</code>, additional fields <code>reason</code> and <code>until</code> may appear in
 the serialised form as nested objects.</p>
-<h3 id="515-error"><a class="header" href="#515-error">5.15 <code>error</code></a></h3>
+<h3 id="516-error"><a class="header" href="#516-error">5.16 <code>error</code></a></h3>
 <pre><code class="language-json">{
     "type": "error",
     "req_id": "r1",
@@ -7907,10 +7925,10 @@ not authoritative event data. Always use the later, event-driven message
 <h3 id="subscription-tracking-1"><a class="header" href="#subscription-tracking-1">Subscription tracking</a></h3>
 <p>Subscriptions are tracked per-connection in a <code>HashSet&lt;(InstrumentId, channel)&gt;</code>:</p>
 <ul>
-<li><strong>Empty set</strong> (initial state): all events for all instruments are forwarded.
-This means a client that never sends <code>subscribe</code> will still receive all events
-directed to its participant ID (fills, rejects, cancels) plus global market
-data broadcasts.</li>
+<li><strong>Empty set</strong> (initial state): no events are forwarded. A client that
+never sends <code>subscribe</code> will not receive any market data broadcasts. The
+client does still receive directed events (fills, rejects, cancels) for
+its own participant ID.</li>
 <li><strong>Non-empty set</strong>: only events matching an active subscription are forwarded.</li>
 </ul>
 <p>To receive market data for a specific instrument, send <code>subscribe</code> first.
@@ -9949,6 +9967,108 @@ only, per spec §8.2.</p>
 auction, which could produce unexpected fills. Market and stop orders have no
 meaningful auction behavior.</p>
 <p><strong>Impact:</strong> <code>nadatrade-matching</code> (engine order gating).</p>
+<hr>
+<h2 id="2026-06-12-settlement-cash-deferred-to-sweep-only"><a class="header" href="#2026-06-12-settlement-cash-deferred-to-sweep-only">2026-06-12: Settlement cash deferred to sweep only</a></h2>
+<p><strong>Decision:</strong> <code>settle_trade()</code> no longer adjusts cash immediately. Cash moves
+only during <code>sweep_settlements()</code> when the T+N obligation matures.</p>
+<p><strong>Rationale:</strong> The previous code adjusted cash both at trade time AND at
+settlement time, double-counting every trade’s cash impact. Deferring cash
+movement to settlement sweep matches real-world T+N settlement where cash
+isn’t available until the obligation clears.</p>
+<p><strong>Impact:</strong> <code>nadatrade-postrade</code> (settlement).</p>
+<hr>
+<h2 id="2026-06-12-messagestore-append-only-architecture"><a class="header" href="#2026-06-12-messagestore-append-only-architecture">2026-06-12: MessageStore append-only architecture</a></h2>
+<p><strong>Decision:</strong> The store O(n²) rewrite-on-every-record pattern replaced with
+append-only writes. Header (<code>last_seq_in</code>, <code>last_seq_out</code>) lives in a
+separate <code>&lt;identity&gt;.fixheader</code> file.</p>
+<p><strong>Rationale:</strong> Rewriting the entire log file on every inbound/outbound record
+is O(n²) I/O and corrupts the entire store on crash. Append-only entries with
+a separate small header file eliminates both problems. All <code>expect()</code> panics
+removed; I/O errors handled gracefully.</p>
+<p><strong>Impact:</strong> <code>nadatrade-fix</code> (store).</p>
+<hr>
+<h2 id="2026-06-12-acceleratedclock-rwlock-replaces-unsafecell"><a class="header" href="#2026-06-12-acceleratedclock-rwlock-replaces-unsafecell">2026-06-12: AcceleratedClock RwLock replaces UnsafeCell</a></h2>
+<p><strong>Decision:</strong> <code>UnsafeCell&lt;f64&gt;</code> + <code>unsafe impl Sync</code> replaced with
+<code>RwLock&lt;f64&gt;</code>. <code>paused_at</code> field stores the time when paused instead of
+returning <code>sim_start</code>.</p>
+<p><strong>Rationale:</strong> The <code>UnsafeCell&lt;f64&gt;</code> had a data race (undefined behavior) on
+concurrent <code>set_factor()</code> and <code>now()</code> calls. <code>RwLock</code> provides safe interior
+mutability. Returning <code>sim_start</code> when paused caused backwards time travel;
+returning the paused-at time preserves monotonicity.</p>
+<p><strong>Impact:</strong> <code>nadatrade-simulation</code> (clock).</p>
+<hr>
+<h2 id="2026-06-12-pretradeactor-active_order_ids-lifecycle"><a class="header" href="#2026-06-12-pretradeactor-active_order_ids-lifecycle">2026-06-12: PretradeActor active_order_ids lifecycle</a></h2>
+<p><strong>Decision:</strong> Background task now removes <code>(participant, instrument, client_order_id)</code> tuples on <code>OrderFilled</code> and <code>OrderExpired</code> events, not just
+<code>OrderCancelled</code>.</p>
+<p><strong>Rationale:</strong> Previously, once an order filled or expired, its ClOrdID was
+permanently stuck in the active set, causing all future orders with that ID
+to be falsely rejected as <code>DuplicateClOrdId</code>.</p>
+<p><strong>Impact:</strong> <code>nadatrade-pretrade</code> (actor).</p>
+<hr>
+<h2 id="2026-06-12-fix-auth--require-explicit-allow_no_auth"><a class="header" href="#2026-06-12-fix-auth--require-explicit-allow_no_auth">2026-06-12: FIX auth — require explicit allow_no_auth</a></h2>
+<p><strong>Decision:</strong> <code>FixSession.allow_no_auth: bool</code> (default <code>false</code>). When
+<code>credentials</code> is empty and <code>allow_no_auth</code> is false, logon is rejected.</p>
+<p><strong>Rationale:</strong> The previous code silently accepted all logons when credentials
+were unset, creating an implicit auth bypass. The flag makes the intent
+explicit — empty credentials without opt-in is a configuration error, not a
+dev mode.</p>
+<p><strong>Impact:</strong> <code>nadatrade-fix</code> (session).</p>
+<hr>
+<h2 id="2026-06-12-ws-is_subscribed--empty-set-no-longer-broadcasts"><a class="header" href="#2026-06-12-ws-is_subscribed--empty-set-no-longer-broadcasts">2026-06-12: WS is_subscribed — empty set no longer broadcasts</a></h2>
+<p><strong>Decision:</strong> <code>is_subscribed()</code> changed from <code>empty || contains(...)</code> to
+<code>!empty &amp;&amp; contains(...)</code>. A client with no subscriptions receives no
+market data.</p>
+<p><strong>Rationale:</strong> Previously, every WebSocket client received the full market
+data feed until making at least one subscription. This leaked data to
+clients who hadn’t explicitly subscribed.</p>
+<p><strong>Impact:</strong> <code>nadatrade-ws</code> (server).</p>
+<hr>
+<h2 id="2026-06-12-replace-order-qty-semantics"><a class="header" href="#2026-06-12-replace-order-qty-semantics">2026-06-12: Replace order qty semantics</a></h2>
+<p><strong>Decision:</strong> Three fixes to <code>process_replace</code>:</p>
+<ol>
+<li>Default <code>new_qty</code> to <code>remaining_qty</code>, not <code>original_qty</code>.</li>
+<li>Match only <code>new_qty - filled_qty</code> incrementally on increase/price-change.</li>
+<li>Emit <code>BookUpdated</code> on decrease-only path.</li>
+</ol>
+<p><strong>Rationale:</strong> Defaulting to <code>original_qty</code> caused previously-filled shares
+to be re-matched. Matching full <code>new_qty</code> instead of the incremental amount
+caused double-counting prior fills. Omitting <code>BookUpdated</code> left subscribers
+with stale book depth.</p>
+<p><strong>Impact:</strong> <code>nadatrade-matching</code> (engine).</p>
+<hr>
+<h2 id="2026-06-12-event-sequence-per-event-increment"><a class="header" href="#2026-06-12-event-sequence-per-event-increment">2026-06-12: Event sequence per-event increment</a></h2>
+<p><strong>Decision:</strong> <code>global_seq</code> now increments inside the per-event loop, not once
+per batch. Every event gets a unique monotonically increasing sequence.</p>
+<p><strong>Rationale:</strong> A single trade producing 8 events previously got 8 rows with
+the identical sequence number, making replay ordering impossible and
+violating the PRIMARY KEY uniqueness constraint.</p>
+<p><strong>Impact:</strong> <code>nadatrade-bin</code> (main loop).</p>
+<hr>
+<h2 id="2026-06-12-utcnow-removal-from-business-logic"><a class="header" href="#2026-06-12-utcnow-removal-from-business-logic">2026-06-12: Utc::now removal from business logic</a></h2>
+<p><strong>Decision:</strong> <code>chrono::Utc::now()</code> removed from <code>MatchingEngine::new()</code>
+(epoch init) and <code>FixSession::parse_new_order()</code> (accepts <code>sim_time</code> param).
+FIX acceptor tracks <code>current_sim_time</code> from <code>ClockTick</code>.</p>
+<p><strong>Rationale:</strong> Wall-clock time in business logic breaks deterministic replay
+and produces incorrect GTD expiry times under accelerated simulation.
+All time must flow through <code>SimClock</code>.</p>
+<p><strong>Impact:</strong> <code>nadatrade-matching</code>, <code>nadatrade-fix</code>.</p>
+<hr>
+<h2 id="2026-06-12-orderrouter-deprecated"><a class="header" href="#2026-06-12-orderrouter-deprecated">2026-06-12: OrderRouter deprecated</a></h2>
+<p><strong>Decision:</strong> <code>OrderRouter</code> in <code>nadatrade-matching</code> marked <code>#[deprecated]</code>.
+Routing is handled directly in <code>main.rs</code> via <code>HashMap&lt;InstrumentId, MatchingEngine&gt;</code>.</p>
+<p><strong>Rationale:</strong> The struct had zero references outside its own tests.
+Marking it deprecated rather than removing avoids breaking downstream
+consumers.</p>
+<p><strong>Impact:</strong> <code>nadatrade-matching</code> (router).</p>
+<hr>
+<h2 id="2026-06-12-enginesnapshot-dep-inversion-deferred"><a class="header" href="#2026-06-12-enginesnapshot-dep-inversion-deferred">2026-06-12: EngineSnapshot dep-inversion deferred</a></h2>
+<p><strong>Decision:</strong> <code>EngineSnapshot</code> remains in <code>nadatrade-persist</code> despite the
+clean-architecture violation. Moving it to <code>nadatrade-core</code> is deferred.</p>
+<p><strong>Rationale:</strong> The snapshot serialization chain is tightly coupled to
+persistence types. A clean extraction requires significant refactoring.
+The matching engine’s <code>serialize_snapshot()</code> now returns <code>Result</code> — session
+state serialization failures propagate rather than silently corrupting.</p>
+<p><strong>Impact:</strong> <code>nadatrade-persist</code>, <code>nadatrade-matching</code>.</p>
 
                     </main>
 
