@@ -1,0 +1,595 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Settlement - NadaTrade Documentation</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon-de23e50b.svg">
+        <link rel="shortcut icon" href="../favicon-8114d1fc.png">
+        <link rel="stylesheet" href="../css/variables-8adf115d.css">
+        <link rel="stylesheet" href="../css/general-0392ca55.css">
+        <link rel="stylesheet" href="../css/chrome-fc474251.css">
+        <link rel="stylesheet" href="../css/print-9e4910d8.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../fonts/fonts-9644e21d.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="mdbook-highlight-css" href="../highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="../tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight-3fdfc3ac.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../searchindex-8fb08360.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc-00c5fce9.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="mdbook-body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="mdbook-page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="mdbook-menu-bar-hover-placeholder"></div>
+                <div id="mdbook-menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
+                        </label>
+                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
+                        </button>
+                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-ayu">Ayu</button></li>
+                        </ul>
+                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">NadaTrade Documentation</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/nadawrks/nadatrade" title="Git repository" aria-label="Git repository">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/nadawrks/nadatrade/edit/main/docs/book/./user-guide/settlement.md" title="Suggest an edit" aria-label="Suggest an edit" rel="edit">
+                            <span class=fa-svg id="git-edit-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M421.7 220.3l-11.3 11.3-22.6 22.6-205 205c-6.6 6.6-14.8 11.5-23.8 14.1L30.8 511c-8.4 2.5-17.5 .2-23.7-6.1S-1.5 489.7 1 481.2L38.7 353.1c2.6-9 7.5-17.2 14.1-23.8l205-205 22.6-22.6 11.3-11.3 33.9 33.9 62.1 62.1 33.9 33.9zM96 353.9l-9.3 9.3c-.9 .9-1.6 2.1-2 3.4l-25.3 86 86-25.3c1.3-.4 2.5-1.1 3.4-2l9.3-9.3H112c-8.8 0-16-7.2-16-16V353.9zM453.3 19.3l39.4 39.4c25 25 25 65.5 0 90.5l-14.5 14.5-22.6 22.6-11.3 11.3-33.9-33.9-62.1-62.1L314.3 67.7l11.3-11.3 22.6-22.6 14.5-14.5c25-25 65.5-25 90.5 0z"/></svg></span>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="mdbook-search-wrapper" class="hidden">
+                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                        <ul id="mdbook-searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="mdbook-content" class="content">
+                    <main>
+                        <h1 id="settlement"><a class="header" href="#settlement">Settlement</a></h1>
+<p>NadaTrade implements a full post-trade lifecycle: position tracking, realized P&amp;L computation, settlement obligations, and mark-to-market valuation. This guide covers the mechanics of how your positions, cash, and settlement obligations are managed after each trade.</p>
+<hr>
+<h2 id="1-position-tracking"><a class="header" href="#1-position-tracking">1. Position Tracking</a></h2>
+<p>Each participant holds one <code>Position</code> per instrument. A position is identified by <code>(participant_id, instrument_id)</code> and stored in the <code>Ledger</code>. A position has no explicit <code>side</code> field—the sign of <code>qty</code> determines the direction:</p>
+<ul>
+<li><strong>Positive qty</strong> → long position</li>
+<li><strong>Negative qty</strong> → short position</li>
+</ul>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Field</th><th>Type</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>qty</code></td><td><code>Decimal</code></td><td>Current position size. Positive = long, negative = short.</td></tr>
+<tr><td><code>avg_cost</code></td><td><code>Decimal</code></td><td>Volume-weighted average entry price.</td></tr>
+<tr><td><code>realized_pnl</code></td><td><code>Decimal</code></td><td>Cumulative realized profit/loss from closed portions of the position.</td></tr>
+<tr><td><code>unrealized_pnl</code></td><td><code>Decimal</code></td><td>Current mark-to-market P&amp;L (see §9).</td></tr>
+</tbody>
+</table>
+</div>
+<p>Positions are lazily initialized to <code>qty=0, avg_cost=0, realized_pnl=0, unrealized_pnl=0</code> on the first trade for that instrument.</p>
+<hr>
+<h2 id="2-apply_fill--position-update-logic"><a class="header" href="#2-apply_fill--position-update-logic">2. apply_fill — Position Update Logic</a></h2>
+<p>Every <code>TradePrinted</code> event triggers an <code>apply_fill</code> call on both the buyer’s and the seller’s positions. A fill carries:</p>
+<ul>
+<li><code>fill_qty</code>: positive for buys, negative for sells (the sign matters)</li>
+<li><code>fill_price</code>: the execution price</li>
+</ul>
+<p>The function handles three cases:</p>
+<h3 id="2a-extend"><a class="header" href="#2a-extend">2a. Extend</a></h3>
+<p>When the fill is on the same side as the existing position (both qty values have the same sign), the position is extended:</p>
+<pre><code>new_qty = old_qty + fill_qty
+avg_cost = (|old_qty| × old_avg + |fill_qty| × fill_price) / (|old_qty| + |fill_qty|)
+</code></pre>
+<p><strong>Example.</strong> Holding +500 PETR4 at avg 38.50. Buy another +300 at 39.00:</p>
+<pre><code>avg_cost = (500 × 38.50 + 300 × 39.00) / (500 + 300) = 38.6875
+new_qty  = +800
+realized_pnl = 0 (no portion closed)
+</code></pre>
+<h3 id="2b-reduce"><a class="header" href="#2b-reduce">2b. Reduce</a></h3>
+<p>When the fill is on the opposite side (signs differ), a portion of the position is closed. Realized P&amp;L is calculated on the closed portion only:</p>
+<pre><code>reduced = min(|old_qty|, |fill_qty|)
+realized = reduced × (fill_price − avg_cost) × position_sign
+</code></pre>
+<p>The position sign (<code>old_sign</code>) is +1 for longs, −1 for shorts. This yields:</p>
+<ul>
+<li><strong>Closing longs</strong> (sell against long): <code>reduced × (fill_price − avg_cost)</code> — profit when <code>fill_price &gt; avg_cost</code></li>
+<li><strong>Closing shorts</strong> (buy back against short): <code>reduced × (avg_cost − fill_price)</code> — profit when <code>fill_price &lt; avg_cost</code></li>
+</ul>
+<p>The remaining qty keeps the original <code>avg_cost</code>.</p>
+<p><strong>Example.</strong> Holding +500 PETR4 at 38.50. Sell 300 at 39.00:</p>
+<pre><code>reduced = min(500, 300) = 300
+realized = 300 × (39.00 − 38.50) × (+1) = 150.00
+new_qty  = +200
+avg_cost = 38.50 (unchanged)
+</code></pre>
+<p><strong>Example.</strong> Short −500 PETR4 at 40.00. Buy back 300 at 39.00:</p>
+<pre><code>reduced = min(500, 300) = 300
+realized = 300 × (39.00 − 40.00) × (−1) = 300.00
+new_qty  = −200
+avg_cost = 40.00 (unchanged)
+</code></pre>
+<h3 id="2c-flip"><a class="header" href="#2c-flip">2c. Flip</a></h3>
+<p>When the fill qty exceeds the position in the opposite direction, the position flips:</p>
+<ol>
+<li>Close the entire original position → realize full P&amp;L on the original side</li>
+<li>Open a new opposite-side position at the fill price</li>
+</ol>
+<pre><code>realized = |old_qty| × (fill_price − old_avg) × old_sign
+avg_cost = fill_price
+</code></pre>
+<p><strong>Example.</strong> Holding +500 PETR4 at 38.50. Sell 800 at 39.00:</p>
+<pre><code>realized = 500 × (39.00 − 38.50) × (+1) = 250.00
+avg_cost = 39.00
+new_qty  = −300 (now short)
+</code></pre>
+<p><strong>Example.</strong> Short −500 PETR4 at 40.00. Buy 700 at 39.00:</p>
+<pre><code>realized = 500 × (39.00 − 40.00) × (−1) = 500.00
+avg_cost = 39.00
+new_qty  = +200 (now long)
+</code></pre>
+<hr>
+<h2 id="3-the-ledger"><a class="header" href="#3-the-ledger">3. The Ledger</a></h2>
+<p>The <code>Ledger</code> struct is the per-participant balance sheet:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Field</th><th>Type</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>participant</code></td><td><code>ParticipantId</code></td><td>Owner of this ledger.</td></tr>
+<tr><td><code>cash</code></td><td><code>HashMap&lt;Currency, Decimal&gt;</code></td><td>Cash balances per currency.</td></tr>
+<tr><td><code>positions</code></td><td><code>HashMap&lt;InstrumentId, Position&gt;</code></td><td>One position per instrument traded.</td></tr>
+<tr><td><code>pending_obligations</code></td><td><code>Vec&lt;SettlementObligation&gt;</code></td><td>Unsettled T+N obligations (see §6–8).</td></tr>
+<tr><td><code>realized_pnl</code></td><td><code>Decimal</code></td><td>Running total of all realized P&amp;L across positions.</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="cash-tracking"><a class="header" href="#cash-tracking">Cash tracking</a></h3>
+<p>On each trade, cash is adjusted immediately:</p>
+<ul>
+<li><strong>Buyer</strong>: cash − (<code>qty × price</code>) in the instrument’s currency</li>
+<li><strong>Seller</strong>: cash + (<code>qty × price</code>) in the instrument’s currency</li>
+</ul>
+<p>Cash is tracked per currency (e.g., <code>"BRL"</code>, <code>"USD"</code>). The currency comes from the instrument’s <code>InstrumentConfig.settlement.currency</code> field.</p>
+<h3 id="ledger-lifecycle"><a class="header" href="#ledger-lifecycle">Ledger lifecycle</a></h3>
+<ul>
+<li>A ledger is created lazily on the first trade for a participant.</li>
+<li>Positions are created lazily per instrument.</li>
+<li>Settlement can later adjust cash (see §8).</li>
+</ul>
+<hr>
+<h2 id="4-realized-pl"><a class="header" href="#4-realized-pl">4. Realized P&amp;L</a></h2>
+<p>Realized P&amp;L is credited to the <code>realized_pnl</code> field on the <code>Ledger</code> each time <code>apply_fill</code> closes any qty. The formula depends on direction:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Direction</th><th>Action</th><th>Formula</th></tr>
+</thead>
+<tbody>
+<tr><td>Long</td><td>Sell (close long)</td><td><code>qty × (sell_price − avg_cost)</code></td></tr>
+<tr><td>Short</td><td>Buy (close short)</td><td><code>qty × (avg_cost − buy_price)</code></td></tr>
+</tbody>
+</table>
+</div>
+<p><strong>Example — Long P&amp;L.</strong> Bought 500 at 38.50. Sold 200 at 39.00:</p>
+<pre><code>P&amp;L = 200 × (39.00 − 38.50) = +100.00
+</code></pre>
+<p><strong>Example — Short P&amp;L.</strong> Sold short 300 at 42.00. Bought back 150 at 40.00:</p>
+<pre><code>P&amp;L = 150 × (42.00 − 40.00) = +300.00
+</code></pre>
+<p>Realized P&amp;L is cumulative and never resets. It is <strong>not</strong> the same as mark-to-market (unrealized) P&amp;L. Only closed portions generate realized P&amp;L.</p>
+<hr>
+<h2 id="5-settlement-cycle-tn"><a class="header" href="#5-settlement-cycle-tn">5. Settlement Cycle (T+N)</a></h2>
+<p>Each instrument defines a settlement cycle in its configuration under <code>settlement.cycle</code>:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Cycle</th><th>Description</th><th>Settlement date</th></tr>
+</thead>
+<tbody>
+<tr><td><code>T0</code></td><td>Same-day settlement</td><td>Trade date</td></tr>
+<tr><td><code>T1</code></td><td>Next business day</td><td>Trade date + 1 day</td></tr>
+<tr><td><code>T2</code></td><td>Two business days (default)</td><td>Trade date + 2 days</td></tr>
+<tr><td><code>T3</code></td><td>Three business days</td><td>Trade date + 3 days</td></tr>
+<tr><td><code>TN(int)</code></td><td>Custom N days</td><td>Trade date + N days</td></tr>
+</tbody>
+</table>
+</div>
+<p>Unknown cycle values default to <code>T2</code>.</p>
+<p>The settlement cycle is configured per instrument:</p>
+<pre><code class="language-toml">[[instruments]]
+name = "PETR4"
+# ...
+[instruments.settlement]
+cycle = "T2"
+currency = "BRL"
+</code></pre>
+<hr>
+<h2 id="6-settlement-date-calculation"><a class="header" href="#6-settlement-date-calculation">6. Settlement Date Calculation</a></h2>
+<p>The settlement date is calculated as <code>trade_date + N calendar days</code>, where <code>N</code> is determined by the instrument’s settlement cycle (§5).</p>
+<p>For session-based instruments with <code>trading_days</code>, the system uses <code>InstrumentConfig.trading_days</code> (e.g., <code>["Mon", "Tue", "Wed", "Thu", "Fri"]</code>) to skip weekends and holidays when needed by higher-level scheduling logic. The current implementation computes the settlement date as a simple calendar offset from the trade’s <code>sim_time</code>.</p>
+<p>This means a trade on Friday with T+2 would settle on Sunday (calendar date). The sweep function then checks if the current simulation date equals or exceeds this date.</p>
+<hr>
+<h2 id="7-settlement-obligations"><a class="header" href="#7-settlement-obligations">7. Settlement Obligations</a></h2>
+<p>When <code>create_obligations()</code> is called for each <code>TradePrinted</code> event, it creates one <code>SettlementObligation</code> per side of the trade:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Field</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>trade_id</code></td><td>The UUID of the trade.</td></tr>
+<tr><td><code>participant</code></td><td>Which participant owes or is owed.</td></tr>
+<tr><td><code>instrument</code></td><td>The instrument traded.</td></tr>
+<tr><td><code>qty</code></td><td>Quantity traded.</td></tr>
+<tr><td><code>price</code></td><td>Execution price.</td></tr>
+<tr><td><code>side</code></td><td><code>Side::Buy</code> or <code>Side::Sell</code>.</td></tr>
+<tr><td><code>cash</code></td><td>Notional amount (<code>qty × price</code>).</td></tr>
+<tr><td><code>currency</code></td><td>Settlement currency (from instrument config).</td></tr>
+<tr><td><code>settle_date</code></td><td>The date when this obligation becomes due.</td></tr>
+<tr><td><code>settled</code></td><td><code>false</code> initially; set to <code>true</code> after sweep.</td></tr>
+</tbody>
+</table>
+</div>
+<p><strong>Buyer’s obligation</strong>: cash is positive (the amount owed to the counterparty). On settlement, this amount is debited from the buyer’s cash balance.</p>
+<p><strong>Seller’s obligation</strong>: cash is also positive (the amount the seller receives). On settlement, this amount is credited to the seller’s cash balance.</p>
+<p>Obligations are appended to the participant’s <code>pending_obligations</code> list in their ledger.</p>
+<h3 id="synthetic-trades"><a class="header" href="#synthetic-trades">Synthetic trades</a></h3>
+<p>Trades with <code>synthetic = true</code> (e.g., from simulation or mark-to-market adjustments) are <strong>skipped</strong> in settlement — they generate no obligations. Only real trades originating from the matching engine create obligations.</p>
+<hr>
+<h2 id="8-settlement-sweep"><a class="header" href="#8-settlement-sweep">8. Settlement Sweep</a></h2>
+<p><code>sweep_settlements()</code> runs periodically. In the current implementation, it is triggered at end-of-day (when the session transitions to <code>Closed</code>).</p>
+<h3 id="sweep-logic"><a class="header" href="#sweep-logic">Sweep logic</a></h3>
+<p>For each participant’s pending obligations:</p>
+<ol>
+<li>If <code>settle_date ≤ today</code> and <code>settled == false</code>:
+<ul>
+<li><strong>Buyer side</strong>: debit <code>cash</code> from the participant’s cash balance.</li>
+<li><strong>Seller side</strong>: credit <code>cash</code> to the participant’s cash balance.</li>
+<li>Mark the obligation as <code>settled = true</code>.</li>
+<li>Emit an <code>ObligationSettled</code> event.</li>
+</ul>
+</li>
+<li>If <code>settle_date &gt; today</code>, leave the obligation in the pending list.</li>
+</ol>
+<p>Future-dated obligations are never settled early. Once settled, obligations are retained in the pending list with <code>settled = true</code> (they are not removed).</p>
+<h3 id="settlement-events"><a class="header" href="#settlement-events">Settlement events</a></h3>
+<p>Each settled obligation emits an <code>ExchangeEvent::ObligationSettled</code>:</p>
+<pre><code class="language-json">{
+  "participant": "BOT001",
+  "trade_id": "f47ac10b-...",
+  "instrument": "PETR4",
+  "qty": "100.0",
+  "cash": "3850.00",
+  "currency": "BRL",
+  "sim_time": ...
+}
+</code></pre>
+<h3 id="worked-example"><a class="header" href="#worked-example">Worked example</a></h3>
+<ul>
+<li><code>BOT001</code> buys 100 <code>PETR4</code> @ 38.50 from <code>BOT002</code> on Monday.</li>
+<li>Settlement cycle: <code>T2</code>, so <code>settle_date = Wednesday</code>.</li>
+<li>On Monday and Tuesday the sweep runs but skips this obligation (settle_date is in the future).</li>
+<li>On Wednesday, the sweep fires:
+<ul>
+<li><code>BOT001</code> cash: −3,850.00 BRL</li>
+<li><code>BOT002</code> cash: +3,850.00 BRL</li>
+<li>Obligation marked settled.</li>
+</ul>
+</li>
+</ul>
+<h3 id="mixed-obligations"><a class="header" href="#mixed-obligations">Mixed obligations</a></h3>
+<p>A participant can have obligations with different settlement dates. The sweep processes only those that have matured:</p>
+<pre><code class="language-text">pending_obligations = [
+  { settle_date: 2026-06-09, settled: true  },  // already swept earlier
+  { settle_date: 2026-06-12, settled: false },  // sweeps today
+  { settle_date: 2026-06-15, settled: false },  // stays pending
+]
+</code></pre>
+<hr>
+<h2 id="9-mark-to-market-unrealized-pl"><a class="header" href="#9-mark-to-market-unrealized-pl">9. Mark-to-Market (Unrealized P&amp;L)</a></h2>
+<p><code>mark_to_market()</code> computes the unrealized P&amp;L on open positions based on the most recent trade price:</p>
+<pre><code>unrealized_pnl = current_qty × (last_price − avg_cost)
+</code></pre>
+<p>This is called on every <code>TradePrinted</code> event, using the trade price as the mark. For example:</p>
+<ul>
+<li>
+<p>Position: long 1,000 PETR4 @ avg 38.50</p>
+</li>
+<li>
+<p>Last trade: 40.00</p>
+</li>
+<li>
+<p><strong>Unrealized P&amp;L</strong> = <code>1000 × (40.00 − 38.50) = +1,500.00</code> (BRL, since PETR4 is BRL-denominated)</p>
+</li>
+<li>
+<p>Position: short 500 PETR4 @ avg 42.00</p>
+</li>
+<li>
+<p>Last trade: 40.00</p>
+</li>
+<li>
+<p><strong>Unrealized P&amp;L</strong> = <code>−500 × (40.00 − 42.00) = +1,000.00</code></p>
+</li>
+</ul>
+<h3 id="key-properties"><a class="header" href="#key-properties">Key properties</a></h3>
+<ul>
+<li><strong>Informational only.</strong> Mark-to-market does <strong>not</strong> affect cash balances, realized P&amp;L, or settlement.</li>
+<li><strong>Per-instrument.</strong> Only positions in the instrument whose trade just occurred are re-marked. Other instruments retain their last mark.</li>
+<li><strong>Flat positions ignored.</strong> If <code>qty == 0</code>, unrealized P&amp;L is left unchanged.</li>
+<li><strong>Used by</strong> the TUI Dashboard (Ledger tab), risk monitoring, and external reporting.</li>
+</ul>
+<hr>
+<h2 id="10-synthetic-trades"><a class="header" href="#10-synthetic-trades">10. Synthetic Trades</a></h2>
+<p>A <code>TradePrinted</code> event carries a <code>synthetic</code> boolean field:</p>
+<ul>
+<li><code>synthetic: false</code> — real trade from the matching engine. Positions are updated, obligations are created, settlement applies.</li>
+<li><code>synthetic: true</code> — generated trade (e.g., from simulation scenarios, replay data, or system adjustments). <strong>Position tracking still applies</strong>, but <strong>no settlement obligations</strong> are created. Realized P&amp;L is still computed for the ledger.</li>
+</ul>
+<p>This allows synthetic data feeds to exercise position tracking without polluting the settlement pipeline.</p>
+<hr>
+<h2 id="11-continuous-instruments-247"><a class="header" href="#11-continuous-instruments-247">11. Continuous Instruments (24×7)</a></h2>
+<p>Instruments with <code>session.type = "continuous_24x7"</code> never enter a <code>Closed</code> session state, so the EOD sweep trigger does not fire. For these instruments:</p>
+<ul>
+<li>Settlement obligations are still created with appropriate <code>settle_date</code> values (T+0, T+2, etc.).</li>
+<li>The sweep function processes obligations whenever it is called. Integration code should invoke <code>sweep_settlements()</code> on a periodic timer (e.g., every simulated midnight) for continuous instruments.</li>
+<li>No trading-day gating applies — every calendar day is a valid settlement date.</li>
+</ul>
+<p>The <code>trading_days</code> configuration (e.g., <code>["Mon", "Tue", "Wed", "Thu", "Fri"]</code>) does not constrain settlement for continuous instruments.</p>
+<hr>
+<h2 id="12-currency"><a class="header" href="#12-currency">12. Currency</a></h2>
+<p>Every instrument declares a settlement currency:</p>
+<pre><code class="language-toml">[instruments.settlement]
+cycle = "T2"
+currency = "BRL"
+</code></pre>
+<p>All cash tracking and settlement amounts use this currency. A single participant’s ledger can hold balances in multiple currencies (e.g., BRL from PETR4 trades, USD from ADR trades). Each currency bucket is tracked independently in <code>ledger.cash: HashMap&lt;Currency, Decimal&gt;</code>.</p>
+<h3 id="currency-flow-summary"><a class="header" href="#currency-flow-summary">Currency flow summary</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Step</th><th>Where the currency field is used</th></tr>
+</thead>
+<tbody>
+<tr><td>Trade execution</td><td><code>InstrumentConfig.settlement.currency</code></td></tr>
+<tr><td>Cash debit/credit</td><td><code>settle_trade()</code> adjusts <code>ledger.cash[currency]</code></td></tr>
+<tr><td>Obligation record</td><td><code>SettlementObligation.currency</code></td></tr>
+<tr><td>Settlement sweep</td><td>Sweep moves cash using the obligation’s currency field</td></tr>
+<tr><td>MtM display</td><td>P&amp;L is expressed in the instrument’s currency</td></tr>
+</tbody>
+</table>
+</div>
+<hr>
+<h2 id="full-lifecycle-example"><a class="header" href="#full-lifecycle-example">Full Lifecycle Example</a></h2>
+<p>Consider <code>BOT001</code> trading <code>PETR4</code> (currency = BRL, T+2 settlement):</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Day</th><th>Event</th><th>Position</th><th>Cash (BRL)</th><th>Pending Obligations</th></tr>
+</thead>
+<tbody>
+<tr><td>Mon 09:30</td><td>Buy 1,000 @ 38.50</td><td>+1,000 @ 38.50</td><td>−38,500</td><td>1 (settles Wed)</td></tr>
+<tr><td>Mon 10:00</td><td>Sell 300 @ 39.00</td><td>+700 @ 38.50</td><td>−26,800</td><td>1 (qty 1,000)</td></tr>
+<tr><td>Mon 10:01</td><td>Realized P&amp;L: 300 × (39.00 − 38.50) = +150.00</td><td></td><td></td><td></td></tr>
+<tr><td>Wed 00:01</td><td>Sweep runs (settle_date ≤ today)</td><td>+700 @ 38.50</td><td>−26,800</td><td>1 (settled)</td></tr>
+</tbody>
+</table>
+</div>
+<p>After settlement, <code>BOT001</code>’s cash reflects the full consideration for the trade. The realized P&amp;L of 150.00 is embedded in the position tracking but does not change the cash flow (the seller receives the full 38,500 regardless of BOT001’s average cost).</p>
+<p>The unrealized P&amp;L on the remaining 700 shares will fluctuate with each subsequent trade price update via <code>mark_to_market</code>, visible in the TUI Dashboard Ledger tab.</p>
+<hr>
+<h2 id="configuration-reference"><a class="header" href="#configuration-reference">Configuration Reference</a></h2>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Key</th><th>Type</th><th>Default</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>instruments[].settlement.cycle</code></td><td><code>"T0"</code>, <code>"T1"</code>, <code>"T2"</code>, <code>"T3"</code>, or <code>"TN(int)"</code></td><td>—</td><td>Settlement cycle duration.</td></tr>
+<tr><td><code>instruments[].settlement.currency</code></td><td>string</td><td>—</td><td>ISO currency code for cash and obligations.</td></tr>
+<tr><td><code>instruments[].session.trading_days</code></td><td><code>string[]</code></td><td><code>["Mon","Tue","Wed","Thu","Fri"]</code></td><td>Valid trading days (for business-day logic).</td></tr>
+<tr><td><code>instruments[].session.type</code></td><td><code>"session_based"</code> or <code>"continuous_24x7"</code></td><td>—</td><td>Session model; affects sweep timing.</td></tr>
+</tbody>
+</table>
+</div>
+<h2 id="see-also"><a class="header" href="#see-also">See Also</a></h2>
+<ul>
+<li><a href="matching.html">Matching Engine</a> — how fills are generated</li>
+<li><a href="risk-pipeline.html">Risk Pipeline</a> — position limits use the ledger tracked here</li>
+<li><a href="persistence.html">Persistence</a> — how positions survive restarts</li>
+<li><a href="simulation.html">Simulation</a> — how settlement sweep is triggered in different clock modes</li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../user-guide/risk-pipeline.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                            </a>
+
+                            <a rel="next prefetch" href="../user-guide/persistence.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../user-guide/risk-pipeline.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                    </a>
+
+                    <a rel="next prefetch" href="../user-guide/persistence.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                    </a>
+            </nav>
+
+        </div>
+
+        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
+        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
+        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
+        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
+        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr-ef4e11c1.min.js"></script>
+        <script src="../mark-09e88c2c.min.js"></script>
+        <script src="../searcher-09f2665d.js"></script>
+
+        <script src="../clipboard-1626706a.min.js"></script>
+        <script src="../highlight-abc7f01d.js"></script>
+        <script src="../book-c22b7243.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+
+    </div>
+    </body>
+</html>

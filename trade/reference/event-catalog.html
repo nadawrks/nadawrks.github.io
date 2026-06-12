@@ -1,0 +1,991 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Event Catalog - NadaTrade Documentation</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon-de23e50b.svg">
+        <link rel="shortcut icon" href="../favicon-8114d1fc.png">
+        <link rel="stylesheet" href="../css/variables-8adf115d.css">
+        <link rel="stylesheet" href="../css/general-0392ca55.css">
+        <link rel="stylesheet" href="../css/chrome-fc474251.css">
+        <link rel="stylesheet" href="../css/print-9e4910d8.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../fonts/fonts-9644e21d.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="mdbook-highlight-css" href="../highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="../tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight-3fdfc3ac.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../searchindex-8fb08360.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc-00c5fce9.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="mdbook-body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="mdbook-page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="mdbook-menu-bar-hover-placeholder"></div>
+                <div id="mdbook-menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
+                        </label>
+                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
+                        </button>
+                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-ayu">Ayu</button></li>
+                        </ul>
+                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">NadaTrade Documentation</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/nadawrks/nadatrade" title="Git repository" aria-label="Git repository">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/nadawrks/nadatrade/edit/main/docs/book/./reference/event-catalog.md" title="Suggest an edit" aria-label="Suggest an edit" rel="edit">
+                            <span class=fa-svg id="git-edit-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M421.7 220.3l-11.3 11.3-22.6 22.6-205 205c-6.6 6.6-14.8 11.5-23.8 14.1L30.8 511c-8.4 2.5-17.5 .2-23.7-6.1S-1.5 489.7 1 481.2L38.7 353.1c2.6-9 7.5-17.2 14.1-23.8l205-205 22.6-22.6 11.3-11.3 33.9 33.9 62.1 62.1 33.9 33.9zM96 353.9l-9.3 9.3c-.9 .9-1.6 2.1-2 3.4l-25.3 86 86-25.3c1.3-.4 2.5-1.1 3.4-2l9.3-9.3H112c-8.8 0-16-7.2-16-16V353.9zM453.3 19.3l39.4 39.4c25 25 25 65.5 0 90.5l-14.5 14.5-22.6 22.6-11.3 11.3-33.9-33.9-62.1-62.1L314.3 67.7l11.3-11.3 22.6-22.6 14.5-14.5c25-25 65.5-25 90.5 0z"/></svg></span>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="mdbook-search-wrapper" class="hidden">
+                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                        <ul id="mdbook-searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="mdbook-content" class="content">
+                    <main>
+                        <h1 id="event-catalog"><a class="header" href="#event-catalog">Event Catalog</a></h1>
+<p>All events emitted by the NadaTrade matching engine, post-trade engine, and clock layer. Every <code>ExchangeEvent</code> variant is persisted to the <code>events</code> table and broadcast to all connected gateways (FIX, WebSocket, TUI).</p>
+<h2 id="sequencedevent-wrapper"><a class="header" href="#sequencedevent-wrapper">SequencedEvent wrapper</a></h2>
+<p>Before persistence and broadcast, every <code>ExchangeEvent</code> is wrapped in a <code>SequencedEvent</code> envelope.</p>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>pub struct SequencedEvent {
+    pub sequence: u64,
+    pub event: ExchangeEvent,
+}
+<span class="boring">}</span></code></pre>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Field</th><th>Type</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td>sequence</td><td><code>u64</code></td><td>Monotonically increasing event number across the entire system</td></tr>
+<tr><td>event</td><td>ExchangeEvent</td><td>The payload variant (see below)</td></tr>
+</tbody>
+</table>
+</div>
+<p>Every <code>ExchangeEvent</code> variant carries its own <code>sim_time</code> (simulation clock time, <code>DateTime&lt;Utc&gt;</code> as epoch milliseconds). The wrapper does not duplicate <code>sim_time</code> — clients read it from the inner event.</p>
+<p><strong>JSON envelope example:</strong></p>
+<pre><code class="language-json">{
+  "sequence": 12345,
+  "event": {
+    "event": "trade_printed",
+    "trade_id": "b3c1a2d4-...",
+    "instrument": "PETR4",
+    "qty": "300",
+    "price": "38.50",
+    "aggressor_side": "buy",
+    "buyer_id": "BOT001",
+    "seller_id": "BOT002",
+    "buyer_order_id": "f5e6d7c8-...",
+    "seller_order_id": "a1b2c3d4-...",
+    "synthetic": false,
+    "sim_time": 1718143200000
+  }
+}
+</code></pre>
+<hr>
+<h2 id="enum-tag"><a class="header" href="#enum-tag">Enum tag</a></h2>
+<p><code>ExchangeEvent</code> uses serde internally-tagged representation:</p>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>#[serde(rename_all = "snake_case", tag = "event")]
+<span class="boring">}</span></code></pre>
+<p>Every variant serializes with an <code>"event"</code> field containing the snake_case variant name (e.g. <code>"order_accepted"</code>, <code>"trade_printed"</code>, <code>"session_state_changed"</code>).</p>
+<hr>
+<h2 id="serialization-conventions"><a class="header" href="#serialization-conventions">Serialization conventions</a></h2>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Rust type</th><th>JSON representation</th></tr>
+</thead>
+<tbody>
+<tr><td><code>Price</code>, <code>Qty</code> (<code>Decimal</code>)</td><td>JSON string (<code>"38.50"</code>) via <code>rust_decimal::serde::str</code></td></tr>
+<tr><td><code>OrderId</code>, <code>TradeId</code> (<code>Uuid</code>)</td><td>JSON string with hyphens (<code>"b3c1a2d4-..."</code>)</td></tr>
+<tr><td><code>DateTime&lt;Utc&gt;</code></td><td>Epoch milliseconds integer via <code>chrono::serde::ts_milliseconds</code></td></tr>
+<tr><td><code>Option&lt;Price&gt;</code></td><td>String or absent via <code>rust_decimal::serde::str_option</code> + <code>skip_serializing_if</code></td></tr>
+<tr><td>All enums (Side, OrderType, SessionState, …)</td><td>snake_case string</td></tr>
+<tr><td><code>Vec&lt;(Price, Qty)&gt;</code></td><td>Array of <code>["price_str", "qty_str"]</code> two-element arrays</td></tr>
+</tbody>
+</table>
+</div>
+<hr>
+<h2 id="exchangeevent-variants"><a class="header" href="#exchangeevent-variants">ExchangeEvent variants</a></h2>
+<h3 id="1-orderaccepted"><a class="header" href="#1-orderaccepted">1. OrderAccepted</a></h3>
+<p>Fires when a new order passes all pretrade checks and is accepted by the matching engine.</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Field</th><th>Type</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td>order_id</td><td><code>Uuid</code></td><td>Exchange-assigned order ID</td></tr>
+<tr><td>participant</td><td><code>String</code></td><td>Participant ID</td></tr>
+<tr><td>instrument</td><td><code>String</code></td><td>Instrument ID</td></tr>
+<tr><td>side</td><td><code>Side</code></td><td><code>"buy"</code> or <code>"sell"</code></td></tr>
+<tr><td>order_type</td><td><code>OrderType</code></td><td><code>"limit"</code>, <code>"market"</code>, <code>"stop"</code>, <code>"stop_limit"</code>, <code>"market_to_limit"</code>, <code>"iceberg"</code></td></tr>
+<tr><td>qty</td><td><code>Decimal</code></td><td>Order quantity (string)</td></tr>
+<tr><td>price</td><td><code>Option&lt;Decimal&gt;</code></td><td>Limit price (string), absent for market orders</td></tr>
+<tr><td>tif</td><td><code>TimeInForce</code></td><td><code>"day"</code>, <code>"gtc"</code>, <code>"gtd"</code> (with timestamp), <code>"ioc"</code>, <code>"fok"</code>, <code>"at_open"</code>, <code>"at_close"</code></td></tr>
+<tr><td>client_order_id</td><td><code>String</code></td><td>Client-assigned correlation ID</td></tr>
+<tr><td>sim_time</td><td><code>DateTime&lt;Utc&gt;</code></td><td>Simulation time (epoch ms)</td></tr>
+</tbody>
+</table>
+</div>
+<pre><code class="language-json">{
+  "event": "order_accepted",
+  "order_id": "b3c1a2d4-e5f6-7890-abcd-ef1234567890",
+  "participant": "BOT001",
+  "instrument": "PETR4",
+  "side": "buy",
+  "order_type": "limit",
+  "qty": "1000",
+  "price": "38.50",
+  "tif": "day",
+  "client_order_id": "bot-001",
+  "sim_time": 1718143200000
+}
+</code></pre>
+<hr>
+<h3 id="2-orderrejected"><a class="header" href="#2-orderrejected">2. OrderRejected</a></h3>
+<p>Fires when a new order fails pretrade validation.</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Field</th><th>Type</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td>client_order_id</td><td><code>String</code></td><td>Client correlation ID from the rejected order</td></tr>
+<tr><td>participant</td><td><code>String</code></td><td>Participant ID</td></tr>
+<tr><td>instrument</td><td><code>String</code></td><td>Instrument ID</td></tr>
+<tr><td>reason</td><td><code>RejectReason</code></td><td>Reason code (see below)</td></tr>
+<tr><td>sim_time</td><td><code>DateTime&lt;Utc&gt;</code></td><td>Simulation time (epoch ms)</td></tr>
+</tbody>
+</table>
+</div>
+<p><strong>RejectReason values:</strong></p>
+<p><code>unknown_instrument</code>, <code>unknown_participant</code>, <code>invalid_quantity</code>, <code>invalid_price</code>, <code>price_band_violation</code>, <code>participant_not_active</code>, <code>notional_limit_exceeded</code>, <code>position_limit_exceeded</code>, <code>fat_finger_protection</code>, <code>duplicate_cl_ord_id</code>, <code>stp_cancelled</code>, <code>session_not_accepting_orders</code>, <code>instrument_halted</code>, <code>incompatible_order_type_and_tif</code>, <code>market_order_no_liquidity</code></p>
+<pre><code class="language-json">{
+  "event": "order_rejected",
+  "client_order_id": "bot-002",
+  "participant": "BOT001",
+  "instrument": "PETR4",
+  "reason": "price_band_violation",
+  "sim_time": 1718143200000
+}
+</code></pre>
+<hr>
+<h3 id="3-orderfilled"><a class="header" href="#3-orderfilled">3. OrderFilled</a></h3>
+<p>Fires when an order is <strong>fully</strong> filled (leaves_qty = 0). For partial fills, see <code>OrderPartiallyFilled</code>.</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Field</th><th>Type</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td>order_id</td><td><code>Uuid</code></td><td>Order ID</td></tr>
+<tr><td>trade_id</td><td><code>Uuid</code></td><td>Trade ID linking to the <code>TradePrinted</code> event</td></tr>
+<tr><td>participant</td><td><code>String</code></td><td>Participant ID of the filled order owner</td></tr>
+<tr><td>instrument</td><td><code>String</code></td><td>Instrument ID</td></tr>
+<tr><td>side</td><td><code>Side</code></td><td><code>"buy"</code> or <code>"sell"</code></td></tr>
+<tr><td>fill_qty</td><td><code>Decimal</code></td><td>Quantity filled in this trade (string)</td></tr>
+<tr><td>fill_price</td><td><code>Decimal</code></td><td>Execution price (string)</td></tr>
+<tr><td>leaves_qty</td><td><code>Decimal</code></td><td>Remaining quantity after fill (always <code>"0"</code> for full fill)</td></tr>
+<tr><td>aggressor</td><td><code>bool</code></td><td><code>true</code> if this order was the aggressor (marketable)</td></tr>
+<tr><td>client_order_id</td><td><code>String</code></td><td>Client correlation ID</td></tr>
+<tr><td>sim_time</td><td><code>DateTime&lt;Utc&gt;</code></td><td>Simulation time (epoch ms)</td></tr>
+</tbody>
+</table>
+</div>
+<pre><code class="language-json">{
+  "event": "order_filled",
+  "order_id": "b3c1a2d4-e5f6-7890-abcd-ef1234567890",
+  "trade_id": "f5e6d7c8-b3a2-41d0-9876-fedcba098765",
+  "participant": "BOT001",
+  "instrument": "PETR4",
+  "side": "buy",
+  "fill_qty": "500",
+  "fill_price": "38.50",
+  "leaves_qty": "0",
+  "aggressor": true,
+  "client_order_id": "bot-001",
+  "sim_time": 1718143200000
+}
+</code></pre>
+<hr>
+<h3 id="4-orderpartiallyfilled"><a class="header" href="#4-orderpartiallyfilled">4. OrderPartiallyFilled</a></h3>
+<p>Fires when an order receives a <strong>partial</strong> fill (leaves_qty &gt; 0). Same fields as <code>OrderFilled</code> — inspect <code>leaves_qty</code> to distinguish.</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Field</th><th>Type</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td>order_id</td><td><code>Uuid</code></td><td>Order ID</td></tr>
+<tr><td>trade_id</td><td><code>Uuid</code></td><td>Trade ID linking to the <code>TradePrinted</code> event</td></tr>
+<tr><td>participant</td><td><code>String</code></td><td>Participant ID of the filled order owner</td></tr>
+<tr><td>instrument</td><td><code>String</code></td><td>Instrument ID</td></tr>
+<tr><td>side</td><td><code>Side</code></td><td><code>"buy"</code> or <code>"sell"</code></td></tr>
+<tr><td>fill_qty</td><td><code>Decimal</code></td><td>Quantity filled in this trade (string)</td></tr>
+<tr><td>fill_price</td><td><code>Decimal</code></td><td>Execution price (string)</td></tr>
+<tr><td>leaves_qty</td><td><code>Decimal</code></td><td>Remaining quantity after fill (&gt; <code>"0"</code>)</td></tr>
+<tr><td>aggressor</td><td><code>bool</code></td><td><code>true</code> if this order was the aggressor</td></tr>
+<tr><td>client_order_id</td><td><code>String</code></td><td>Client correlation ID</td></tr>
+<tr><td>sim_time</td><td><code>DateTime&lt;Utc&gt;</code></td><td>Simulation time (epoch ms)</td></tr>
+</tbody>
+</table>
+</div>
+<pre><code class="language-json">{
+  "event": "order_partially_filled",
+  "order_id": "b3c1a2d4-e5f6-7890-abcd-ef1234567890",
+  "trade_id": "f5e6d7c8-b3a2-41d0-9876-fedcba098765",
+  "participant": "BOT001",
+  "instrument": "PETR4",
+  "side": "buy",
+  "fill_qty": "200",
+  "fill_price": "38.50",
+  "leaves_qty": "800",
+  "aggressor": true,
+  "client_order_id": "bot-001",
+  "sim_time": 1718143200000
+}
+</code></pre>
+<hr>
+<h3 id="5-ordercancelled"><a class="header" href="#5-ordercancelled">5. OrderCancelled</a></h3>
+<p>Fires when an order is cancelled. May be triggered by client request, STP, instrument delisting, session end, replace, or scenario injection.</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Field</th><th>Type</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td>order_id</td><td><code>Uuid</code></td><td>Order ID</td></tr>
+<tr><td>participant</td><td><code>String</code></td><td>Participant ID</td></tr>
+<tr><td>instrument</td><td><code>String</code></td><td>Instrument ID</td></tr>
+<tr><td>reason</td><td><code>CancelReason</code></td><td>Cancel reason code (see below)</td></tr>
+<tr><td>client_order_id</td><td><code>String</code></td><td>Client correlation ID</td></tr>
+<tr><td>sim_time</td><td><code>DateTime&lt;Utc&gt;</code></td><td>Simulation time (epoch ms)</td></tr>
+</tbody>
+</table>
+</div>
+<p><strong>CancelReason values:</strong></p>
+<p><code>client_requested</code>, <code>stp_cancel_aggressive</code>, <code>stp_cancel_resting</code>, <code>stp_cancel_both</code>, <code>instrument_delisted</code>, <code>session_end</code>, <code>replaced</code>, <code>scenario</code></p>
+<pre><code class="language-json">{
+  "event": "order_cancelled",
+  "order_id": "b3c1a2d4-e5f6-7890-abcd-ef1234567890",
+  "participant": "BOT001",
+  "instrument": "PETR4",
+  "reason": "client_requested",
+  "client_order_id": "bot-001",
+  "sim_time": 1718143200000
+}
+</code></pre>
+<hr>
+<h3 id="6-orderexpired"><a class="header" href="#6-orderexpired">6. OrderExpired</a></h3>
+<p>Fires when an order expires naturally — IOC not filled, FOK cannot fill, GTD deadline passed, day-end GTC, auction unexecuted, or stop never triggered.</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Field</th><th>Type</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td>order_id</td><td><code>Uuid</code></td><td>Order ID</td></tr>
+<tr><td>participant</td><td><code>String</code></td><td>Participant ID</td></tr>
+<tr><td>instrument</td><td><code>String</code></td><td>Instrument ID</td></tr>
+<tr><td>reason</td><td><code>ExpireReason</code></td><td>Expiry reason code (see below)</td></tr>
+<tr><td>client_order_id</td><td><code>String</code></td><td>Client correlation ID</td></tr>
+<tr><td>sim_time</td><td><code>DateTime&lt;Utc&gt;</code></td><td>Simulation time (epoch ms)</td></tr>
+</tbody>
+</table>
+</div>
+<p><strong>ExpireReason values:</strong></p>
+<p><code>ioc_not_filled</code>, <code>fok_not_filled</code>, <code>gtd_expired</code>, <code>day_end_gtc</code>, <code>auction_unfilled</code>, <code>stop_never_triggered</code></p>
+<pre><code class="language-json">{
+  "event": "order_expired",
+  "order_id": "b3c1a2d4-e5f6-7890-abcd-ef1234567890",
+  "participant": "BOT001",
+  "instrument": "PETR4",
+  "reason": "ioc_not_filled",
+  "client_order_id": "bot-003",
+  "sim_time": 1718143200000
+}
+</code></pre>
+<hr>
+<h3 id="7-orderreplaced"><a class="header" href="#7-orderreplaced">7. OrderReplaced</a></h3>
+<p>Fires when an existing order is successfully amended (quantity reduction preserves priority; quantity increase or price change loses priority).</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Field</th><th>Type</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td>orig_order_id</td><td><code>Uuid</code></td><td>Original order ID (cancelled)</td></tr>
+<tr><td>new_order_id</td><td><code>Uuid</code></td><td>New replacement order ID</td></tr>
+<tr><td>participant</td><td><code>String</code></td><td>Participant ID</td></tr>
+<tr><td>instrument</td><td><code>String</code></td><td>Instrument ID</td></tr>
+<tr><td>new_qty</td><td><code>Decimal</code></td><td>New total quantity (string)</td></tr>
+<tr><td>new_price</td><td><code>Option&lt;Decimal&gt;</code></td><td>New limit price (string), absent for market orders</td></tr>
+<tr><td>new_client_order_id</td><td><code>String</code></td><td>New client correlation ID</td></tr>
+<tr><td>sim_time</td><td><code>DateTime&lt;Utc&gt;</code></td><td>Simulation time (epoch ms)</td></tr>
+</tbody>
+</table>
+</div>
+<pre><code class="language-json">{
+  "event": "order_replaced",
+  "orig_order_id": "b3c1a2d4-e5f6-7890-abcd-ef1234567890",
+  "new_order_id": "c4d5e6f7-a1b2-3098-cdef-0123456789ab",
+  "participant": "BOT001",
+  "instrument": "PETR4",
+  "new_qty": "800",
+  "new_price": "38.75",
+  "new_client_order_id": "bot-001-amend",
+  "sim_time": 1718143200000
+}
+</code></pre>
+<hr>
+<h3 id="8-cancelrejected"><a class="header" href="#8-cancelrejected">8. CancelRejected</a></h3>
+<p>Fires when a cancel or replace request cannot be processed.</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Field</th><th>Type</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td>participant</td><td><code>String</code></td><td>Participant ID</td></tr>
+<tr><td>instrument</td><td><code>String</code></td><td>Instrument ID</td></tr>
+<tr><td>orig_client_id</td><td><code>String</code></td><td>Original client order ID from the failed request</td></tr>
+<tr><td>reason</td><td><code>CancelRejectReason</code></td><td>Rejection reason code (see below)</td></tr>
+<tr><td>sim_time</td><td><code>DateTime&lt;Utc&gt;</code></td><td>Simulation time (epoch ms)</td></tr>
+</tbody>
+</table>
+</div>
+<p><strong>CancelRejectReason values:</strong></p>
+<p><code>unknown_order</code>, <code>already_closed</code>, <code>session_not_accepting_cancels</code>, <code>duplicate_cl_ord_id</code>, <code>invalid_replace_params</code></p>
+<pre><code class="language-json">{
+  "event": "cancel_rejected",
+  "participant": "BOT001",
+  "instrument": "PETR4",
+  "orig_client_id": "bot-001",
+  "reason": "unknown_order",
+  "sim_time": 1718143200000
+}
+</code></pre>
+<hr>
+<h3 id="9-tradeprinted"><a class="header" href="#9-tradeprinted">9. TradePrinted</a></h3>
+<p>Fires for every matched trade on the tape. Emitted alongside <code>OrderFilled</code> / <code>OrderPartiallyFilled</code> for both sides.</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Field</th><th>Type</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td>trade_id</td><td><code>Uuid</code></td><td>Unique trade identifier</td></tr>
+<tr><td>instrument</td><td><code>String</code></td><td>Instrument ID</td></tr>
+<tr><td>qty</td><td><code>Decimal</code></td><td>Traded quantity (string)</td></tr>
+<tr><td>price</td><td><code>Decimal</code></td><td>Execution price (string)</td></tr>
+<tr><td>aggressor_side</td><td><code>Side</code></td><td>Which side was the aggressor (<code>"buy"</code> or <code>"sell"</code>)</td></tr>
+<tr><td>buyer_id</td><td><code>String</code></td><td>Buyer participant ID</td></tr>
+<tr><td>seller_id</td><td><code>String</code></td><td>Seller participant ID</td></tr>
+<tr><td>buyer_order_id</td><td><code>Uuid</code></td><td>Buyer’s order ID</td></tr>
+<tr><td>seller_order_id</td><td><code>Uuid</code></td><td>Seller’s order ID</td></tr>
+<tr><td>auction</td><td><code>Option&lt;AuctionType&gt;</code></td><td>Present if trade occurred during an auction (<code>"opening"</code>, <code>"closing"</code>, <code>"reopening"</code>), absent for continuous trading</td></tr>
+<tr><td>synthetic</td><td><code>bool</code></td><td><code>true</code> if this is a synthetic trade (e.g. settlement-generated), <code>false</code> for real matches. Defaults to <code>false</code>.</td></tr>
+<tr><td>sim_time</td><td><code>DateTime&lt;Utc&gt;</code></td><td>Simulation time (epoch ms)</td></tr>
+</tbody>
+</table>
+</div>
+<pre><code class="language-json">{
+  "event": "trade_printed",
+  "trade_id": "f5e6d7c8-b3a2-41d0-9876-fedcba098765",
+  "instrument": "PETR4",
+  "qty": "500",
+  "price": "38.50",
+  "aggressor_side": "buy",
+  "buyer_id": "BOT001",
+  "seller_id": "BOT002",
+  "buyer_order_id": "b3c1a2d4-e5f6-7890-abcd-ef1234567890",
+  "seller_order_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+  "synthetic": false,
+  "sim_time": 1718143200000
+}
+</code></pre>
+<p>With auction:</p>
+<pre><code class="language-json">{
+  "event": "trade_printed",
+  "trade_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+  "instrument": "PETR4",
+  "qty": "1200",
+  "price": "38.55",
+  "aggressor_side": "buy",
+  "buyer_id": "BOT001",
+  "seller_id": "BOT003",
+  "buyer_order_id": "b3c1a2d4-e5f6-7890-abcd-ef1234567890",
+  "seller_order_id": "c4d5e6f7-a1b2-3098-cdef-0123456789ab",
+  "auction": "opening",
+  "synthetic": false,
+  "sim_time": 1718143200000
+}
+</code></pre>
+<hr>
+<h3 id="10-bookupdated"><a class="header" href="#10-bookupdated">10. BookUpdated</a></h3>
+<p>Fires whenever the order book depth changes — on each new order, fill, cancel, expire, or replace. Emitted at most once per matching engine process cycle per instrument.</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Field</th><th>Type</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td>instrument</td><td><code>String</code></td><td>Instrument ID</td></tr>
+<tr><td>bids</td><td><code>Vec&lt;(Price, Qty)&gt;</code></td><td>Ordered list of bid price levels (descending price)</td></tr>
+<tr><td>asks</td><td><code>Vec&lt;(Price, Qty)&gt;</code></td><td>Ordered list of ask price levels (ascending price)</td></tr>
+<tr><td>sim_time</td><td><code>DateTime&lt;Utc&gt;</code></td><td>Simulation time (epoch ms)</td></tr>
+</tbody>
+</table>
+</div>
+<p>Each price level in <code>bids</code> and <code>asks</code> is a two-element array of Decimal strings: <code>[price, qty]</code>.</p>
+<pre><code class="language-json">{
+  "event": "book_updated",
+  "instrument": "PETR4",
+  "bids": [
+    ["38.49", "500"],
+    ["38.48", "1200"],
+    ["38.45", "300"]
+  ],
+  "asks": [
+    ["38.51", "700"],
+    ["38.55", "400"]
+  ],
+  "sim_time": 1718143200000
+}
+</code></pre>
+<hr>
+<h3 id="11-sessionstatechanged"><a class="header" href="#11-sessionstatechanged">11. SessionStateChanged</a></h3>
+<p>Fires on every session state transition for an instrument.</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Field</th><th>Type</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td>instrument</td><td><code>String</code></td><td>Instrument ID</td></tr>
+<tr><td>from</td><td><code>SessionState</code></td><td>Previous session state</td></tr>
+<tr><td>to</td><td><code>SessionState</code></td><td>New session state</td></tr>
+<tr><td>sim_time</td><td><code>DateTime&lt;Utc&gt;</code></td><td>Simulation time (epoch ms)</td></tr>
+</tbody>
+</table>
+</div>
+<p><strong>SessionState values:</strong></p>
+<ul>
+<li><code>closed</code> — No trading, no orders accepted</li>
+<li><code>pre_open</code> — Orders accepted for opening auction, no matching</li>
+<li><code>opening_auction</code> — Opening auction in progress</li>
+<li><code>trading</code> — Continuous trading</li>
+<li><code>trading_halt</code> — Trading paused: <code>{"trading_halt": {"reason": "circuit_breaker", "until": null}}</code>. <code>reason</code> is a <code>HaltReason</code> (<code>circuit_breaker</code>, <code>manual_halt</code>, <code>technical_halt</code>). <code>until</code> is an optional epoch ms timestamp.</li>
+<li><code>reopening_auction</code> — Reopening auction after halt</li>
+<li><code>closing_auction</code> — Closing auction</li>
+</ul>
+<pre><code class="language-json">{
+  "event": "session_state_changed",
+  "instrument": "PETR4",
+  "from": "pre_open",
+  "to": "opening_auction",
+  "sim_time": 1718143200000
+}
+</code></pre>
+<p>Halt example:</p>
+<pre><code class="language-json">{
+  "event": "session_state_changed",
+  "instrument": "PETR4",
+  "from": "trading",
+  "to": {
+    "trading_halt": {
+      "reason": "circuit_breaker",
+      "until": null
+    }
+  },
+  "sim_time": 1718143300000
+}
+</code></pre>
+<hr>
+<h3 id="12-auctionuncrossed"><a class="header" href="#12-auctionuncrossed">12. AuctionUncrossed</a></h3>
+<p>Fires when an auction completes uncrossing — produces the auction price, total traded quantity, and imbalance if any.</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Field</th><th>Type</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td>instrument</td><td><code>String</code></td><td>Instrument ID</td></tr>
+<tr><td>auction_type</td><td><code>AuctionType</code></td><td><code>"opening"</code>, <code>"closing"</code>, or <code>"reopening"</code></td></tr>
+<tr><td>auction_price</td><td><code>Option&lt;Decimal&gt;</code></td><td>Uncross price (string), absent if no match</td></tr>
+<tr><td>traded_qty</td><td><code>Decimal</code></td><td>Total quantity traded in this auction (string)</td></tr>
+<tr><td>imbalance_qty</td><td><code>Decimal</code></td><td>Unfilled quantity on the surplus side (string)</td></tr>
+<tr><td>imbalance_side</td><td><code>Option&lt;Side&gt;</code></td><td>Side with surplus (<code>"buy"</code> or <code>"sell"</code>), absent if balanced</td></tr>
+<tr><td>sim_time</td><td><code>DateTime&lt;Utc&gt;</code></td><td>Simulation time (epoch ms)</td></tr>
+</tbody>
+</table>
+</div>
+<pre><code class="language-json">{
+  "event": "auction_uncrossed",
+  "instrument": "PETR4",
+  "auction_type": "opening",
+  "auction_price": "38.55",
+  "traded_qty": "1200",
+  "imbalance_qty": "300",
+  "imbalance_side": "buy",
+  "sim_time": 1718143200000
+}
+</code></pre>
+<p>No-match auction:</p>
+<pre><code class="language-json">{
+  "event": "auction_uncrossed",
+  "instrument": "PETR4",
+  "auction_type": "closing",
+  "auction_price": null,
+  "traded_qty": "0",
+  "imbalance_qty": "0",
+  "sim_time": 1718200000000
+}
+</code></pre>
+<hr>
+<h3 id="13-referencepricechanged"><a class="header" href="#13-referencepricechanged">13. ReferencePriceChanged</a></h3>
+<p>Fires when an instrument’s reference price changes — via config, auction result, scenario injection, or first trade.</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Field</th><th>Type</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td>instrument</td><td><code>String</code></td><td>Instrument ID</td></tr>
+<tr><td>old</td><td><code>Option&lt;Decimal&gt;</code></td><td>Previous reference price (string), absent on first set</td></tr>
+<tr><td>new</td><td><code>Decimal</code></td><td>New reference price (string)</td></tr>
+<tr><td>source</td><td><code>RefPriceSource</code></td><td><code>"config"</code>, <code>"auction"</code>, <code>"scenario"</code>, or <code>"first_trade"</code></td></tr>
+<tr><td>sim_time</td><td><code>DateTime&lt;Utc&gt;</code></td><td>Simulation time (epoch ms)</td></tr>
+</tbody>
+</table>
+</div>
+<pre><code class="language-json">{
+  "event": "reference_price_changed",
+  "instrument": "PETR4",
+  "old": "38.00",
+  "new": "38.55",
+  "source": "auction",
+  "sim_time": 1718143200000
+}
+</code></pre>
+<p>First reference price (no old value):</p>
+<pre><code class="language-json">{
+  "event": "reference_price_changed",
+  "instrument": "PETR4",
+  "new": "38.00",
+  "source": "config",
+  "sim_time": 1718100000000
+}
+</code></pre>
+<hr>
+<h3 id="14-obligationsettled"><a class="header" href="#14-obligationsettled">14. ObligationSettled</a></h3>
+<p>Fires when a settlement obligation is swept (cash delivery completes).</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Field</th><th>Type</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td>participant</td><td><code>String</code></td><td>Participant ID</td></tr>
+<tr><td>trade_id</td><td><code>Uuid</code></td><td>Trade ID being settled</td></tr>
+<tr><td>instrument</td><td><code>String</code></td><td>Instrument ID</td></tr>
+<tr><td>qty</td><td><code>Decimal</code></td><td>Quantity delivered (string)</td></tr>
+<tr><td>cash</td><td><code>Decimal</code></td><td>Cash amount transferred (string)</td></tr>
+<tr><td>currency</td><td><code>String</code></td><td>Currency code (e.g. <code>"BRL"</code>)</td></tr>
+<tr><td>sim_time</td><td><code>DateTime&lt;Utc&gt;</code></td><td>Simulation time (epoch ms)</td></tr>
+</tbody>
+</table>
+</div>
+<pre><code class="language-json">{
+  "event": "obligation_settled",
+  "participant": "BOT001",
+  "trade_id": "f5e6d7c8-b3a2-41d0-9876-fedcba098765",
+  "instrument": "PETR4",
+  "qty": "500",
+  "cash": "19250.00",
+  "currency": "BRL",
+  "sim_time": 1726800000000
+}
+</code></pre>
+<hr>
+<h3 id="15-scenarioapplied"><a class="header" href="#15-scenarioapplied">15. ScenarioApplied</a></h3>
+<p>Fires when a simulation scenario is injected and applied.</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Field</th><th>Type</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td>instrument</td><td><code>Option&lt;String&gt;</code></td><td>Target instrument, absent for system-wide scenarios</td></tr>
+<tr><td>scenario</td><td><code>ScenarioEvent</code></td><td>The applied scenario (see below)</td></tr>
+<tr><td>sim_time</td><td><code>DateTime&lt;Utc&gt;</code></td><td>Simulation time (epoch ms)</td></tr>
+</tbody>
+</table>
+</div>
+<p><strong>ScenarioEvent values:</strong></p>
+<ul>
+<li><code>halt_instrument</code> — <code>{"halt_instrument": {"duration_secs": 300, "reason": "manual_halt"}}</code>. <code>duration_secs</code> optional.</li>
+<li><code>resume_instrument</code> — <code>"resume_instrument"</code></li>
+<li><code>set_reference_price</code> — <code>{"set_reference_price": {"price": "40.00"}}</code></li>
+<li><code>trigger_circuit_breaker</code> — <code>"trigger_circuit_breaker"</code></li>
+<li><code>expire_all_gtc</code> — <code>"expire_all_gtc"</code></li>
+<li><code>delist_instrument</code> — <code>{"delist_instrument": {"instrument": "PETR4", "reason": "corporate_action"}}</code></li>
+<li><code>broadcast_system_message</code> — <code>{"broadcast_system_message": {"text": "System maintenance at 18:00"}}</code></li>
+</ul>
+<pre><code class="language-json">{
+  "event": "scenario_applied",
+  "instrument": "PETR4",
+  "scenario": {
+    "halt_instrument": {
+      "duration_secs": 300,
+      "reason": "manual_halt"
+    }
+  },
+  "sim_time": 1718143200000
+}
+</code></pre>
+<p>System-wide scenario (no instrument):</p>
+<pre><code class="language-json">{
+  "event": "scenario_applied",
+  "scenario": {
+    "broadcast_system_message": {
+      "text": "Market-wide circuit breaker reset"
+    }
+  },
+  "sim_time": 1718143200000
+}
+</code></pre>
+<hr>
+<h3 id="16-clockspeedchanged"><a class="header" href="#16-clockspeedchanged">16. ClockSpeedChanged</a></h3>
+<p>Fires when the simulation clock speed changes (accelerated mode).</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Field</th><th>Type</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td>new_speed</td><td><code>f64</code></td><td>Clock multiplier (1.0 = real-time, &gt; 1.0 = accelerated)</td></tr>
+<tr><td>sim_time</td><td><code>DateTime&lt;Utc&gt;</code></td><td>Simulation time (epoch ms)</td></tr>
+</tbody>
+</table>
+</div>
+<pre><code class="language-json">{
+  "event": "clock_speed_changed",
+  "new_speed": 5.0,
+  "sim_time": 1718143200000
+}
+</code></pre>
+<hr>
+<h3 id="17-replaystarted"><a class="header" href="#17-replaystarted">17. ReplayStarted</a></h3>
+<p>Fires when market data replay begins.</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Field</th><th>Type</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td>feed_id</td><td><code>String</code></td><td>Replay feed identifier</td></tr>
+<tr><td>sim_time</td><td><code>DateTime&lt;Utc&gt;</code></td><td>Simulation time (epoch ms)</td></tr>
+</tbody>
+</table>
+</div>
+<pre><code class="language-json">{
+  "event": "replay_started",
+  "feed_id": "b3-trades-2024-06-11",
+  "sim_time": 1718143200000
+}
+</code></pre>
+<hr>
+<h3 id="18-replaystopped"><a class="header" href="#18-replaystopped">18. ReplayStopped</a></h3>
+<p>Fires when market data replay stops (natural end or manual interruption).</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Field</th><th>Type</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td>feed_id</td><td><code>String</code></td><td>Replay feed identifier</td></tr>
+<tr><td>sim_time</td><td><code>DateTime&lt;Utc&gt;</code></td><td>Simulation time (epoch ms)</td></tr>
+</tbody>
+</table>
+</div>
+<pre><code class="language-json">{
+  "event": "replay_stopped",
+  "feed_id": "b3-trades-2024-06-11",
+  "sim_time": 1718229600000
+}
+</code></pre>
+<hr>
+<h3 id="19-systemmessage"><a class="header" href="#19-systemmessage">19. SystemMessage</a></h3>
+<p>Fires for system-level informational broadcasts.</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Field</th><th>Type</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td>text</td><td><code>String</code></td><td>Human-readable message text</td></tr>
+<tr><td>sim_time</td><td><code>DateTime&lt;Utc&gt;</code></td><td>Simulation time (epoch ms)</td></tr>
+</tbody>
+</table>
+</div>
+<pre><code class="language-json">{
+  "event": "system_message",
+  "text": "End-of-day processing complete. All positions marked to market.",
+  "sim_time": 1718236800000
+}
+</code></pre>
+<hr>
+<h2 id="event-lifecycle-summary"><a class="header" href="#event-lifecycle-summary">Event lifecycle summary</a></h2>
+<pre><code>                  ┌──────────────┐
+                  │ OrderAccepted │
+                  └──────┬───────┘
+         ┌───────────────┼───────────────┐
+         ▼               ▼               ▼
+  ┌──────────┐   ┌───────────────┐  ┌────────────┐
+  │OrderFilled│   │OrderPartiallyFilled│  │OrderCancelled│
+  └──────────┘   └───────────────┘  └────────────┘
+         │               │
+         │    ┌──────────┘
+         ▼    ▼
+  ┌──────────────┐
+  │ TradePrinted │
+  └──────┬───────┘
+         │ (T+N days later)
+         ▼
+  ┌──────────────────┐
+  │ ObligationSettled│
+  └──────────────────┘
+
+  OrderAccepted → OrderReplaced (amend) → new OrderAccepted on replace
+  Limit order with IOC/FOK → OrderExpired if unfilled
+  Stop order → StopTriggered (via BookUpdated + TradePrinted on trigger)
+</code></pre>
+<hr>
+<h2 id="related-types"><a class="header" href="#related-types">Related types</a></h2>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Type</th><th>Source file</th></tr>
+</thead>
+<tbody>
+<tr><td>Side</td><td><code>crates/nadatrade-core/src/enums.rs</code></td></tr>
+<tr><td>OrderType</td><td><code>crates/nadatrade-core/src/enums.rs</code></td></tr>
+<tr><td>TimeInForce</td><td><code>crates/nadatrade-core/src/enums.rs</code></td></tr>
+<tr><td>SessionState</td><td><code>crates/nadatrade-core/src/enums.rs</code></td></tr>
+<tr><td>HaltReason</td><td><code>crates/nadatrade-core/src/enums.rs</code></td></tr>
+<tr><td>AuctionType</td><td><code>crates/nadatrade-core/src/enums.rs</code></td></tr>
+<tr><td>RejectReason</td><td><code>crates/nadatrade-core/src/enums.rs</code></td></tr>
+<tr><td>CancelReason</td><td><code>crates/nadatrade-core/src/enums.rs</code></td></tr>
+<tr><td>CancelRejectReason</td><td><code>crates/nadatrade-core/src/enums.rs</code></td></tr>
+<tr><td>ExpireReason</td><td><code>crates/nadatrade-core/src/enums.rs</code></td></tr>
+<tr><td>RefPriceSource</td><td><code>crates/nadatrade-core/src/enums.rs</code></td></tr>
+<tr><td>ScenarioEvent</td><td><code>crates/nadatrade-core/src/enums.rs</code></td></tr>
+<tr><td>OrderId, TradeId</td><td><code>crates/nadatrade-core/src/types.rs</code></td></tr>
+<tr><td>Price, Qty</td><td><code>crates/nadatrade-core/src/types.rs</code></td></tr>
+</tbody>
+</table>
+</div>
+<h2 id="source"><a class="header" href="#source">Source</a></h2>
+<p>All variants, fields, and serde attributes are documented from the authoritative source: <code>crates/nadatrade-core/src/events.rs</code>.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../reference/ws-protocol.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                            </a>
+
+                            <a rel="next prefetch" href="../development/architecture.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../reference/ws-protocol.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                    </a>
+
+                    <a rel="next prefetch" href="../development/architecture.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                    </a>
+            </nav>
+
+        </div>
+
+        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
+        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
+        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
+        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
+        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr-ef4e11c1.min.js"></script>
+        <script src="../mark-09e88c2c.min.js"></script>
+        <script src="../searcher-09f2665d.js"></script>
+
+        <script src="../clipboard-1626706a.min.js"></script>
+        <script src="../highlight-abc7f01d.js"></script>
+        <script src="../book-c22b7243.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+
+    </div>
+    </body>
+</html>

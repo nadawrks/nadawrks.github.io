@@ -1,0 +1,692 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Matching Engine - NadaTrade Documentation</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon-de23e50b.svg">
+        <link rel="shortcut icon" href="../favicon-8114d1fc.png">
+        <link rel="stylesheet" href="../css/variables-8adf115d.css">
+        <link rel="stylesheet" href="../css/general-0392ca55.css">
+        <link rel="stylesheet" href="../css/chrome-fc474251.css">
+        <link rel="stylesheet" href="../css/print-9e4910d8.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../fonts/fonts-9644e21d.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="mdbook-highlight-css" href="../highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="../tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight-3fdfc3ac.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../searchindex-8fb08360.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc-00c5fce9.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="mdbook-body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="mdbook-page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="mdbook-menu-bar-hover-placeholder"></div>
+                <div id="mdbook-menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
+                        </label>
+                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
+                        </button>
+                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-ayu">Ayu</button></li>
+                        </ul>
+                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">NadaTrade Documentation</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/nadawrks/nadatrade" title="Git repository" aria-label="Git repository">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/nadawrks/nadatrade/edit/main/docs/book/./user-guide/matching.md" title="Suggest an edit" aria-label="Suggest an edit" rel="edit">
+                            <span class=fa-svg id="git-edit-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M421.7 220.3l-11.3 11.3-22.6 22.6-205 205c-6.6 6.6-14.8 11.5-23.8 14.1L30.8 511c-8.4 2.5-17.5 .2-23.7-6.1S-1.5 489.7 1 481.2L38.7 353.1c2.6-9 7.5-17.2 14.1-23.8l205-205 22.6-22.6 11.3-11.3 33.9 33.9 62.1 62.1 33.9 33.9zM96 353.9l-9.3 9.3c-.9 .9-1.6 2.1-2 3.4l-25.3 86 86-25.3c1.3-.4 2.5-1.1 3.4-2l9.3-9.3H112c-8.8 0-16-7.2-16-16V353.9zM453.3 19.3l39.4 39.4c25 25 25 65.5 0 90.5l-14.5 14.5-22.6 22.6-11.3 11.3-33.9-33.9-62.1-62.1L314.3 67.7l11.3-11.3 22.6-22.6 14.5-14.5c25-25 65.5-25 90.5 0z"/></svg></span>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="mdbook-search-wrapper" class="hidden">
+                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                        <ul id="mdbook-searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="mdbook-content" class="content">
+                    <main>
+                        <h1 id="matching-engine"><a class="header" href="#matching-engine">Matching Engine</a></h1>
+<p>NadaTrade runs one independent matching engine per instrument, each owning a central limit order book (CLOB). The engine processes <code>OrderCommand</code> variants — <code>New</code>, <code>Cancel</code>, <code>Replace</code>, <code>ClockTick</code>, <code>SessionTransition</code>, <code>Scenario</code>, and <code>Status</code> — and emits <code>ExchangeEvent</code> variants back to the system.</p>
+<h2 id="1-architecture-overview"><a class="header" href="#1-architecture-overview">1. Architecture overview</a></h2>
+<p>Each <code>MatchingEngine</code> is keyed by <code>InstrumentId</code> (the instrument name string). The <code>OrderRouter</code> (<code>crates/nadatrade-matching/src/router.rs</code>) dispatches incoming commands to the correct engine via a <code>HashMap&lt;InstrumentId, MatchingEngine&gt;</code>.</p>
+<p>The CLOB itself (<code>Clob</code> struct in <code>clob.rs:17–25</code>) uses <strong>deterministic</strong> data structures throughout:</p>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>pub struct Clob {
+    pub bids: BTreeMap&lt;Price, VecDeque&lt;RestingOrder&gt;&gt;,
+    pub asks: BTreeMap&lt;Price, VecDeque&lt;RestingOrder&gt;&gt;,
+    by_order_id: HashMap&lt;OrderId, (Price, Side)&gt;,
+    pub by_client_id: HashMap&lt;(ParticipantId, String), OrderId&gt;,
+    pub last_trade_price: Option&lt;Price&gt;,
+    pub stop_book: StopBook,
+    pub expiries: BTreeMap&lt;DateTime&lt;Utc&gt;, Vec&lt;OrderId&gt;&gt;,
+}
+<span class="boring">}</span></code></pre>
+<ul>
+<li><strong><code>BTreeMap&lt;Price, ...&gt;</code></strong> — price levels are ordered. Bids iterate descending (best = highest, via <code>.last_key_value()</code>). Asks iterate ascending (best = lowest, via <code>.first_key_value()</code>). This guarantees deterministic price-level iteration.</li>
+<li><strong><code>VecDeque&lt;RestingOrder&gt;</code></strong> — within each price level, orders are FIFO (price-time priority). New orders <code>.push_back()</code>, fills <code>.pop_front()</code>.</li>
+<li><strong><code>by_order_id</code></strong> — O(1) lookup for cancels and replaces.</li>
+<li><strong><code>by_client_id</code></strong> — O(1) duplicate <code>ClOrdID</code> detection, keyed on <code>(participant, client_order_id)</code>.</li>
+<li><strong>No <code>HashMap</code> iteration in hot paths</strong> — matching walks <code>BTreeMap</code> entries only.</li>
+</ul>
+<h2 id="2-order-types"><a class="header" href="#2-order-types">2. Order types</a></h2>
+<p>NadaTrade supports six order types (<code>OrderType</code> enum, <code>enums.rs:13–20</code>):</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>OrderType</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>Market</code></td><td>Fills immediately at the best available opposite price. Must not specify <code>price</code>, <code>stop_price</code>, or <code>display_qty</code>. Requires <code>Ioc</code>, <code>Fok</code>, or <code>Day</code> TIF. If the opposite book is empty → <code>OrderRejected(MarketOrderNoLiquidity)</code>.</td></tr>
+<tr><td><code>Limit</code></td><td>Rests at a specified <code>price</code> (must be present and a multiple of <code>tick_size</code>). Supports all 7 TIF variants.</td></tr>
+<tr><td><code>Stop</code></td><td>Parks in the Stop Book with a <code>trigger_price</code>. When the market crosses the trigger (bid rises above for buys, ask falls below for sells), the order triggers and becomes a <strong>Market</strong> order (<code>engine.rs:457</code>). Requires <code>stop_price</code>; must not have <code>price</code>. TIF: <code>Day</code>, <code>Gtc</code>, <code>Gtd</code>.</td></tr>
+<tr><td><code>StopLimit</code></td><td>Like <code>Stop</code> but triggers into a <strong>Limit</strong> order at the specified <code>price</code>. Requires both <code>price</code> and <code>stop_price</code>. TIF: <code>Day</code>, <code>Gtc</code>, <code>Gtd</code>.</td></tr>
+<tr><td><code>MarketToLimit</code></td><td>Like <code>Market</code> but after filling what it can, the unfilled remainder rests as a Limit at the last trade price (<code>engine.rs:836</code>). Must not specify <code>price</code> or <code>stop_price</code>. TIF: <code>Day</code>, <code>Ioc</code>.</td></tr>
+<tr><td><code>Iceberg</code></td><td>Displays only <code>display_qty</code> on the order book; the rest (<code>qty − display_qty</code>) is in a hidden reserve. When the visible portion is exhausted, it replenishes from the hidden reserve and <strong>re-enters at the back</strong> of the price queue (loses time priority). Requires <code>price</code> and a valid <code>display_qty</code> (must be &gt; 0 and ≤ <code>qty</code>). TIF: <code>Day</code>, <code>Gtc</code>, <code>Gtd</code>.</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="marketmarkettolimit-vs-empty-book"><a class="header" href="#marketmarkettolimit-vs-empty-book">Market/MarketToLimit vs empty book</a></h3>
+<p>Both <code>Market</code> and <code>MarketToLimit</code> are rejected immediately if the opposite side has no resting orders (<code>clob.rs:132–143</code>).</p>
+<h2 id="3-time-in-force-tif-matrix"><a class="header" href="#3-time-in-force-tif-matrix">3. Time-in-Force (TIF) matrix</a></h2>
+<p>The function <code>validate_tif()</code> in <code>tif_matrix.rs</code> enforces a 6 × 7 = 42-cell compatibility table. Incompatible combinations produce <code>RejectReason::IncompatibleOrderTypeAndTif</code>.</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>TIF ↓ / OrderType →</th><th>Limit</th><th>Market</th><th>Stop</th><th>StopLimit</th><th>MarketToLimit</th><th>Iceberg</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>Day</strong></td><td>✓</td><td>✓</td><td>✓</td><td>✓</td><td>✓</td><td>✓</td></tr>
+<tr><td><strong>Gtc</strong></td><td>✓</td><td>✗</td><td>✓</td><td>✓</td><td>✗</td><td>✓</td></tr>
+<tr><td><strong>Gtd</strong></td><td>✓</td><td>✗</td><td>✓</td><td>✓</td><td>✗</td><td>✓</td></tr>
+<tr><td><strong>Ioc</strong></td><td>✓</td><td>✓</td><td>✗</td><td>✗</td><td>✓</td><td>✗</td></tr>
+<tr><td><strong>Fok</strong></td><td>✓</td><td>✓</td><td>✗</td><td>✗</td><td>✗</td><td>✗</td></tr>
+<tr><td><strong>AtOpen</strong></td><td>✓</td><td>✗</td><td>✗</td><td>✗</td><td>✗</td><td>✗</td></tr>
+<tr><td><strong>AtClose</strong></td><td>✓</td><td>✗</td><td>✗</td><td>✗</td><td>✗</td><td>✗</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="tif-behaviours"><a class="header" href="#tif-behaviours">TIF behaviours</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>TIF</th><th>Meaning</th></tr>
+</thead>
+<tbody>
+<tr><td><code>Day</code></td><td>Good until end of the trading session. On session close (<code>SessionState::Closed</code>), all Day orders on the CLOB and Stop Book are cancelled with <code>CancelReason::SessionEnd</code> (<code>engine.rs:130–134</code>).</td></tr>
+<tr><td><code>Gtc</code></td><td>Good-Till-Cancelled. Survives session boundaries. Can be purged at EOD per-participant via <code>eod_purge_participants</code> (emits <code>OrderExpired(DayEndGtc)</code>). Also can be bulk-expired via <code>ScenarioEvent::ExpireAllGtc</code>.</td></tr>
+<tr><td><code>Gtd</code></td><td>Good-Till-Date. Carries a <code>DateTime&lt;Utc&gt;</code> expiry. Checked every <code>ClockTick</code> against <code>sim_time</code>: if <code>expiry ≤ sim_time</code>, the order is removed and <code>OrderExpired(GtdExpired)</code> is emitted (<code>clob.rs:448–469</code>). GTD stop orders in the Stop Book are also checked (<code>engine.rs:142–174</code>).</td></tr>
+<tr><td><code>Ioc</code></td><td>Immediate-or-Cancel. Fills whatever is possible against the current book, then cancels the remainder. See <a href="#10-ioc-immediate-or-cancel">IOC</a> below.</td></tr>
+<tr><td><code>Fok</code></td><td>Fill-or-Kill. The entire quantity must fill or nothing at all. See <a href="#9-fok-fill-or-kill">FOK</a> below.</td></tr>
+<tr><td><code>AtOpen</code></td><td>Valid only during <code>PreOpen</code> and <code>OpeningAuction</code> states. Unfilled portions expire with <code>OrderExpired(AuctionUnfilled)</code> after the opening auction uncross (<code>auction.rs:211–230</code>).</td></tr>
+<tr><td><code>AtClose</code></td><td>Valid only during <code>ClosingAuction</code>. Same unfilled-expiry semantics as <code>AtOpen</code>.</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="field-validation-per-order-type"><a class="header" href="#field-validation-per-order-type">Field validation per order type</a></h3>
+<p><code>validate_tif()</code> also checks required/optional fields (<code>tif_matrix.rs:49–96</code>):</p>
+<ul>
+<li><strong>Limit</strong>: requires <code>price</code>; rejects <code>stop_price</code> and <code>display_qty</code>.</li>
+<li><strong>Market</strong>: rejects all of <code>price</code>, <code>stop_price</code>, and <code>display_qty</code>.</li>
+<li><strong>Stop</strong>: requires <code>stop_price</code>; rejects <code>price</code>.</li>
+<li><strong>StopLimit</strong>: requires <em>both</em> <code>price</code> and <code>stop_price</code>.</li>
+<li><strong>MarketToLimit</strong>: rejects all of <code>price</code>, <code>stop_price</code>, and <code>display_qty</code>.</li>
+<li><strong>Iceberg</strong>: requires <code>price</code> and <code>display_qty</code> where <code>display_qty &gt; 0</code> and <code>display_qty ≤ qty</code>.</li>
+</ul>
+<h2 id="4-order-lifecycle"><a class="header" href="#4-order-lifecycle">4. Order lifecycle</a></h2>
+<p>All orders follow this state machine:</p>
+<pre><code>   ┌──────────────────────────────────────────────────────┐
+   │                                                      │
+   ▼                                                      │
+  New ──► Accepted ──► (Partial Fill ──► Accepted ──► ...) ──► Filled
+   │                       │                                   ▲
+   │                       │                                   │
+   └──► Rejected           └──► Cancelled                      │
+   └──► Expired            └──► Expired                        │
+</code></pre>
+<ul>
+<li><strong>New → Accepted</strong>: Order passes session gating, TIF validation, lot size, min/max qty, price tick size, and price band checks. <code>OrderAccepted</code> event emitted.</li>
+<li><strong>New → Rejected</strong>: Fails any defence-in-depth check. <code>OrderRejected</code> event emitted with a specific <code>RejectReason</code>.</li>
+<li><strong>New → Expired</strong>: Market order hits empty book, FOK unfeasible. <code>OrderExpired</code> emitted.</li>
+<li><strong>Accepted → Partial Fill</strong>: On each trade, <code>OrderPartiallyFilled</code> events are emitted for both the resting order (aggressor=false) and the incoming order (aggressor=true).</li>
+<li><strong>Accepted → Filled</strong>: When <code>remaining_qty</code> reaches zero. <code>OrderFilled</code> emitted.</li>
+<li><strong>Accepted → Cancelled</strong>: Client cancel request, STP, session end, scenario, or instrument delisting.</li>
+<li><strong>Accepted → Expired</strong>: IOC unfilled remainder, FOK not feasible, GTD time reached, AtOpen/AtClose unfilled in auction, Day order at EOD with GTC EOD purge.</li>
+</ul>
+<h2 id="5-price-time-priority"><a class="header" href="#5-price-time-priority">5. Price-time priority</a></h2>
+<p>The CLOB enforces strict price-time priority (<code>clob.rs</code>):</p>
+<ol>
+<li><strong>Best price first</strong>: Bids are matched from highest to lowest price. Asks are matched from lowest to highest.</li>
+<li><strong>FIFO within a price level</strong>: Orders at the same price are matched in insertion order via <code>VecDeque</code>. <code>pop_front()</code> takes the oldest order.</li>
+<li><strong>New resting orders enter at the back</strong>: <code>push_back()</code> — they yield to all existing orders at that price.</li>
+<li><strong>Partial fills keep position</strong>: A partially filled order (with remaining <code>display_qty &gt; 0</code>) is pushed back to the <em>front</em> of the queue via <code>push_front()</code> (<code>clob.rs:371</code>), preserving its time priority over orders that came later.</li>
+<li><strong>Iceberg replenishment loses priority</strong>: When an iceberg’s visible portion is exhausted and it replenishes from hidden reserves, it is pushed to the <em>back</em> (<code>clob.rs:369</code>), yielding to all other orders at that level.</li>
+</ol>
+<h2 id="6-self-trade-prevention-stp"><a class="header" href="#6-self-trade-prevention-stp">6. Self-Trade Prevention (STP)</a></h2>
+<p>STP prevents a participant from trading against their own resting orders. The <code>StpMode</code> enum (<code>enums.rs:48–55</code>) has four variants, configured per-order via the <code>stp_mode</code> field:</p>
+<h3 id="cancelaggressive-stpmodecancelaggressive"><a class="header" href="#cancelaggressive-stpmodecancelaggressive">CancelAggressive (<code>StpMode::CancelAggressive</code>)</a></h3>
+<p>The resting order is put back at the <strong>front</strong> of its price queue (retains time priority via <code>push_front</code>). The aggressive (incoming) order is cancelled. If no prior fills occurred in this matching cycle, an <code>OrderRejected(StpCancelled)</code> is emitted. If there were prior fills, an <code>OrderCancelled(StpCancelAggressive)</code> is emitted (<code>clob.rs:205–228</code>).</p>
+<h3 id="cancelresting-stpmodecancelresting"><a class="header" href="#cancelresting-stpmodecancelresting">CancelResting (<code>StpMode::CancelResting</code>)</a></h3>
+<p>The resting order is removed from the book and cancelled with <code>OrderCancelled(StpCancelResting)</code>. The aggressive order continues matching against other resting orders (<code>clob.rs:229–244</code>).</p>
+<h3 id="cancelboth-stpmodecancelboth"><a class="header" href="#cancelboth-stpmodecancelboth">CancelBoth (<code>StpMode::CancelBoth</code>)</a></h3>
+<p>Both orders are cancelled. The resting order emits <code>OrderCancelled(StpCancelBoth)</code>. The incoming order emits <code>OrderCancelled(StpCancelBoth)</code> if there were prior fills, or <code>OrderRejected(StpCancelled)</code> if no fills occurred (<code>clob.rs:245–288</code>).</p>
+<h3 id="none-stpmodenone"><a class="header" href="#none-stpmodenone">None (<code>StpMode::None</code>)</a></h3>
+<p>No STP check. Orders from the same participant can match — this is allowed for market makers who run separate trading bots under one participant ID.</p>
+<h2 id="7-stop-orders"><a class="header" href="#7-stop-orders">7. Stop orders</a></h2>
+<p>Stop orders rest in the <code>StopBook</code> (<code>stop_book.rs:12–15</code>), not in the CLOB:</p>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>pub struct StopBook {
+    pub buy_stops: BTreeMap&lt;Price, VecDeque&lt;StopOrder&gt;&gt;,
+    pub sell_stops: BTreeMap&lt;Price, VecDeque&lt;StopOrder&gt;&gt;,
+    pub by_order_id: HashMap&lt;OrderId, (Price, bool)&gt;,
+}
+<span class="boring">}</span></code></pre>
+<p>Each <code>StopOrder</code> bundles a <code>RestingOrder</code> with its <code>trigger_price</code>.</p>
+<h3 id="trigger-conditions"><a class="header" href="#trigger-conditions">Trigger conditions</a></h3>
+<p>Scanned after every trade via <code>stop_book.scan(last_trade_price)</code> (<code>stop_book.rs:60–87</code>):</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Side</th><th>Triggers when</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>Buy stop</strong></td><td><code>last_trade_price &gt;= trigger_price</code> (market rises to or above the stop)</td></tr>
+<tr><td><strong>Sell stop</strong></td><td><code>last_trade_price &lt;= trigger_price</code> (market falls to or below the stop)</td></tr>
+</tbody>
+</table>
+</div>
+<p>Scan uses BTreeMap range queries: <code>buy_stops.range(..=last_trade)</code> returns all buy stops with trigger ≤ last trade, ascending by trigger price. <code>sell_stops.range(last_trade..)</code> returns all sell stops with trigger ≥ last trade, descending by trigger price.</p>
+<h3 id="triggered-behaviour"><a class="header" href="#triggered-behaviour">Triggered behaviour</a></h3>
+<p>When triggered (<code>engine.rs:456–460</code>):</p>
+<ul>
+<li><code>Stop</code> → converts to <code>OrderType::Market</code> (no limit price).</li>
+<li><code>StopLimit</code> → converts to <code>OrderType::Limit</code> with the order’s <code>price</code> field as the limit.</li>
+</ul>
+<p>The triggered order is then passed to <code>clob.match_order()</code> with the converted type.</p>
+<h3 id="stop-cascade"><a class="header" href="#stop-cascade">Stop cascade</a></h3>
+<p>Stop execution uses a <strong>breadth-first cascade queue</strong> (<code>engine.rs:446–482</code>):</p>
+<ol>
+<li>Initial scan of the Stop Book against <code>last_trade_price</code>.</li>
+<li>All triggered orders are added to a <code>VecDeque</code>.</li>
+<li>Each order is popped, matched, and emitted. Each match may update <code>last_trade_price</code>.</li>
+<li>After each individual stop-order match, a <strong>fresh scan</strong> of the Stop Book is run. Newly triggered orders are appended to the back of the queue.</li>
+<li>This repeats until the queue is empty — stops can cascade: one stop’s fill triggers another stop, and so on.</li>
+</ol>
+<p>After the stop cascade, the circuit breaker check runs (see <a href="#12-circuit-breaker">Circuit breaker</a>).</p>
+<h3 id="gtd-stop-expiry"><a class="header" href="#gtd-stop-expiry">GTD stop expiry</a></h3>
+<p>GTD stop orders are expired on <code>ClockTick</code> by scanning both <code>buy_stops</code> and <code>sell_stops</code> for orders whose <code>Gtd(expiry)</code> time has been reached or passed (<code>engine.rs:142–174</code>).</p>
+<h3 id="day-stop-eod-cleanup"><a class="header" href="#day-stop-eod-cleanup">Day stop EOD cleanup</a></h3>
+<p>On session close, <code>cancel_all_stop_day_orders()</code> (<code>clob.rs:540–558</code>) partitions each stop-book price level: Day orders are removed, non-Day orders are retained. The removed Day orders emit <code>OrderCancelled(SessionEnd)</code>.</p>
+<h2 id="8-iceberg-orders"><a class="header" href="#8-iceberg-orders">8. Iceberg orders</a></h2>
+<p>Iceberg orders display only a fraction of their total quantity on the order book. The <code>RestingOrder</code> struct tracks this through four fields (<code>resting_order.rs:14–18</code>):</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Field</th><th>Meaning</th></tr>
+</thead>
+<tbody>
+<tr><td><code>original_qty</code></td><td>Total quantity at order entry. Used in replace logic.</td></tr>
+<tr><td><code>remaining_qty</code></td><td>Total unfilled quantity (visible + hidden).</td></tr>
+<tr><td><code>display_qty</code></td><td>Currently visible quantity on the book.</td></tr>
+<tr><td><code>hidden_qty</code></td><td>Remaining hidden reserve.</td></tr>
+<tr><td><code>original_display</code></td><td>The initial display_qty cap; used to bound replenishments.</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="during-matching-clobrs294"><a class="header" href="#during-matching-clobrs294">During matching (<code>clob.rs:294</code>)</a></h3>
+<p>A fill consumes <code>fill_qty = min(incoming_remaining, resting.display_qty)</code>. Both <code>remaining_qty</code> and <code>display_qty</code> are reduced by <code>fill_qty</code>. Only the <em>visible</em> portion is matched against — the hidden reserve is invisible to aggressors.</p>
+<h3 id="replenishment-resting_orderrs3949"><a class="header" href="#replenishment-resting_orderrs3949">Replenishment (<code>resting_order.rs:39–49</code>)</a></h3>
+<p>When <code>display_qty</code> drops to zero but <code>hidden_qty &gt; 0</code>:</p>
+<ol>
+<li><code>iceberg_replenish()</code> refills <code>display_qty</code> to <code>min(original_display, hidden_qty)</code>.</li>
+<li>The replenished order is <code>push_back()</code> into its price level — <strong>loses time priority</strong> (<code>clob.rs:369</code>).</li>
+<li>Returns the replenished amount so the caller can track the new visible size.</li>
+</ol>
+<h3 id="non-replenished-partial-fill-display-still--0"><a class="header" href="#non-replenished-partial-fill-display-still--0">Non-replenished (partial fill, display still &gt; 0)</a></h3>
+<p>If <code>display_qty</code> is still positive after the fill (partial fill of the visible portion only), the order is <code>push_front()</code> — <strong>retains time priority</strong> (<code>clob.rs:371</code>).</p>
+<h3 id="fok-and-iceberg-visibility"><a class="header" href="#fok-and-iceberg-visibility">FOK and iceberg visibility</a></h3>
+<p>The FOK feasibility check (<code>clob.rs:414–443</code>) counts <code>remaining_qty</code> (total, including hidden), not just <code>display_qty</code>. A FOK order can succeed against an iceberg even if the visible portion alone would be insufficient.</p>
+<h2 id="9-fok-fill-or-kill"><a class="header" href="#9-fok-fill-or-kill">9. FOK (Fill-or-Kill)</a></h2>
+<p>FOK orders must fill in their entirety against the current order book, or fail entirely with <strong>no partial fills and no resting remainder</strong>.</p>
+<h3 id="feasibility-pre-check-clobrs414443"><a class="header" href="#feasibility-pre-check-clobrs414443">Feasibility pre-check (<code>clob.rs:414–443</code>)</a></h3>
+<p>Before matching begins, <code>fok_feasible()</code> walks the opposite book at all acceptable prices (respecting limit price constraints) and sums <code>remaining_qty</code> across all resting orders. It counts the full quantity, including iceberg hidden reserves.</p>
+<p>If the total available quantity at acceptable prices is <strong>less than</strong> the FOK order’s quantity → <code>OrderExpired(FokNotFilled)</code> is emitted immediately, with <strong>no</strong> <code>TradePrinted</code> events generated at all.</p>
+<p>If feasible, the FOK proceeds through the normal matching loop. Since the feasibility check guarantees sufficient quantity exists, the FOK is guaranteed to fully fill — no remainder handling is needed.</p>
+<h2 id="10-ioc-immediate-or-cancel"><a class="header" href="#10-ioc-immediate-or-cancel">10. IOC (Immediate-or-Cancel)</a></h2>
+<p>IOC orders fill whatever is possible against the current book, then cancel the remainder.</p>
+<p>Matching proceeds normally through the loop in <code>clob.match_order()</code>. After all possible fills, if <code>remaining_qty &gt; 0</code>:</p>
+<ul>
+<li>If the order is <code>Ioc</code> or <code>Fok</code>, or the order type is <code>Market</code> → the unfilled remainder emits <code>OrderExpired(IocNotFilled)</code> (<code>engine.rs:822–832</code>).</li>
+<li>This also applies to <code>Market + Day</code> orders: after matching, any unfilled portion is treated as IOC-like and expired.</li>
+<li><code>MarketToLimit + Day</code> orders: after matching, the unfilled portion rests as a Limit order at the last trade price (or zero if no trade occurred) rather than expiring.</li>
+</ul>
+<h2 id="11-replace-semantics"><a class="header" href="#11-replace-semantics">11. Replace semantics</a></h2>
+<p>Order replacement (<code>engine.rs:945–1178</code>) first removes the existing order from the CLOB by its <code>(participant, orig_client_id)</code> key, then processes a new order.</p>
+<h3 id="validation-checks"><a class="header" href="#validation-checks">Validation checks</a></h3>
+<p>Before replacement proceeds:</p>
+<ul>
+<li>Session must accept cancels (<code>Trading</code>, <code>PreOpen</code>, auction states — not <code>Closed</code> or <code>TradingHalt</code>).</li>
+<li>Target order must exist (by <code>orig_client_id</code>) → else <code>CancelRejected(UnknownOrder)</code>.</li>
+<li><code>new_client_id</code> must not collide with an existing order from the same participant → else <code>CancelRejected(DuplicateClOrdId)</code>.</li>
+<li><code>new_qty</code> must not be less than the quantity already filled → else <code>CancelRejected(InvalidReplaceParams)</code>.</li>
+</ul>
+<h3 id="decrease-only-keeps-priority-enginers10191049"><a class="header" href="#decrease-only-keeps-priority-enginers10191049">Decrease-only: keeps priority (<code>engine.rs:1019–1049</code>)</a></h3>
+<p>When <strong>both</strong> conditions are true:</p>
+<ul>
+<li><code>new_qty ≤ original_qty</code> (quantity not increased)</li>
+<li><code>new_price == existing.price</code> (price unchanged)</li>
+</ul>
+<p>The order is modified in-place:</p>
+<pre><code>original_qty = new_qty
+remaining_qty = new_qty - filled_qty
+</code></pre>
+<p>The order is reinserted into the book via <code>clob.insert()</code> which does <code>push_back()</code>, but since this is a <strong>decrease only</strong> (qty reduced, price same), it retains its position. No new matching is performed — the order just updates its size. An <code>OrderReplaced</code> event is emitted.</p>
+<h3 id="price-change-or-quantity-increase-loses-priority-enginers10521178"><a class="header" href="#price-change-or-quantity-increase-loses-priority-enginers10521178">Price change or quantity increase: loses priority (<code>engine.rs:1052–1178</code>)</a></h3>
+<p>When <strong>either</strong> condition is true:</p>
+<ul>
+<li><code>new_qty &gt; original_qty</code> (quantity increased)</li>
+<li><code>new_price != existing.price</code> (any price change, better or worse)</li>
+</ul>
+<p>The old order is removed, an <code>OrderReplaced</code> event is emitted, then the order re-enters as a new order:</p>
+<ol>
+<li><code>match_order()</code> is called with the new quantity and price.</li>
+<li>The replacement order gets a new <code>OrderId</code> (<code>fields.id</code>).</li>
+<li>Any fills against the current book happen immediately.</li>
+<li>If unfilled, the remainder rests as a new order at the <strong>back</strong> of the queue (<code>clob.insert</code> → <code>push_back</code>).</li>
+<li>After matching, the stop cascade and circuit breaker checks run on the new trades.</li>
+</ol>
+<h2 id="12-circuit-breaker"><a class="header" href="#12-circuit-breaker">12. Circuit breaker</a></h2>
+<p>The circuit breaker (<code>engine.rs:484–506</code>) triggers when the last trade price deviates too far from the reference price.</p>
+<h3 id="trigger-condition"><a class="header" href="#trigger-condition">Trigger condition</a></h3>
+<pre><code>|last_trade − ref_price| / ref_price &gt; price_band
+</code></pre>
+<p>Where:</p>
+<ul>
+<li><code>ref_price</code> is the instrument’s <code>reference_price</code> (set via config, auction, or scenario).</li>
+<li><code>price_band</code> is the instrument’s <code>price_band</code> (e.g. <code>0.10</code> = 10%).</li>
+</ul>
+<p>If <code>ref_price == 0</code>, <code>price_band == 0</code>, or <code>last_trade_price</code> is <code>None</code>, the check is skipped.</p>
+<h3 id="on-trigger"><a class="header" href="#on-trigger">On trigger</a></h3>
+<ul>
+<li>The session is forced into <code>SessionState::TradingHalt { reason: CircuitBreaker, until: sim_time + halt_duration_secs }</code>.</li>
+<li>In this state, all new orders are rejected with <code>RejectReason::InstrumentHalted</code> and all cancels/replaces are rejected too.</li>
+<li>After <code>halt_duration_secs</code> elapses on a <code>ClockTick</code>, the session transitions to <code>ReopeningAuction</code>, then to <code>Trading</code>.</li>
+</ul>
+<h3 id="when-checked"><a class="header" href="#when-checked">When checked</a></h3>
+<p>The circuit breaker check runs as part of <code>run_stop_cascade_and_circuit_breaker()</code>, which is called:</p>
+<ul>
+<li>After every <code>process_new</code> match cycle.</li>
+<li>After every <code>process_replace</code> match cycle.</li>
+</ul>
+<p>The stop cascade runs first (so all stop triggers from a trade are processed), then the CB check evaluates the final <code>last_trade_price</code>.</p>
+<h2 id="13-auction"><a class="header" href="#13-auction">13. Auction</a></h2>
+<h3 id="auction-scheduled-states"><a class="header" href="#auction-scheduled-states">Auction scheduled states</a></h3>
+<p>The session state machine drives auctions. On transition from an auction to <code>Trading</code> (or <code>Closed</code>), <code>run_auction_uncross()</code> fires:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Transition</th><th>Auction type</th></tr>
+</thead>
+<tbody>
+<tr><td><code>OpeningAuction → Trading</code></td><td><code>AuctionType::Opening</code></td></tr>
+<tr><td><code>ReopeningAuction → Trading</code></td><td><code>AuctionType::Reopening</code></td></tr>
+<tr><td><code>ClosingAuction → Closed</code></td><td><code>AuctionType::Closing</code></td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="call-market-algorithm-auctionrs27253"><a class="header" href="#call-market-algorithm-auctionrs27253">Call market algorithm (<code>auction.rs:27–253</code>)</a></h3>
+<p>The uncross algorithm proceeds in three tie-break rounds:</p>
+<p><strong>Round 0 — Find candidates:</strong>
+For every price level present in either side of the book, compute:</p>
+<ul>
+<li><code>buy_demand</code> = sum of all bid quantities at prices ≥ candidate.</li>
+<li><code>sell_supply</code> = sum of all ask quantities at prices ≤ candidate.</li>
+<li><code>volume</code> = min(buy_demand, sell_supply).</li>
+<li><code>surplus</code> = buy_demand − sell_supply.</li>
+</ul>
+<p><strong>Tie-break 1 — Maximize volume:</strong>
+Retain only the candidates with the largest <code>volume</code>.</p>
+<p><strong>Tie-break 2 — Minimize absolute surplus + market pressure:</strong>
+Retain candidates with the smallest <code>|surplus|</code>.</p>
+<ul>
+<li>If all remaining candidates have <code>surplus &gt; 0</code> (buy pressure) → keep only the <strong>highest</strong> price.</li>
+<li>If all remaining candidates have <code>surplus &lt; 0</code> (sell pressure) → keep only the <strong>lowest</strong> price.</li>
+</ul>
+<p><strong>Tie-break 3 — Reference price proximity:</strong>
+Sort remaining candidates by proximity to <code>reference_price</code>. If tied, prefer the higher price.</p>
+<p>The first candidate is the <strong>clearing price</strong>.</p>
+<h3 id="trade-allocation-auctionrs292358"><a class="header" href="#trade-allocation-auctionrs292358">Trade allocation (<code>auction.rs:292–358</code>)</a></h3>
+<p>Orders are collected in priority order:</p>
+<ul>
+<li><strong>Bids</strong>: descending price (highest first). Within a price level, FIFO.</li>
+<li><strong>Asks</strong>: ascending price (lowest first). Within a price level, FIFO.</li>
+</ul>
+<p>A simplified two-phase allocation fills orders in priority order up to the <code>traded_qty</code> cap. Buy fills and sell fills are paired to produce <code>TradePrinted</code> events.</p>
+<h3 id="post-uncross"><a class="header" href="#post-uncross">Post-uncross</a></h3>
+<ul>
+<li>A <code>ReferencePriceChanged</code> event is emitted (source: <code>Auction</code>), updating the reference price to the clearing price.</li>
+<li>An <code>AuctionUncrossed</code> event is emitted with the clearing price, traded quantity, imbalance quantity, and imbalance side.</li>
+<li><code>AtOpen</code>/<code>AtClose</code> orders that were not fully filled emit <code>OrderExpired(AuctionUnfilled)</code>.</li>
+<li>The CLOB is updated: filled orders are reduced or removed, unfilled auction-TIF orders are removed.</li>
+<li>After applying auction events, the stop cascade and circuit breaker are run.</li>
+</ul>
+<h2 id="14-end-of-day-cleanup"><a class="header" href="#14-end-of-day-cleanup">14. End-of-Day cleanup</a></h2>
+<p>When the session transitions to <code>SessionState::Closed</code> (either via <code>ClockTick</code> or <code>SessionTransition</code>), the engine executes three cleanup operations (<code>engine.rs:129–136</code>):</p>
+<h3 id="1-cancel-all-day-orders-on-the-clob"><a class="header" href="#1-cancel-all-day-orders-on-the-clob">1. Cancel all Day orders on the CLOB</a></h3>
+<p><code>clob.cancel_all_day_orders()</code> (<code>clob.rs:508–537</code>) scans both bids and asks, collects all orders with <code>tif == Day</code>, removes them via <code>remove_by_id()</code>, and emits <code>OrderCancelled(SessionEnd)</code> for each.</p>
+<h3 id="2-cancel-all-day-orders-in-the-stop-book"><a class="header" href="#2-cancel-all-day-orders-in-the-stop-book">2. Cancel all Day orders in the Stop Book</a></h3>
+<p><code>clob.cancel_all_stop_day_orders()</code> (<code>clob.rs:540–558</code>) partitions each stop-book price level, removing Day orders while retaining non-Day orders. Emits <code>OrderCancelled(SessionEnd)</code>.</p>
+<h3 id="3-expire-gtc-orders-per-participant-eod-purge"><a class="header" href="#3-expire-gtc-orders-per-participant-eod-purge">3. Expire GTC orders (per-participant EOD purge)</a></h3>
+<p><code>expire_eod_gtc()</code> (<code>engine.rs:382–420</code>) scans both books for GTC orders belonging to participants listed in <code>eod_purge_participants</code>. Each matching order emits <code>OrderExpired(DayEndGtc)</code>. If <code>eod_purge_participants</code> is empty, this step is skipped.</p>
+<p>Additionally, GTD order expiry runs on every <code>ClockTick</code> regardless of session state (<code>engine.rs:139</code>).</p>
+<h2 id="15-instruments"><a class="header" href="#15-instruments">15. Instruments</a></h2>
+<h3 id="toml-definition"><a class="header" href="#toml-definition">TOML definition</a></h3>
+<p>Instruments are defined in TOML files under the <code>instruments/</code> directory and hot-reloaded via the <code>notify</code> file watcher in <code>nadatrade-refdata</code>. The <code>InstrumentConfig</code> struct (<code>instrument.rs:10–39</code>) maps directly to TOML keys.</p>
+<p><strong>Example — session-based equity:</strong></p>
+<pre><code class="language-toml">[instruments.PETR4]
+name            = "PETR4"
+currency        = "BRL"
+tick_size       = "0.01"
+lot_size        = "100"
+min_qty         = "100"
+max_qty         = "1000000"
+price_band      = "0.10"
+reference_price = "38.00"
+md_depth_max    = 50
+
+[instruments.PETR4.session]
+type                          = "session_based"
+pre_open_start                = "09:45"
+opening_auction_duration_secs = 300
+continuous_start              = "10:00"
+closing_auction_start         = "17:30"
+closing_auction_duration_secs = 600
+reopening_auction_duration_secs = 300
+timezone                      = "America/Sao_Paulo"
+trading_days                  = ["Mon","Tue","Wed","Thu","Fri"]
+
+[instruments.PETR4.settlement]
+cycle    = "t2"
+currency = "BRL"
+
+[instruments.PETR4.risk]
+max_notional_per_order = "10000000.00"
+fat_finger_pct         = 0.05
+
+[instruments.PETR4.circuit_breaker]
+enabled            = true
+halt_duration_secs = 300
+auto_reopen        = true
+</code></pre>
+<p><strong>Example — 24×7 crypto:</strong></p>
+<pre><code class="language-toml">[instruments.BTC-BRL]
+name            = "BTC-BRL"
+currency        = "BRL"
+tick_size       = "0.01"
+lot_size        = "0.000001"
+min_qty         = "0.000001"
+max_qty         = "1000.0"
+price_band      = "0.0"
+reference_price = "185000.00"
+md_depth_max    = 20
+
+[instruments.BTC-BRL.session]
+type = "continuous_24x7"
+
+[instruments.BTC-BRL.settlement]
+cycle    = "t0"
+currency = "BRL"
+
+[instruments.BTC-BRL.circuit_breaker]
+enabled = false
+</code></pre>
+<h3 id="key-fields"><a class="header" href="#key-fields">Key fields</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Field</th><th>Type</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>name</code></td><td><code>string</code></td><td>Instrument identifier (used as <code>InstrumentId</code> throughout the system).</td></tr>
+<tr><td><code>currency</code></td><td><code>string</code></td><td>ISO 4217 or custom currency code (e.g. <code>"BRL"</code>).</td></tr>
+<tr><td><code>tick_size</code></td><td><code>Decimal</code> (string)</td><td>Minimum price increment. Limit/StopLimit prices must be multiples. <code>0</code> disables validation.</td></tr>
+<tr><td><code>lot_size</code></td><td><code>Decimal</code> (string)</td><td>Minimum quantity increment. All order quantities must be multiples. <code>0</code> disables validation.</td></tr>
+<tr><td><code>min_qty</code></td><td><code>Decimal</code> (string)</td><td>Minimum order quantity.</td></tr>
+<tr><td><code>max_qty</code></td><td><code>Decimal</code> (string)</td><td>Maximum order quantity.</td></tr>
+<tr><td><code>price_band</code></td><td><code>Decimal</code> (string)</td><td>Maximum allowed deviation from <code>reference_price</code> for new limit orders (e.g. <code>0.10</code> = 10%). <code>0</code> disables.</td></tr>
+<tr><td><code>reference_price</code></td><td><code>Decimal</code> or absent (string)</td><td>Initial reference price. Updated by auctions and scenarios.</td></tr>
+<tr><td><code>md_depth_max</code></td><td><code>u32</code></td><td>Depth of the order book snapshot in <code>BookUpdated</code> events. Default <code>50</code>.</td></tr>
+<tr><td><code>session.type</code></td><td><code>"session_based"</code> or <code>"continuous_24x7"</code></td><td>Session model.</td></tr>
+<tr><td><code>session.trading_days</code></td><td><code>[string]</code></td><td>Days when trading is active (e.g. <code>["Mon","Tue","Wed","Thu","Fri"]</code>).</td></tr>
+<tr><td><code>settlement.cycle</code></td><td><code>"t0"</code>, <code>"t1"</code>, <code>"t2"</code>, or <code>{ tn = N }</code></td><td>Settlement cycle.</td></tr>
+<tr><td><code>risk.max_notional_per_order</code></td><td><code>Decimal</code> (string)</td><td>Maximum order notional (price × qty). Optional.</td></tr>
+<tr><td><code>risk.fat_finger_pct</code></td><td><code>f64</code></td><td>Percentage deviation from reference for fat-finger protection.</td></tr>
+<tr><td><code>circuit_breaker.enabled</code></td><td><code>bool</code></td><td>Enables/disables the circuit breaker.</td></tr>
+<tr><td><code>circuit_breaker.halt_duration_secs</code></td><td><code>u64</code> or absent</td><td>Duration of a circuit breaker halt in seconds.</td></tr>
+<tr><td><code>circuit_breaker.auto_reopen</code></td><td><code>bool</code></td><td>Whether the CB halt auto-reopens via <code>ReopeningAuction</code>.</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="hot-reload"><a class="header" href="#hot-reload">Hot reload</a></h3>
+<p>The <code>InstrumentRegistry</code> (in <code>nadatrade-refdata</code>) watches the <code>instruments/</code> directory for changes. When a TOML file is added, modified, or removed, a <code>RegistryChange</code> event (<code>Added</code>, <code>Updated</code>, or <code>Delisted</code>) is broadcast to all subscribers.</p>
+<h2 id="16-defence-in-depth-validation-summary"><a class="header" href="#16-defence-in-depth-validation-summary">16. Defence-in-depth validation summary</a></h2>
+<p>Every new order passes through these checks in <code>engine.process_new()</code> before matching (<code>engine.rs:566–898</code>):</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>#</th><th>Check</th><th>Reject reason</th></tr>
+</thead>
+<tbody>
+<tr><td>1</td><td>Session state gating — which order types and TIFs are allowed in the current session state</td><td><code>SessionNotAcceptingOrders</code>, <code>InstrumentHalted</code></td></tr>
+<tr><td>2</td><td>TIF compatibility (<code>validate_tif()</code>) — 42-cell matrix + field validation</td><td><code>IncompatibleOrderTypeAndTif</code>, <code>InvalidPrice</code>, <code>InvalidQuantity</code></td></tr>
+<tr><td>3</td><td>Lot size — <code>qty % lot_size == 0</code></td><td><code>InvalidQuantity</code></td></tr>
+<tr><td>4</td><td>Min/max qty — <code>min_qty ≤ qty ≤ max_qty</code></td><td><code>InvalidQuantity</code></td></tr>
+<tr><td>5</td><td>Price tick size — <code>price % tick_size == 0</code> (for limit/stop-limit/iceberg)</td><td><code>InvalidPrice</code></td></tr>
+<tr><td>6</td><td>Price band — `</td><td>price − ref_price</td></tr>
+<tr><td>7</td><td>Market order against empty book</td><td><code>MarketOrderNoLiquidity</code></td></tr>
+<tr><td>8</td><td>FOK feasibility pre-check</td><td><code>FokNotFilled</code> (OrderExpired)</td></tr>
+<tr><td>9</td><td>STP — self-trade detection during matching</td><td><code>StpCancelled</code>, <code>StpCancelAggressive</code>, <code>StpCancelResting</code>, <code>StpCancelBoth</code></td></tr>
+</tbody>
+</table>
+</div>
+<h2 id="see-also"><a class="header" href="#see-also">See Also</a></h2>
+<ul>
+<li><a href="sessions.html">Sessions &amp; Auctions</a> — how session states gate order entry and drive auctions</li>
+<li><a href="risk-pipeline.html">Risk Pipeline</a> — the 11-point pretrade check that runs before orders reach the engine</li>
+<li><a href="simulation.html">Simulation</a> — how ClockTick drives session transitions and stop expiry</li>
+<li><a href="../client-dev/glossary.html">Glossary &amp; Cheat Sheet</a> — order type and TIF quick reference</li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../user-guide/ws-gateway.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                            </a>
+
+                            <a rel="next prefetch" href="../user-guide/sessions.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../user-guide/ws-gateway.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                    </a>
+
+                    <a rel="next prefetch" href="../user-guide/sessions.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                    </a>
+            </nav>
+
+        </div>
+
+        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
+        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
+        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
+        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
+        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr-ef4e11c1.min.js"></script>
+        <script src="../mark-09e88c2c.min.js"></script>
+        <script src="../searcher-09f2665d.js"></script>
+
+        <script src="../clipboard-1626706a.min.js"></script>
+        <script src="../highlight-abc7f01d.js"></script>
+        <script src="../book-c22b7243.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+
+    </div>
+    </body>
+</html>

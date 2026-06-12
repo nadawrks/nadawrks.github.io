@@ -1,0 +1,866 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>WebSocket Gateway - NadaTrade Documentation</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon-de23e50b.svg">
+        <link rel="shortcut icon" href="../favicon-8114d1fc.png">
+        <link rel="stylesheet" href="../css/variables-8adf115d.css">
+        <link rel="stylesheet" href="../css/general-0392ca55.css">
+        <link rel="stylesheet" href="../css/chrome-fc474251.css">
+        <link rel="stylesheet" href="../css/print-9e4910d8.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../fonts/fonts-9644e21d.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="mdbook-highlight-css" href="../highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="../tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight-3fdfc3ac.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../searchindex-8fb08360.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc-00c5fce9.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="mdbook-body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="mdbook-page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="mdbook-menu-bar-hover-placeholder"></div>
+                <div id="mdbook-menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
+                        </label>
+                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
+                        </button>
+                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-ayu">Ayu</button></li>
+                        </ul>
+                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">NadaTrade Documentation</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/nadawrks/nadatrade" title="Git repository" aria-label="Git repository">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/nadawrks/nadatrade/edit/main/docs/book/./user-guide/ws-gateway.md" title="Suggest an edit" aria-label="Suggest an edit" rel="edit">
+                            <span class=fa-svg id="git-edit-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M421.7 220.3l-11.3 11.3-22.6 22.6-205 205c-6.6 6.6-14.8 11.5-23.8 14.1L30.8 511c-8.4 2.5-17.5 .2-23.7-6.1S-1.5 489.7 1 481.2L38.7 353.1c2.6-9 7.5-17.2 14.1-23.8l205-205 22.6-22.6 11.3-11.3 33.9 33.9 62.1 62.1 33.9 33.9zM96 353.9l-9.3 9.3c-.9 .9-1.6 2.1-2 3.4l-25.3 86 86-25.3c1.3-.4 2.5-1.1 3.4-2l9.3-9.3H112c-8.8 0-16-7.2-16-16V353.9zM453.3 19.3l39.4 39.4c25 25 25 65.5 0 90.5l-14.5 14.5-22.6 22.6-11.3 11.3-33.9-33.9-62.1-62.1L314.3 67.7l11.3-11.3 22.6-22.6 14.5-14.5c25-25 65.5-25 90.5 0z"/></svg></span>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="mdbook-search-wrapper" class="hidden">
+                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                        <ul id="mdbook-searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="mdbook-content" class="content">
+                    <main>
+                        <h1 id="websocket-gateway"><a class="header" href="#websocket-gateway">WebSocket Gateway</a></h1>
+<p>The WebSocket gateway provides a JSON-based interface for order entry, order management, and real-time market data subscriptions. It shares a single TCP port with the HTTP health/metrics endpoints via axum’s <code>Router</code> merge.</p>
+<h2 id="architecture"><a class="header" href="#architecture">Architecture</a></h2>
+<pre><code>                 ┌─────────────────────────────────────┐
+                 │  axum Router (single port, 9824)     │
+                 │                                     │
+   Client ──────►│  GET /v1/orders      → WS upgrade   │──► OrderCommand
+                 │  GET /v1/marketdata   → WS upgrade   │──► Event fan-out
+                 │  GET /healthz         → 200 OK        │
+                 │  GET /metrics         → Prometheus    │
+                 └─────────────────────────────────────┘
+</code></pre>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Path</th><th>Protocol</th><th>Purpose</th></tr>
+</thead>
+<tbody>
+<tr><td><code>/v1/orders</code></td><td>WebSocket</td><td>Order entry, cancel, replace, status</td></tr>
+<tr><td><code>/v1/marketdata</code></td><td>WebSocket</td><td>Subscribe to trades, orderbook, session state</td></tr>
+<tr><td><code>/healthz</code></td><td>HTTP</td><td>Liveness check</td></tr>
+<tr><td><code>/metrics</code></td><td>HTTP</td><td>Prometheus text metrics</td></tr>
+</tbody>
+</table>
+</div>
+<p>The <code>/v1/marketdata</code> endpoint rejects order commands (new, cancel, replace, status). Order operations are only accepted on <code>/v1/orders</code>.</p>
+<p>Default port: <code>9824</code> (<code>server.ws_listen_addr</code> in config).</p>
+<h2 id="authentication"><a class="header" href="#authentication">Authentication</a></h2>
+<p>JWT HS256. The token carries a <code>sub</code> claim (participant ID) and <code>exp</code> claim (epoch-seconds expiry).</p>
+<h3 id="passing-the-token"><a class="header" href="#passing-the-token">Passing the token</a></h3>
+<p>Two methods, checked in order:</p>
+<ol>
+<li><strong>Query parameter</strong>: <code>ws://host:9824/v1/orders?token=&lt;jwt&gt;</code></li>
+<li><strong>Authorization header</strong>: <code>Authorization: Bearer &lt;jwt&gt;</code> (sent during the HTTP upgrade handshake)</li>
+</ol>
+<h3 id="configuration"><a class="header" href="#configuration">Configuration</a></h3>
+<pre><code class="language-toml"># Top-level key — not nested under [server]
+ws_jwt_secret = "my-secret-key"
+</code></pre>
+<p>Default is <code>"changeme"</code> — change this for production. The secret is the raw bytes used as the HS256 signing key. The environment variable <code>NADATRADE_JWT_SECRET</code> is recommended for production over hardcoding in TOML.</p>
+<h3 id="error-responses-http-401-before-upgrade"><a class="header" href="#error-responses-http-401-before-upgrade">Error responses (HTTP 401 before upgrade)</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Condition</th><th>Status</th><th>Body</th></tr>
+</thead>
+<tbody>
+<tr><td>No token provided</td><td>401</td><td><code>Missing token</code></td></tr>
+<tr><td>Token validation fails</td><td>401</td><td><code>Invalid token: &lt;error&gt;</code></td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="server-side-jwt-verification"><a class="header" href="#server-side-jwt-verification">Server-side JWT verification</a></h3>
+<p>On every WebSocket upgrade, the token is verified via <code>jsonwebtoken::decode</code> with the configured secret. The <code>sub</code> claim becomes the participant identifier used for all subsequent order routing and event filtering. There is no per-message re-verification after the initial upgrade — trust is established at connection time.</p>
+<h2 id="order-entry-endpoint-v1orders"><a class="header" href="#order-entry-endpoint-v1orders">Order Entry Endpoint (<code>/v1/orders</code>)</a></h2>
+<p>Connect: <code>ws://host:9824/v1/orders?token=&lt;jwt&gt;</code></p>
+<p>All messages in both directions are JSON with a <code>"type"</code> discriminator field. Decimal values (prices, quantities) are JSON <strong>strings</strong> to avoid floating-point precision loss.</p>
+<p>On connect, the server sends a welcome message:</p>
+<pre><code class="language-json">{
+  "type": "error",
+  "req_id": null,
+  "code": "connected",
+  "message": "Welcome BOT001, you are connected to NadaTrade",
+  "details": null
+}
+</code></pre>
+<h2 id="clientmessage-types-client--server"><a class="header" href="#clientmessage-types-client--server">ClientMessage Types (client → server)</a></h2>
+<h3 id="new_order"><a class="header" href="#new_order"><code>new_order</code></a></h3>
+<p>Place a new order.</p>
+<pre><code class="language-json">{
+  "type": "new_order",
+  "req_id": "r1",
+  "instrument": "PETR4",
+  "side": "buy",
+  "order_type": "limit",
+  "qty": "100",
+  "price": "38.50",
+  "tif": "day"
+}
+</code></pre>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Field</th><th>Type</th><th>Required</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>type</code></td><td>string</td><td>yes</td><td><code>"new_order"</code></td></tr>
+<tr><td><code>req_id</code></td><td>string</td><td>yes</td><td>Client-generated request identifier for correlation</td></tr>
+<tr><td><code>instrument</code></td><td>string</td><td>yes</td><td>Instrument ID as configured in refdata</td></tr>
+<tr><td><code>side</code></td><td>string</td><td>yes</td><td><code>"buy"</code> or <code>"sell"</code></td></tr>
+<tr><td><code>order_type</code></td><td>string</td><td>yes</td><td><code>"market"</code>, <code>"limit"</code>, <code>"stop"</code>, <code>"stop_limit"</code>, <code>"market_to_limit"</code>, or <code>"iceberg"</code></td></tr>
+<tr><td><code>qty</code></td><td>decimal string</td><td>yes</td><td>Total order quantity</td></tr>
+<tr><td><code>price</code></td><td>decimal string</td><td>no</td><td>Limit price (required for limit/stop_limit/iceberg; omitted for market)</td></tr>
+<tr><td><code>stop_price</code></td><td>decimal string</td><td>no</td><td>Trigger price for stop/stop_limit orders</td></tr>
+<tr><td><code>tif</code></td><td>string</td><td>no</td><td><code>"day"</code>, <code>"gtc"</code>, <code>"gtd"</code>, <code>"ioc"</code>, <code>"fok"</code>, <code>"at_open"</code>, <code>"at_close"</code>. Defaults to <code>"gtc"</code></td></tr>
+<tr><td><code>display_qty</code></td><td>decimal string</td><td>no</td><td>Visible quantity for iceberg orders</td></tr>
+<tr><td><code>expire_time</code></td><td>string</td><td>no</td><td>ISO 8601 timestamp for GTD orders (e.g. <code>"2026-12-31T23:59:59Z"</code>)</td></tr>
+<tr><td><code>client_order_id</code></td><td>string</td><td>no</td><td>Client-assigned order ID. If omitted, a UUID is generated</td></tr>
+<tr><td><code>stp_mode</code></td><td>string</td><td>no</td><td>Self-trade prevention: <code>"none"</code>, <code>"cancel_aggressive"</code>, <code>"cancel_resting"</code>, <code>"cancel_both"</code></td></tr>
+</tbody>
+</table>
+</div>
+<p><strong>Minimal market order:</strong></p>
+<pre><code class="language-json">{"type":"new_order","req_id":"r1","instrument":"PETR4","side":"buy","order_type":"market","qty":"100"}
+</code></pre>
+<p><strong>Stop-limit order:</strong></p>
+<pre><code class="language-json">{"type":"new_order","req_id":"r2","instrument":"PETR4","side":"sell","order_type":"stop_limit","qty":"200","price":"35.00","stop_price":"38.00","tif":"gtc"}
+</code></pre>
+<p><strong>Iceberg order:</strong></p>
+<pre><code class="language-json">{"type":"new_order","req_id":"r3","instrument":"PETR4","side":"buy","order_type":"iceberg","qty":"1000","price":"38.50","display_qty":"100","tif":"day"}
+</code></pre>
+<p><strong>GTD order:</strong></p>
+<pre><code class="language-json">{"type":"new_order","req_id":"r4","instrument":"PETR4","side":"buy","order_type":"limit","qty":"500","price":"38.00","tif":"gtd","expire_time":"2026-12-31T23:59:59Z"}
+</code></pre>
+<p>The server responds with an immediate <code>order_accepted</code> acknowledgment (before the order reaches the matching engine). The actual acceptance or rejection follows asynchronously via event fan-out.</p>
+<h3 id="cancel_order"><a class="header" href="#cancel_order"><code>cancel_order</code></a></h3>
+<p>Cancel an existing order by client-assigned ID.</p>
+<pre><code class="language-json">{
+  "type": "cancel_order",
+  "req_id": "r1",
+  "instrument": "PETR4",
+  "orig_client_order_id": "mybot-001"
+}
+</code></pre>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Field</th><th>Type</th><th>Required</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>type</code></td><td>string</td><td>yes</td><td><code>"cancel_order"</code></td></tr>
+<tr><td><code>req_id</code></td><td>string</td><td>yes</td><td>Client-generated request identifier</td></tr>
+<tr><td><code>instrument</code></td><td>string</td><td>yes</td><td>Instrument ID</td></tr>
+<tr><td><code>orig_client_order_id</code></td><td>string</td><td>yes</td><td>The <code>client_order_id</code> of the order to cancel</td></tr>
+</tbody>
+</table>
+</div>
+<p>The server sends an immediate acknowledgment (<code>"cancel_sent"</code>) and the actual cancel or cancel-reject follows asynchronously.</p>
+<h3 id="replace_order"><a class="header" href="#replace_order"><code>replace_order</code></a></h3>
+<p>Replace an existing order (modify price, quantity, or stop price).</p>
+<pre><code class="language-json">{
+  "type": "replace_order",
+  "req_id": "r1",
+  "instrument": "PETR4",
+  "orig_client_order_id": "c1",
+  "new_client_order_id": "c2",
+  "new_price": "39.00",
+  "new_qty": "200"
+}
+</code></pre>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Field</th><th>Type</th><th>Required</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>type</code></td><td>string</td><td>yes</td><td><code>"replace_order"</code></td></tr>
+<tr><td><code>req_id</code></td><td>string</td><td>yes</td><td>Client-generated request identifier</td></tr>
+<tr><td><code>instrument</code></td><td>string</td><td>yes</td><td>Instrument ID</td></tr>
+<tr><td><code>orig_client_order_id</code></td><td>string</td><td>yes</td><td>The <code>client_order_id</code> of the order to replace</td></tr>
+<tr><td><code>new_client_order_id</code></td><td>string</td><td>no</td><td>New client order ID for the replacement. Generated if omitted</td></tr>
+<tr><td><code>new_price</code></td><td>decimal string</td><td>no</td><td>Updated limit price</td></tr>
+<tr><td><code>new_qty</code></td><td>decimal string</td><td>no</td><td>Updated quantity (can only decrease per replace semantics)</td></tr>
+<tr><td><code>stop_price</code></td><td>decimal string</td><td>no</td><td>Updated stop trigger price</td></tr>
+</tbody>
+</table>
+</div>
+<p>The server sends an immediate acknowledgment (<code>"replace_sent"</code>) and the actual replace or replace-reject follows asynchronously.</p>
+<h3 id="order_status"><a class="header" href="#order_status"><code>order_status</code></a></h3>
+<p>Query the current state of an order.</p>
+<pre><code class="language-json">{
+  "type": "order_status",
+  "req_id": "r1",
+  "order_id": "550e8400-e29b-41d4-a716-446655440000"
+}
+</code></pre>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Field</th><th>Type</th><th>Required</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>type</code></td><td>string</td><td>yes</td><td><code>"order_status"</code></td></tr>
+<tr><td><code>req_id</code></td><td>string</td><td>yes</td><td>Client-generated request identifier</td></tr>
+<tr><td><code>order_id</code></td><td>string (UUID)</td><td>yes</td><td>The exchange-assigned order UUID</td></tr>
+</tbody>
+</table>
+</div>
+<p>The server responds asynchronously with an <code>order_status</code> message containing the full order state. If the engine does not respond within the timeout, an error is returned.</p>
+<h3 id="subscribe"><a class="header" href="#subscribe"><code>subscribe</code></a></h3>
+<p>Subscribe to real-time market data for one instrument and channel.</p>
+<pre><code class="language-json">{
+  "type": "subscribe",
+  "req_id": "r1",
+  "instrument": "PETR4",
+  "channel": "trades"
+}
+</code></pre>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Field</th><th>Type</th><th>Required</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>type</code></td><td>string</td><td>yes</td><td><code>"subscribe"</code></td></tr>
+<tr><td><code>req_id</code></td><td>string</td><td>yes</td><td>Client-generated request identifier</td></tr>
+<tr><td><code>instrument</code></td><td>string</td><td>yes</td><td>Instrument ID</td></tr>
+<tr><td><code>channel</code></td><td>string</td><td>yes</td><td><code>"trades"</code>, <code>"orderbook"</code>, or <code>"session"</code></td></tr>
+</tbody>
+</table>
+</div>
+<p>Only valid on the <code>/v1/marketdata</code> endpoint. The server responds immediately with <code>subscribed</code>. Subscription tracking is per-connection; multiple subscriptions for the same instrument+channel are idempotent. When no subscriptions are active, all public events are broadcast (empty-subscription-set = subscribed to everything).</p>
+<h3 id="unsubscribe"><a class="header" href="#unsubscribe"><code>unsubscribe</code></a></h3>
+<p>Stop receiving market data for an instrument and channel.</p>
+<pre><code class="language-json">{
+  "type": "unsubscribe",
+  "req_id": "r1",
+  "instrument": "PETR4",
+  "channel": "trades"
+}
+</code></pre>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Field</th><th>Type</th><th>Required</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>type</code></td><td>string</td><td>yes</td><td><code>"unsubscribe"</code></td></tr>
+<tr><td><code>req_id</code></td><td>string</td><td>yes</td><td>Client-generated request identifier</td></tr>
+<tr><td><code>instrument</code></td><td>string</td><td>yes</td><td>Instrument ID</td></tr>
+<tr><td><code>channel</code></td><td>string</td><td>yes</td><td><code>"trades"</code>, <code>"orderbook"</code>, or <code>"session"</code></td></tr>
+</tbody>
+</table>
+</div>
+<p>The server confirms with a raw <code>unsubscribed</code> JSON object (not a formal <code>ServerMessage</code> enum variant).</p>
+<h3 id="websocket-pingpong"><a class="header" href="#websocket-pingpong">WebSocket Ping/Pong</a></h3>
+<p>WebSocket protocol-level <code>Ping</code> frames are automatically answered with <code>Pong</code> frames. No JSON-level ping message is needed.</p>
+<h2 id="servermessage-types-server--client"><a class="header" href="#servermessage-types-server--client">ServerMessage Types (server → client)</a></h2>
+<p>Every server-sent message carries two positional fields:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Field</th><th>Type</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>seq</code></td><td>u64</td><td>Monotonically increasing global exchange sequence number</td></tr>
+<tr><td><code>sim_time</code></td><td>string</td><td>Simulation clock timestamp in RFC 3339 format (e.g. <code>"2026-01-01T00:00:00+00:00"</code>)</td></tr>
+</tbody>
+</table>
+</div>
+<p>These are always present (except on <code>error</code> messages, which are immediate and not sequenced).</p>
+<h3 id="order_accepted"><a class="header" href="#order_accepted"><code>order_accepted</code></a></h3>
+<p>Sent when the matching engine confirms an order has been accepted and placed on the book.</p>
+<pre><code class="language-json">{
+  "type": "order_accepted",
+  "req_id": "r1",
+  "order_id": "550e8400-e29b-41d4-a716-446655440000",
+  "instrument": "PETR4",
+  "client_order_id": "mybot-001",
+  "side": "buy",
+  "order_type": "limit",
+  "qty": "100",
+  "price": "38.50",
+  "tif": "day",
+  "seq": 42,
+  "sim_time": "2026-06-11T10:00:00+00:00"
+}
+</code></pre>
+<p>Note: an <code>order_accepted</code> is also sent <em>immediately</em> on <code>new_order</code> message receipt (with <code>seq: 0</code> and wall-clock <code>sim_time</code>) as an acknowledgment — this is the gateway-level ack, not the engine confirmation. The engine-level event follows with the real <code>seq</code> and simulation time.</p>
+<h3 id="order_rejected"><a class="header" href="#order_rejected"><code>order_rejected</code></a></h3>
+<p>Sent when the matching engine or pretrade pipeline rejects an order.</p>
+<pre><code class="language-json">{
+  "type": "order_rejected",
+  "req_id": null,
+  "client_order_id": "mybot-001",
+  "instrument": "PETR4",
+  "reason": "InvalidQuantity",
+  "seq": 43,
+  "sim_time": "2026-06-11T10:00:00.001+00:00"
+}
+</code></pre>
+<p>The <code>reason</code> field is the <code>Debug</code> representation of <code>RejectReason</code> enum. Possible values include:</p>
+<p><code>UnknownInstrument</code>, <code>UnknownParticipant</code>, <code>InvalidQuantity</code>, <code>InvalidPrice</code>, <code>PriceBandViolation</code>, <code>ParticipantNotActive</code>, <code>NotionalLimitExceeded</code>, <code>PositionLimitExceeded</code>, <code>FatFingerProtection</code>, <code>DuplicateClOrdId</code>, <code>StpCancelled</code>, <code>SessionNotAcceptingOrders</code>, <code>InstrumentHalted</code>, <code>IncompatibleOrderTypeAndTif</code>, <code>MarketOrderNoLiquidity</code></p>
+<h3 id="fill-order_filled--order_partially_filled"><a class="header" href="#fill-order_filled--order_partially_filled"><code>fill</code> (order_filled / order_partially_filled)</a></h3>
+<p>Sent when an order is filled (fully or partially). The <code>is_final</code> flag distinguishes complete fills from partials.</p>
+<p><strong>Full fill:</strong></p>
+<pre><code class="language-json">{
+  "type": "fill",
+  "order_id": "550e8400-e29b-41d4-a716-446655440000",
+  "instrument": "PETR4",
+  "side": "buy",
+  "fill_qty": "100",
+  "fill_price": "38.50",
+  "remaining_qty": "0",
+  "trade_id": "660e8400-e29b-41d4-a716-446655440001",
+  "is_final": true,
+  "client_order_id": "mybot-001",
+  "seq": 44,
+  "sim_time": "2026-06-11T10:00:00.002+00:00"
+}
+</code></pre>
+<p><strong>Partial fill:</strong></p>
+<pre><code class="language-json">{
+  "type": "fill",
+  "order_id": "550e8400-e29b-41d4-a716-446655440000",
+  "instrument": "PETR4",
+  "side": "buy",
+  "fill_qty": "50",
+  "fill_price": "38.50",
+  "remaining_qty": "50",
+  "trade_id": "660e8400-e29b-41d4-a716-446655440002",
+  "is_final": false,
+  "client_order_id": "mybot-001",
+  "seq": 44,
+  "sim_time": "2026-06-11T10:00:00.002+00:00"
+}
+</code></pre>
+<h3 id="order_cancelled"><a class="header" href="#order_cancelled"><code>order_cancelled</code></a></h3>
+<pre><code class="language-json">{
+  "type": "order_cancelled",
+  "order_id": "550e8400-e29b-41d4-a716-446655440000",
+  "instrument": "PETR4",
+  "reason": "ClientRequested",
+  "seq": 45,
+  "sim_time": "2026-06-11T10:00:01+00:00"
+}
+</code></pre>
+<p><code>reason</code> values: <code>ClientRequested</code>, <code>StpCancelAggressive</code>, <code>StpCancelResting</code>, <code>StpCancelBoth</code>, <code>InstrumentDelisted</code>, <code>SessionEnd</code>, <code>Replaced</code>, <code>Scenario</code></p>
+<h3 id="order_expired"><a class="header" href="#order_expired"><code>order_expired</code></a></h3>
+<p>Sent when a Day order reaches end-of-day or a GTD order expires.</p>
+<pre><code class="language-json">{
+  "type": "order_expired",
+  "order_id": "550e8400-e29b-41d4-a716-446655440000",
+  "instrument": "PETR4",
+  "seq": 46,
+  "sim_time": "2026-06-11T17:00:00+00:00"
+}
+</code></pre>
+<h3 id="order_replaced"><a class="header" href="#order_replaced"><code>order_replaced</code></a></h3>
+<p>Sent when an order has been successfully replaced. The original order is cancelled and a new order is created.</p>
+<pre><code class="language-json">{
+  "type": "order_replaced",
+  "order_id": "550e8400-e29b-41d4-a716-446655440000",
+  "new_order_id": "770e8400-e29b-41d4-a716-446655440003",
+  "instrument": "PETR4",
+  "seq": 47,
+  "sim_time": "2026-06-11T10:00:02+00:00"
+}
+</code></pre>
+<h3 id="cancel_rejected"><a class="header" href="#cancel_rejected"><code>cancel_rejected</code></a></h3>
+<p>Sent when a cancel request could not be processed.</p>
+<pre><code class="language-json">{
+  "type": "cancel_rejected",
+  "req_id": null,
+  "order_id": "00000000-0000-0000-0000-000000000000",
+  "reason": "UnknownOrder",
+  "seq": 48,
+  "sim_time": "2026-06-11T10:00:03+00:00"
+}
+</code></pre>
+<p><code>reason</code> values: <code>UnknownOrder</code>, <code>AlreadyFilled</code>, <code>AlreadyCancelled</code>, <code>NotOwnedByParticipant</code></p>
+<h3 id="order_status-orderstatusreport"><a class="header" href="#order_status-orderstatusreport"><code>order_status</code> (OrderStatusReport)</a></h3>
+<p>Response to an <code>order_status</code> client request.</p>
+<pre><code class="language-json">{
+  "type": "order_status",
+  "req_id": "r1",
+  "order_id": "550e8400-e29b-41d4-a716-446655440000",
+  "instrument": "PETR4",
+  "side": "sell",
+  "order_type": "limit",
+  "qty": "500",
+  "filled_qty": "200",
+  "remaining_qty": "300",
+  "price": "38.50",
+  "status": "partially_filled",
+  "seq": 0,
+  "sim_time": "2026-06-11T10:00:00+00:00"
+}
+</code></pre>
+<h3 id="subscribed"><a class="header" href="#subscribed"><code>subscribed</code></a></h3>
+<p>Confirmation of a subscription.</p>
+<pre><code class="language-json">{
+  "type": "subscribed",
+  "req_id": "r1",
+  "instrument": "PETR4",
+  "channel": "trades",
+  "seq": 0,
+  "sim_time": "2026-06-11T10:00:00+00:00"
+}
+</code></pre>
+<h3 id="unsubscribed-raw-json-response"><a class="header" href="#unsubscribed-raw-json-response"><code>unsubscribed</code> (raw JSON response)</a></h3>
+<p>Confirmation of an unsubscription. This is sent as a raw JSON object, not a formal <code>ServerMessage</code> enum variant (it has no <code>seq</code> or <code>sim_time</code>).</p>
+<pre><code class="language-json">{
+  "type": "unsubscribed",
+  "req_id": "r1",
+  "instrument": "PETR4",
+  "channel": "trades"
+}
+</code></pre>
+<h3 id="orderbook_snapshot"><a class="header" href="#orderbook_snapshot"><code>orderbook_snapshot</code></a></h3>
+<p>Full order book depth snapshot.</p>
+<pre><code class="language-json">{
+  "type": "orderbook_snapshot",
+  "instrument": "PETR4",
+  "bids": [
+    ["38.50", "1000"],
+    ["38.49", "500"]
+  ],
+  "asks": [
+    ["38.51", "800"],
+    ["38.52", "200"]
+  ],
+  "seq": 49,
+  "sim_time": "2026-06-11T10:00:00.004+00:00"
+}
+</code></pre>
+<p>Bids and asks are arrays of <code>[price_string, qty_string]</code> tuples. Bids are sorted descending (best first). Asks are sorted ascending (best first).</p>
+<h3 id="orderbook_update"><a class="header" href="#orderbook_update"><code>orderbook_update</code></a></h3>
+<p>Incremental order book update with optional deletes.</p>
+<pre><code class="language-json">{
+  "type": "orderbook_update",
+  "instrument": "PETR4",
+  "bids": [
+    ["38.50", "1200"]
+  ],
+  "asks": [],
+  "deletes": [
+    ["buy", "38.49"]
+  ],
+  "seq": 50,
+  "sim_time": "2026-06-11T10:00:00.005+00:00"
+}
+</code></pre>
+<ul>
+<li><code>bids</code> / <code>asks</code>: price levels to upsert (replace or add at the given price)</li>
+<li><code>deletes</code>: price levels to remove, each as <code>[side_string, price_string]</code> where side is <code>"buy"</code> or <code>"sell"</code></li>
+</ul>
+<h3 id="trade"><a class="header" href="#trade"><code>trade</code></a></h3>
+<p>Public trade report (aggregated side, not per-participant).</p>
+<pre><code class="language-json">{
+  "type": "trade",
+  "instrument": "PETR4",
+  "price": "38.50",
+  "qty": "100",
+  "side": "buy",
+  "seq": 51,
+  "sim_time": "2026-06-11T10:00:00.006+00:00"
+}
+</code></pre>
+<p>The <code>side</code> field indicates the aggressor side. This message is only sent to clients subscribed to the <code>"trades"</code> channel for the instrument.</p>
+<h3 id="ticker"><a class="header" href="#ticker"><code>ticker</code></a></h3>
+<p>Periodic ticker snapshot (best bid, best ask, last price, volume).</p>
+<pre><code class="language-json">{
+  "type": "ticker",
+  "instrument": "PETR4",
+  "last": "38.50",
+  "bid": "38.49",
+  "ask": "38.51",
+  "volume": "10000",
+  "seq": 52,
+  "sim_time": "2026-06-11T10:00:01+00:00"
+}
+</code></pre>
+<p>Tickers for each subscriber are coalesced with a 100 ms timer to avoid flooding during rapid market activity.</p>
+<h3 id="session"><a class="header" href="#session"><code>session</code></a></h3>
+<p>Session state change notification.</p>
+<pre><code class="language-json">{
+  "type": "session",
+  "instrument": "PETR4",
+  "state": "trading",
+  "seq": 53,
+  "sim_time": "2026-06-11T10:00:00+00:00"
+}
+</code></pre>
+<p><code>state</code> values: <code>"closed"</code>, <code>"pre_open"</code>, <code>"opening_auction"</code>, <code>"trading"</code>, <code>"trading_halt"</code>, <code>"reopening_auction"</code>, <code>"closing_auction"</code>. This message is only sent to clients subscribed to the <code>"session"</code> channel.</p>
+<h3 id="error"><a class="header" href="#error"><code>error</code></a></h3>
+<p>Generic error response for protocol errors, parse errors, and authorization failures.</p>
+<pre><code class="language-json">{
+  "type": "error",
+  "req_id": "r1",
+  "code": "unknown_instrument",
+  "message": "Instrument PETR9 is not configured",
+  "details": null
+}
+</code></pre>
+<p><code>error</code> messages do <strong>not</strong> carry <code>seq</code> or <code>sim_time</code> — they are immediate responses. Common error codes:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Code</th><th>Meaning</th></tr>
+</thead>
+<tbody>
+<tr><td><code>parse_error</code></td><td>Malformed JSON or wrong types in a client message</td></tr>
+<tr><td><code>auth_required</code></td><td>First message on the WebSocket must be an <code>auth</code> message (raw TCP mode only)</td></tr>
+<tr><td><code>auth_failed</code></td><td>Invalid JWT token</td></tr>
+<tr><td><code>auth_timeout</code></td><td>No auth message received within 10 seconds (raw TCP mode only)</td></tr>
+<tr><td><code>unknown_instrument</code></td><td>Referenced instrument is not in refdata</td></tr>
+<tr><td><code>invalid_expire_time</code></td><td><code>expire_time</code> field is not valid ISO 8601</td></tr>
+<tr><td><code>internal_error</code></td><td>Unexpected server-side error</td></tr>
+<tr><td><code>unauthorized</code></td><td>Order operations sent to <code>/v1/marketdata</code> endpoint</td></tr>
+<tr><td><code>cancel_sent</code></td><td>Immediate ack for a cancel request (not an error)</td></tr>
+<tr><td><code>replace_sent</code></td><td>Immediate ack for a replace request (not an error)</td></tr>
+<tr><td><code>connected</code></td><td>Welcome message on successful connection</td></tr>
+</tbody>
+</table>
+</div>
+<h2 id="sequence-and-simtime"><a class="header" href="#sequence-and-simtime">Sequence and SimTime</a></h2>
+<p>Every server message (except <code>error</code> and <code>unsubscribed</code>) carries two ordering fields:</p>
+<ul>
+<li>
+<p><strong><code>seq</code></strong> (<code>u64</code>): A monotonically increasing global sequence number assigned by the exchange. Use this for correct event ordering — higher <code>seq</code> means a later event. Gaps in <code>seq</code> are possible across different client connections (each client sees a filtered subset of events).</p>
+</li>
+<li>
+<p><strong><code>sim_time</code></strong> (RFC 3339 string): The simulation clock timestamp at which the event occurred. In real-time mode this is wall-clock time; in accelerated mode it is scaled; in replay mode it is the historical timestamp. Use <code>sim_time</code> for time-domain analysis, not <code>seq</code>.</p>
+</li>
+</ul>
+<p>Messages generated by the gateway itself (immediate acks, subscribed confirmations) carry <code>seq: 0</code> and the current wall-clock time. Engine-generated events carry the true sequence number and simulation time.</p>
+<h2 id="subscription-model"><a class="header" href="#subscription-model">Subscription Model</a></h2>
+<h3 id="channels"><a class="header" href="#channels">Channels</a></h3>
+<p>Three independent channels per instrument:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Channel</th><th>Triggering Event</th><th>Message Type</th></tr>
+</thead>
+<tbody>
+<tr><td><code>"trades"</code></td><td><code>TradePrinted</code></td><td><code>trade</code></td></tr>
+<tr><td><code>"orderbook"</code></td><td><code>BookUpdated</code></td><td><code>orderbook_snapshot</code> / <code>orderbook_update</code></td></tr>
+<tr><td><code>"session"</code></td><td><code>SessionStateChanged</code></td><td><code>session</code></td></tr>
+</tbody>
+</table>
+</div>
+<p>Subscriptions are additive and per-connection. Subscribing to <code>("PETR4", "trades")</code> and <code>("PETR4", "orderbook")</code> gives you both trade and orderbook data for PETR4.</p>
+<h3 id="empty-subscription-set"><a class="header" href="#empty-subscription-set">Empty subscription set</a></h3>
+<p>When no subscriptions have been made, the gateway broadcasts <strong>all</strong> public events to the client. As soon as any subscription is added, only matching events are delivered.</p>
+<h3 id="md-delay-per-participant"><a class="header" href="#md-delay-per-participant">MD delay per participant</a></h3>
+<p>If the participant has a configured <code>market_data_delay_us</code> in their latency profile, the gateway will delay each market data message by that many microseconds before sending. This simulates co-location disparities.</p>
+<h2 id="endpoint-segmentation"><a class="header" href="#endpoint-segmentation">Endpoint Segmentation</a></h2>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Endpoint</th><th>Allowed ClientMessages</th><th>Rejected ClientMessages</th></tr>
+</thead>
+<tbody>
+<tr><td><code>/v1/orders</code></td><td><code>new_order</code>, <code>cancel_order</code>, <code>replace_order</code>, <code>order_status</code></td><td>—</td></tr>
+<tr><td><code>/v1/marketdata</code></td><td><code>subscribe</code>, <code>unsubscribe</code></td><td><code>new_order</code>, <code>cancel_order</code>, <code>replace_order</code>, <code>order_status</code></td></tr>
+</tbody>
+</table>
+</div>
+<p>Sending an order command to <code>/v1/marketdata</code> returns an error with code <code>"unauthorized"</code>.</p>
+<h2 id="error-handling"><a class="header" href="#error-handling">Error Handling</a></h2>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Condition</th><th>Response</th></tr>
+</thead>
+<tbody>
+<tr><td>Malformed JSON in client message</td><td><code>error</code> with code <code>"parse_error"</code></td></tr>
+<tr><td>Field type mismatch (e.g. <code>qty</code> as number instead of string)</td><td><code>error</code> with code <code>"parse_error"</code></td></tr>
+<tr><td>Order command on market data endpoint</td><td><code>error</code> with code <code>"unauthorized"</code></td></tr>
+<tr><td>Missing token on WebSocket upgrade</td><td>HTTP 401 <code>Missing token</code></td></tr>
+<tr><td>Invalid/expired JWT</td><td>HTTP 401 <code>Invalid token: ...</code></td></tr>
+<tr><td>GTD <code>expire_time</code> not ISO 8601</td><td><code>error</code> with code <code>"invalid_expire_time"</code></td></tr>
+<tr><td>Internal server error during message handling</td><td><code>error</code> with code <code>"internal_error"</code></td></tr>
+<tr><td><code>order_status</code> engine timeout</td><td><code>error</code> with code <code>"status_timeout"</code></td></tr>
+</tbody>
+</table>
+</div>
+<p>The gateway does <strong>not</strong> close the connection on error — clients can continue after receiving an error message and correct their input.</p>
+<h2 id="full-lifecycle-example"><a class="header" href="#full-lifecycle-example">Full Lifecycle Example</a></h2>
+<p>Annotated frame exchange for a limit order that fills immediately against the book.</p>
+<h3 id="connect"><a class="header" href="#connect">Connect</a></h3>
+<p>Client opens WebSocket to <code>ws://host:9824/v1/orders?token=eyJ...</code></p>
+<p>Server responds with welcome:</p>
+<pre><code class="language-json">{"type":"error","req_id":null,"code":"connected","message":"Welcome BOT001, you are connected to NadaTrade","details":null}
+</code></pre>
+<h3 id="place-order"><a class="header" href="#place-order">Place order</a></h3>
+<p><strong>Client → Server:</strong></p>
+<pre><code class="language-json">{"type":"new_order","req_id":"r1","instrument":"PETR4","side":"buy","order_type":"limit","qty":"100","price":"38.50","tif":"day"}
+</code></pre>
+<p><strong>Server → Client</strong> (immediate gateway ack):</p>
+<pre><code class="language-json">{"type":"order_accepted","req_id":"r1","order_id":"a1b2c3d4-...","instrument":"PETR4","client_order_id":"a1b2c3d4-...","side":"buy","order_type":"limit","qty":"100","price":"38.50","tif":"day","seq":0,"sim_time":"2026-06-11T10:00:00+00:00"}
+</code></pre>
+<p><strong>Server → Client</strong> (engine confirmation):</p>
+<pre><code class="language-json">{"type":"order_accepted","req_id":null,"order_id":"a1b2c3d4-...","instrument":"PETR4","client_order_id":"a1b2c3d4-...","side":"buy","order_type":"limit","qty":"100","price":"38.50","tif":"day","seq":42,"sim_time":"2026-06-11T10:00:00+00:00"}
+</code></pre>
+<p><strong>Server → Client</strong> (fill event):</p>
+<pre><code class="language-json">{"type":"fill","order_id":"a1b2c3d4-...","instrument":"PETR4","side":"buy","fill_qty":"100","fill_price":"38.50","remaining_qty":"0","trade_id":"b2c3d4e5-...","is_final":true,"client_order_id":"a1b2c3d4-...","seq":43,"sim_time":"2026-06-11T10:00:00.001+00:00"}
+</code></pre>
+<p>Key detail: the gateway-level <code>order_accepted</code> has <code>seq: 0</code> and <code>req_id</code> populated. The engine-level <code>order_accepted</code> has the real <code>seq</code> and <code>req_id: null</code>. Use the real-<code>seq</code> messages for state tracking; the gateway ack is just an early indication.</p>
+<h2 id="market-data-example"><a class="header" href="#market-data-example">Market Data Example</a></h2>
+<p>Connect to <code>ws://host:9824/v1/marketdata?token=eyJ...</code></p>
+<h3 id="subscribe-1"><a class="header" href="#subscribe-1">Subscribe</a></h3>
+<p><strong>Client → Server:</strong></p>
+<pre><code class="language-json">{"type":"subscribe","req_id":"r1","instrument":"PETR4","channel":"trades"}
+{"type":"subscribe","req_id":"r2","instrument":"PETR4","channel":"orderbook"}
+</code></pre>
+<p><strong>Server → Client:</strong></p>
+<pre><code class="language-json">{"type":"subscribed","req_id":"r1","instrument":"PETR4","channel":"trades","seq":0,"sim_time":"2026-06-11T10:00:00+00:00"}
+{"type":"subscribed","req_id":"r2","instrument":"PETR4","channel":"orderbook","seq":0,"sim_time":"2026-06-11T10:00:00+00:00"}
+</code></pre>
+<h3 id="market-data-streaming"><a class="header" href="#market-data-streaming">Market data streaming</a></h3>
+<pre><code class="language-json">{"type":"trade","instrument":"PETR4","price":"38.50","qty":"100","side":"buy","seq":51,"sim_time":"2026-06-11T10:00:00.006+00:00"}
+{"type":"orderbook_snapshot","instrument":"PETR4","bids":[["38.50","1000"],["38.49","500"]],"asks":[["38.51","800"]],"seq":52,"sim_time":"2026-06-11T10:00:00.007+00:00"}
+{"type":"trade","instrument":"PETR4","price":"38.51","qty":"200","side":"sell","seq":53,"sim_time":"2026-06-11T10:00:00.010+00:00"}
+</code></pre>
+<h3 id="unsubscribe-1"><a class="header" href="#unsubscribe-1">Unsubscribe</a></h3>
+<p><strong>Client → Server:</strong></p>
+<pre><code class="language-json">{"type":"unsubscribe","req_id":"r3","instrument":"PETR4","channel":"trades"}
+</code></pre>
+<p><strong>Server → Client:</strong></p>
+<pre><code class="language-json">{"type":"unsubscribed","req_id":"r3","instrument":"PETR4","channel":"trades"}
+</code></pre>
+<h2 id="configuration-reference"><a class="header" href="#configuration-reference">Configuration Reference</a></h2>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Key</th><th>Type</th><th>Default</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>server.ws_listen_addr</code></td><td>string</td><td><code>"0.0.0.0:9824"</code></td><td>TCP listen address for HTTP + WebSocket</td></tr>
+<tr><td><code>ws_jwt_secret</code></td><td>string</td><td><code>"changeme"</code></td><td>HS256 signing secret for JWT tokens</td></tr>
+</tbody>
+</table>
+</div>
+<p>See <a href="../reference/config-keys.html">Config Keys</a> for the full configuration reference.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../user-guide/fix-gateway.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                            </a>
+
+                            <a rel="next prefetch" href="../user-guide/matching.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../user-guide/fix-gateway.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                    </a>
+
+                    <a rel="next prefetch" href="../user-guide/matching.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                    </a>
+            </nav>
+
+        </div>
+
+        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
+        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
+        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
+        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
+        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr-ef4e11c1.min.js"></script>
+        <script src="../mark-09e88c2c.min.js"></script>
+        <script src="../searcher-09f2665d.js"></script>
+
+        <script src="../clipboard-1626706a.min.js"></script>
+        <script src="../highlight-abc7f01d.js"></script>
+        <script src="../book-c22b7243.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+
+    </div>
+    </body>
+</html>

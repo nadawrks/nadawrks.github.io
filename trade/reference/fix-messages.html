@@ -1,0 +1,853 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>FIX Message Catalog - NadaTrade Documentation</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon-de23e50b.svg">
+        <link rel="shortcut icon" href="../favicon-8114d1fc.png">
+        <link rel="stylesheet" href="../css/variables-8adf115d.css">
+        <link rel="stylesheet" href="../css/general-0392ca55.css">
+        <link rel="stylesheet" href="../css/chrome-fc474251.css">
+        <link rel="stylesheet" href="../css/print-9e4910d8.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../fonts/fonts-9644e21d.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="mdbook-highlight-css" href="../highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="../tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight-3fdfc3ac.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../searchindex-8fb08360.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc-00c5fce9.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="mdbook-body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="mdbook-page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="mdbook-menu-bar-hover-placeholder"></div>
+                <div id="mdbook-menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
+                        </label>
+                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
+                        </button>
+                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-ayu">Ayu</button></li>
+                        </ul>
+                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">NadaTrade Documentation</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/nadawrks/nadatrade" title="Git repository" aria-label="Git repository">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/nadawrks/nadatrade/edit/main/docs/book/./reference/fix-messages.md" title="Suggest an edit" aria-label="Suggest an edit" rel="edit">
+                            <span class=fa-svg id="git-edit-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M421.7 220.3l-11.3 11.3-22.6 22.6-205 205c-6.6 6.6-14.8 11.5-23.8 14.1L30.8 511c-8.4 2.5-17.5 .2-23.7-6.1S-1.5 489.7 1 481.2L38.7 353.1c2.6-9 7.5-17.2 14.1-23.8l205-205 22.6-22.6 11.3-11.3 33.9 33.9 62.1 62.1 33.9 33.9zM96 353.9l-9.3 9.3c-.9 .9-1.6 2.1-2 3.4l-25.3 86 86-25.3c1.3-.4 2.5-1.1 3.4-2l9.3-9.3H112c-8.8 0-16-7.2-16-16V353.9zM453.3 19.3l39.4 39.4c25 25 25 65.5 0 90.5l-14.5 14.5-22.6 22.6-11.3 11.3-33.9-33.9-62.1-62.1L314.3 67.7l11.3-11.3 22.6-22.6 14.5-14.5c25-25 65.5-25 90.5 0z"/></svg></span>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="mdbook-search-wrapper" class="hidden">
+                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                        <ul id="mdbook-searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="mdbook-content" class="content">
+                    <main>
+                        <h1 id="fix-messages"><a class="header" href="#fix-messages">FIX Messages</a></h1>
+<p>NadaTrade implements the <strong>FIX 4.2</strong> protocol over TCP. This reference documents every supported message type, tag table, and wire example. All examples use pipe (<code>|</code>) as the field delimiter for readability; on the wire the delimiter is the ASCII SOH character (<code>\x01</code>).</p>
+<hr>
+<h2 id="1-connection-setup"><a class="header" href="#1-connection-setup">1. Connection Setup</a></h2>
+<h3 id="transport"><a class="header" href="#transport">Transport</a></h3>
+<p>Clients connect to NadaTrade via <strong>raw TCP</strong>. The acceptor binds to a configurable <code>SocketAddr</code> and spawns one tokio task per connection.</p>
+<h3 id="bodylength-framing-tag-9"><a class="header" href="#bodylength-framing-tag-9">BodyLength Framing (tag 9)</a></h3>
+<p>FIX messages are delimited by the <strong>BodyLength</strong> field (tag 9). The value of tag 9 is the number of bytes between the delimiter after tag 9 and the delimiter immediately before tag 10 (the checksum). In other words, it counts the length of the message body starting at the first byte of tag 35.</p>
+<pre><code>8=FIX.4.2|9=NNN|35=D|...body...|10=CCC|
+                 ^^^^^^^^^^^^^^^^
+                 This is the BodyLength range
+</code></pre>
+<p>Each complete message is extracted from the TCP stream by:</p>
+<ol>
+<li>Locating the <code>8=FIX.4.2|</code> begin string.</li>
+<li>Reading the <code>9=</code> value to determine the body length.</li>
+<li>Reading <code>body_length</code> bytes for the body.</li>
+<li>Reading the <code>10=CCC|</code> checksum trailer.</li>
+</ol>
+<h3 id="checksum-tag-10"><a class="header" href="#checksum-tag-10">CheckSum (tag 10)</a></h3>
+<p>The checksum is the sum of all byte values from (and including) the <code>8</code> of <code>8=FIX.4.2</code> through the <code>|</code> that immediately precedes tag 10, modulo 256. The result is zero-padded to three digits.</p>
+<pre><code>checksum = sum(bytes of "8=FIX.4.2|9=NNN|...body...") % 256
+</code></pre>
+<h3 id="soh-delimiter"><a class="header" href="#soh-delimiter">SOH Delimiter</a></h3>
+<p>On the wire, fields are separated by ASCII <code>\x01</code> (Start of Header). In documentation and examples in this reference, <code>|</code> is used instead.</p>
+<hr>
+<h2 id="2-admin-messages"><a class="header" href="#2-admin-messages">2. Admin Messages</a></h2>
+<p>All admin messages include the standard header tags <code>8</code>, <code>9</code>, <code>35</code>, <code>49</code>, <code>56</code>, <code>34</code> and the trailer tag <code>10</code>.</p>
+<h3 id="logon-35a"><a class="header" href="#logon-35a">Logon (35=A)</a></h3>
+<p>Authenticates a session. Must be the first message sent by the client. Until a valid Logon is received, all other messages are rejected with a SessionReject (35=3).</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Tag</th><th>Name</th><th>R/O</th><th>Format</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td>49</td><td>SenderCompID</td><td>R</td><td>String</td><td>Client identifier</td></tr>
+<tr><td>56</td><td>TargetCompID</td><td>R</td><td>String</td><td>Server identifier (typically <code>NADATRADE</code>)</td></tr>
+<tr><td>34</td><td>MsgSeqNum</td><td>R</td><td>u64</td><td>Sequence number</td></tr>
+<tr><td>52</td><td>SendingTime</td><td>O</td><td>UTCTimestamp</td><td>Message origination time</td></tr>
+<tr><td>98</td><td>EncryptMethod</td><td>R</td><td>int</td><td>Must be <code>0</code> (none)</td></tr>
+<tr><td>108</td><td>HeartBtInt</td><td>R</td><td>int</td><td>Heartbeat interval in seconds</td></tr>
+<tr><td>553</td><td>Username</td><td>R</td><td>String</td><td>Participant username (custom tag)</td></tr>
+<tr><td>554</td><td>Password</td><td>R</td><td>String</td><td>Participant password (custom tag)</td></tr>
+<tr><td>96</td><td>RawData</td><td>O</td><td>data</td><td>Custom authentication data</td></tr>
+<tr><td>141</td><td>ResetSeqNumFlag</td><td>O</td><td>Y/N</td><td>If <code>Y</code>, reset inbound/outbound sequence numbers</td></tr>
+</tbody>
+</table>
+</div>
+<p><strong>Wire example:</strong></p>
+<pre><code>8=FIX.4.2|9=50|35=A|49=BOT001|56=NADATRADE|34=1|553=trader1|554=secret|98=0|108=30|10=CCC|
+</code></pre>
+<p><strong>NadaTrade server response (Logon acceptance):</strong></p>
+<pre><code>8=FIX.4.2|9=xx|35=A|49=NADATRADE|56=BOT001|34=1|108=30|98=0|10=CCC|
+</code></pre>
+<p>On failure, a Reject (35=3) is returned with the reason in tag 58.</p>
+<h3 id="logout-355"><a class="header" href="#logout-355">Logout (35=5)</a></h3>
+<p>Requests session termination. Sender may optionally provide a reason.</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Tag</th><th>Name</th><th>R/O</th><th>Format</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td>49</td><td>SenderCompID</td><td>R</td><td>String</td><td>Client identifier</td></tr>
+<tr><td>56</td><td>TargetCompID</td><td>R</td><td>String</td><td>Server identifier</td></tr>
+<tr><td>34</td><td>MsgSeqNum</td><td>R</td><td>u64</td><td>Sequence number</td></tr>
+<tr><td>58</td><td>Text</td><td>O</td><td>String</td><td>Optional reason for logout</td></tr>
+</tbody>
+</table>
+</div>
+<p><strong>Wire example:</strong></p>
+<pre><code>8=FIX.4.2|9=80|35=5|49=BOT001|56=NADATRADE|34=2|58=End of day|10=CCC|
+</code></pre>
+<h3 id="heartbeat-350"><a class="header" href="#heartbeat-350">Heartbeat (35=0)</a></h3>
+<p>Sent periodically to keep the session alive. Also used as a response to TestRequest messages.</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Tag</th><th>Name</th><th>R/O</th><th>Format</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td>34</td><td>MsgSeqNum</td><td>R</td><td>u64</td><td>Sequence number</td></tr>
+<tr><td>49</td><td>SenderCompID</td><td>R</td><td>String</td><td>Sender identifier</td></tr>
+<tr><td>56</td><td>TargetCompID</td><td>R</td><td>String</td><td>Recipient identifier</td></tr>
+<tr><td>112</td><td>TestReqID</td><td>C</td><td>String</td><td>Echoed from TestRequest; only present when responding to 35=1</td></tr>
+</tbody>
+</table>
+</div>
+<p><strong>Wire example (unsolicited):</strong></p>
+<pre><code>8=FIX.4.2|9=xx|35=0|49=NADATRADE|56=BOT001|34=5|10=CCC|
+</code></pre>
+<p><strong>Wire example (reply to TestRequest):</strong></p>
+<pre><code>8=FIX.4.2|9=xx|35=0|49=NADATRADE|56=BOT001|34=5|112=test-abc|10=CCC|
+</code></pre>
+<h3 id="testrequest-351"><a class="header" href="#testrequest-351">TestRequest (35=1)</a></h3>
+<p>Sent to verify the connection is alive. The recipient must respond with a Heartbeat echoing the TestReqID.</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Tag</th><th>Name</th><th>R/O</th><th>Format</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td>34</td><td>MsgSeqNum</td><td>R</td><td>u64</td><td>Sequence number</td></tr>
+<tr><td>49</td><td>SenderCompID</td><td>R</td><td>String</td><td>Sender identifier</td></tr>
+<tr><td>56</td><td>TargetCompID</td><td>R</td><td>String</td><td>Recipient identifier</td></tr>
+<tr><td>112</td><td>TestReqID</td><td>R</td><td>String</td><td>Identifier to be echoed in the Heartbeat response</td></tr>
+</tbody>
+</table>
+</div>
+<p><strong>Wire example:</strong></p>
+<pre><code>8=FIX.4.2|9=xx|35=1|49=BOT001|56=NADATRADE|34=3|112=alive-check|10=CCC|
+</code></pre>
+<h3 id="resendrequest-352"><a class="header" href="#resendrequest-352">ResendRequest (35=2)</a></h3>
+<p>Requests retransmission of messages from a range of sequence numbers. NadaTrade replays messages from its persistent <code>MessageStore</code>.</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Tag</th><th>Name</th><th>R/O</th><th>Format</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td>34</td><td>MsgSeqNum</td><td>R</td><td>u64</td><td>Sequence number</td></tr>
+<tr><td>49</td><td>SenderCompID</td><td>R</td><td>String</td><td>Sender identifier</td></tr>
+<tr><td>56</td><td>TargetCompID</td><td>R</td><td>String</td><td>Recipient identifier</td></tr>
+<tr><td>7</td><td>BeginSeqNo</td><td>R</td><td>u64</td><td>First sequence number to replay</td></tr>
+<tr><td>16</td><td>EndSeqNo</td><td>R</td><td>u64</td><td>Last sequence number to replay; <code>0</code> means infinity (all from BeginSeqNo onward)</td></tr>
+</tbody>
+</table>
+</div>
+<p><strong>Wire example:</strong></p>
+<pre><code>8=FIX.4.2|9=xx|35=2|49=BOT001|56=NADATRADE|34=1|7=5|16=0|10=CCC|
+</code></pre>
+<p>NadaTrade also automatically sends ResendRequests when it detects a sequence gap in inbound messages (see §2.3 below).</p>
+<h3 id="reject-353--sessionreject"><a class="header" href="#reject-353--sessionreject">Reject (35=3) / SessionReject</a></h3>
+<p>Sent when a message cannot be processed. NadaTrade sends this for: unknown message types, role violations, malformed messages, and pre-logon messages.</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Tag</th><th>Name</th><th>R/O</th><th>Format</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td>34</td><td>MsgSeqNum</td><td>R</td><td>u64</td><td>Sequence number</td></tr>
+<tr><td>49</td><td>SenderCompID</td><td>R</td><td>String</td><td>Sender identifier</td></tr>
+<tr><td>56</td><td>TargetCompID</td><td>R</td><td>String</td><td>Recipient identifier</td></tr>
+<tr><td>45</td><td>RefSeqNum</td><td>O</td><td>u64</td><td>Sequence number of rejected message</td></tr>
+<tr><td>58</td><td>Text</td><td>O</td><td>String</td><td>Human-readable reason</td></tr>
+<tr><td>371</td><td>RefTagID</td><td>O</td><td>int</td><td>Tag that caused the rejection</td></tr>
+<tr><td>372</td><td>RefMsgType</td><td>O</td><td>String</td><td>MsgType of the rejected message</td></tr>
+<tr><td>373</td><td>SessionRejectReason</td><td>O</td><td>int</td><td>Error code (see §7)</td></tr>
+</tbody>
+</table>
+</div>
+<p><strong>Wire example (SessionReject for unknown message type):</strong></p>
+<pre><code>8=FIX.4.2|9=xx|35=3|49=NADATRADE|56=BOT001|34=2|58=Unknown message type: Z|371=35|372=Z|10=CCC|
+</code></pre>
+<p><strong>Wire example (simple Reject):</strong></p>
+<pre><code>8=FIX.4.2|9=xx|35=3|49=NADATRADE|56=BOT001|34=2|45=1|58=Invalid credentials|10=CCC|
+</code></pre>
+<h3 id="sequencereset-354"><a class="header" href="#sequencereset-354">SequenceReset (35=4)</a></h3>
+<p>Resets the sequence number. Used to recover from gaps.</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Tag</th><th>Name</th><th>R/O</th><th>Format</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td>34</td><td>MsgSeqNum</td><td>R</td><td>u64</td><td>Sequence number</td></tr>
+<tr><td>49</td><td>SenderCompID</td><td>R</td><td>String</td><td>Sender identifier</td></tr>
+<tr><td>56</td><td>TargetCompID</td><td>R</td><td>String</td><td>Recipient identifier</td></tr>
+<tr><td>36</td><td>NewSeqNo</td><td>R</td><td>u64</td><td>New sequence number</td></tr>
+<tr><td>123</td><td>GapFillFlag</td><td>R</td><td>Y/N</td><td><code>Y</code> = gap fill (messages were administrative), <code>N</code> = hard reset</td></tr>
+</tbody>
+</table>
+</div>
+<p><strong>Wire example:</strong></p>
+<pre><code>8=FIX.4.2|9=xx|35=4|49=NADATRADE|56=BOT001|34=10|36=1|123=Y|10=CCC|
+</code></pre>
+<h3 id="sequence-number-management"><a class="header" href="#sequence-number-management">Sequence Number Management</a></h3>
+<p>NadaTrade maintains independent inbound and outbound sequence numbers per session.</p>
+<ul>
+<li><strong>Inbound</strong>: tracked as <code>last_seq_num_in</code> on the session. When a message arrives with <code>34 &gt; last_seq_num_in</code>, a <strong>ResendRequest (35=2)</strong> is sent for the missing range <code>(last_seq_num_in, 0)</code>.</li>
+<li><strong>Outbound</strong>: tracked with an <code>AtomicU64</code> counter. Each outbound message increments it with <code>fetch_add(1, SeqCst)</code>.</li>
+<li>Initiating seq numbers from the client’s Logon: if the Logon contains <code>141=Y</code> (ResetSeqNumFlag), both sides reset to 1.</li>
+</ul>
+<hr>
+<h2 id="3-order-entry-messages"><a class="header" href="#3-order-entry-messages">3. Order Entry Messages</a></h2>
+<h3 id="newordersingle-35d"><a class="header" href="#newordersingle-35d">NewOrderSingle (35=D)</a></h3>
+<p>Submits a new order.</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Tag</th><th>Name</th><th>R/O</th><th>Format</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td>11</td><td>ClOrdID</td><td>R</td><td>String</td><td>Client-assigned order ID (must be unique)</td></tr>
+<tr><td>49</td><td>SenderCompID</td><td>R</td><td>String</td><td>Client identifier</td></tr>
+<tr><td>55</td><td>Symbol</td><td>R</td><td>String</td><td>Instrument identifier (e.g. <code>PETR4</code>, <code>VALE3</code>)</td></tr>
+<tr><td>54</td><td>Side</td><td>R</td><td>char</td><td><code>1</code> = Buy, <code>2</code> = Sell</td></tr>
+<tr><td>38</td><td>OrderQty</td><td>R</td><td>decimal</td><td>Total order quantity</td></tr>
+<tr><td>40</td><td>OrdType</td><td>R</td><td>char</td><td><code>1</code> = Market, <code>2</code> = Limit, <code>3</code> = Stop, <code>4</code> = StopLimit, <code>K</code> = MarketToLimit</td></tr>
+<tr><td>44</td><td>Price</td><td>C</td><td>decimal</td><td>Limit price; required for Limit and StopLimit; optional for Stop</td></tr>
+<tr><td>99</td><td>StopPx</td><td>O</td><td>decimal</td><td>Stop/trigger price; required for Stop and StopLimit</td></tr>
+<tr><td>59</td><td>TimeInForce</td><td>O</td><td>char</td><td><code>0</code> = Day, <code>1</code> = GTC, <code>2</code> = AtOpen, <code>3</code> = IOC, <code>4</code> = FOK, <code>6</code> = GTD, <code>7</code> = AtClose. Default: <code>0</code> (Day)</td></tr>
+<tr><td>7928</td><td>StpMode</td><td>O</td><td>char</td><td><strong>NadaTrade custom tag.</strong> Self-trade prevention mode: <code>0</code> = CancelAggressive (default), <code>1</code> = CancelResting, <code>2</code> = CancelBoth, <code>3</code> = None</td></tr>
+<tr><td>210</td><td>MaxFloor</td><td>O</td><td>decimal</td><td><strong>NadaTrade custom use.</strong> Display quantity for iceberg orders (visible portion)</td></tr>
+<tr><td>126</td><td>ExpireTime</td><td>C</td><td>UTCTimestamp</td><td>Expiry time for GTD orders. Format: <code>YYYYMMDD-HH:MM:SS</code>. Required when <code>59=6</code></td></tr>
+</tbody>
+</table>
+</div>
+<p><strong>Wire example (Limit order):</strong></p>
+<pre><code>8=FIX.4.2|9=123|35=D|49=BOT001|56=NADATRADE|34=2|11=ord-001|55=PETR4|54=1|38=1000|40=2|44=38.50|59=0|10=CCC|
+</code></pre>
+<p><strong>Wire example (Stop order with GTC):</strong></p>
+<pre><code>8=FIX.4.2|9=140|35=D|49=BOT001|56=NADATRADE|34=3|11=ord-stop|55=PETR4|54=2|38=1000|40=3|99=37.00|59=1|10=CCC|
+</code></pre>
+<p><strong>Wire example (StopLimit order):</strong></p>
+<pre><code>8=FIX.4.2|9=150|35=D|49=BOT001|56=NADATRADE|34=4|11=ord-sl|55=PETR4|54=1|38=100|40=4|44=42.00|99=40.00|59=0|10=CCC|
+</code></pre>
+<p><strong>Wire example (Market order):</strong></p>
+<pre><code>8=FIX.4.2|9=123|35=D|49=BOT001|56=NADATRADE|34=5|11=ord-mkt|55=PETR4|54=1|38=500|40=1|59=0|10=CCC|
+</code></pre>
+<p><strong>Wire example (GTD order with expiry):</strong></p>
+<pre><code>8=FIX.4.2|9=160|35=D|49=BOT001|56=NADATRADE|34=6|11=ord-gtd|55=PETR4|54=1|38=100|40=2|44=38.50|59=6|126=20261231-23:59:59|10=CCC|
+</code></pre>
+<p><strong>Wire example (Iceberg order with STP):</strong></p>
+<pre><code>8=FIX.4.2|9=140|35=D|49=BOT001|56=NADATRADE|34=7|11=ord-ice|55=PETR4|54=1|38=1000|40=2|44=38.50|59=0|210=100|7928=1|10=CCC|
+</code></pre>
+<h3 id="ordercancelrequest-35f"><a class="header" href="#ordercancelrequest-35f">OrderCancelRequest (35=F)</a></h3>
+<p>Cancels an existing order.</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Tag</th><th>Name</th><th>R/O</th><th>Format</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td>11</td><td>ClOrdID</td><td>R</td><td>String</td><td>Unique ID for this cancel request</td></tr>
+<tr><td>41</td><td>OrigClOrdID</td><td>R</td><td>String</td><td>Client order ID of the order to cancel</td></tr>
+<tr><td>49</td><td>SenderCompID</td><td>R</td><td>String</td><td>Client identifier</td></tr>
+<tr><td>55</td><td>Symbol</td><td>R</td><td>String</td><td>Instrument identifier</td></tr>
+<tr><td>54</td><td>Side</td><td>R</td><td>char</td><td><code>1</code> = Buy, <code>2</code> = Sell</td></tr>
+<tr><td>37</td><td>OrderID</td><td>O</td><td>String</td><td>Exchange-assigned order ID (optional)</td></tr>
+</tbody>
+</table>
+</div>
+<p><strong>Wire example:</strong></p>
+<pre><code>8=FIX.4.2|9=100|35=F|49=BOT001|56=NADATRADE|34=8|41=ord-001|55=PETR4|54=1|11=cxl-001|10=CCC|
+</code></pre>
+<h3 id="cancelreplacerequest-35g"><a class="header" href="#cancelreplacerequest-35g">CancelReplaceRequest (35=G)</a></h3>
+<p>Amends an existing order’s quantity and/or price. Decreasing quantity preserves time priority; increasing quantity or price change re-enters the order at the back of the queue.</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Tag</th><th>Name</th><th>R/O</th><th>Format</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td>11</td><td>ClOrdID</td><td>O</td><td>String</td><td>New client order ID (defaults to OrigClOrdID if omitted)</td></tr>
+<tr><td>41</td><td>OrigClOrdID</td><td>R</td><td>String</td><td>Client order ID of the order to replace</td></tr>
+<tr><td>49</td><td>SenderCompID</td><td>R</td><td>String</td><td>Client identifier</td></tr>
+<tr><td>55</td><td>Symbol</td><td>R</td><td>String</td><td>Instrument identifier</td></tr>
+<tr><td>54</td><td>Side</td><td>R</td><td>char</td><td><code>1</code> = Buy, <code>2</code> = Sell</td></tr>
+<tr><td>38</td><td>OrderQty</td><td>O</td><td>decimal</td><td>New total quantity</td></tr>
+<tr><td>44</td><td>Price</td><td>O</td><td>decimal</td><td>New limit price</td></tr>
+<tr><td>99</td><td>StopPx</td><td>O</td><td>decimal</td><td>New stop price</td></tr>
+<tr><td>7928</td><td>StpMode</td><td>O</td><td>char</td><td><strong>NadaTrade custom.</strong> New STP mode</td></tr>
+</tbody>
+</table>
+</div>
+<p><strong>Wire example:</strong></p>
+<pre><code>8=FIX.4.2|9=150|35=G|49=BOT001|56=NADATRADE|34=9|41=ord-001|55=PETR4|54=1|38=500|44=39.00|11=ord-002|10=CCC|
+</code></pre>
+<h3 id="orderstatusrequest-35h--planned"><a class="header" href="#orderstatusrequest-35h--planned">OrderStatusRequest (35=H) — Planned</a></h3>
+<p><strong>Not yet implemented.</strong> Planned for a future work package (WP3).</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Tag</th><th>Name</th><th>R/O</th><th>Format</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td>11</td><td>ClOrdID</td><td>O</td><td>String</td><td>Client order ID</td></tr>
+<tr><td>37</td><td>OrderID</td><td>O</td><td>String</td><td>Exchange-assigned order ID</td></tr>
+<tr><td>55</td><td>Symbol</td><td>R</td><td>String</td><td>Instrument identifier</td></tr>
+</tbody>
+</table>
+</div>
+<hr>
+<h2 id="4-execution-messages"><a class="header" href="#4-execution-messages">4. Execution Messages</a></h2>
+<h3 id="executionreport-358"><a class="header" href="#executionreport-358">ExecutionReport (35=8)</a></h3>
+<p>Sent by the server in response to order lifecycle events: accepted, partially filled, filled, cancelled, replaced, rejected, expired. NadaTrade generates these automatically from <code>ExchangeEvent</code> variants.</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Tag</th><th>Name</th><th>R/O</th><th>Format</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td>11</td><td>ClOrdID</td><td>R</td><td>String</td><td>Client order ID</td></tr>
+<tr><td>37</td><td>OrderID</td><td>R</td><td>String</td><td>Exchange-assigned UUID</td></tr>
+<tr><td>17</td><td>ExecID</td><td>O</td><td>String</td><td>Unique execution identifier</td></tr>
+<tr><td>150</td><td>ExecType</td><td>R</td><td>char</td><td><code>0</code> = New (accepted), <code>3</code> = Done/New, <code>4</code> = Cancelled, <code>5</code> = Replaced, <code>8</code> = Rejected, <code>C</code> = Expired, <code>1</code> = Partial Fill, <code>2</code> = Fill</td></tr>
+<tr><td>39</td><td>OrdStatus</td><td>R</td><td>char</td><td><code>0</code> = New, <code>1</code> = Partially Filled, <code>2</code> = Filled, <code>4</code> = Cancelled, <code>8</code> = Rejected, <code>C</code> = Expired</td></tr>
+<tr><td>55</td><td>Symbol</td><td>R</td><td>String</td><td>Instrument identifier</td></tr>
+<tr><td>54</td><td>Side</td><td>R</td><td>char</td><td><code>1</code> = Buy, <code>2</code> = Sell</td></tr>
+<tr><td>38</td><td>OrderQty</td><td>R</td><td>decimal</td><td>Order quantity (or fill quantity on fills)</td></tr>
+<tr><td>44</td><td>Price</td><td>R</td><td>decimal</td><td>Limit price</td></tr>
+<tr><td>14</td><td>CumQty</td><td>O</td><td>decimal</td><td>Cumulative filled quantity</td></tr>
+<tr><td>151</td><td>LeavesQty</td><td>R</td><td>decimal</td><td>Remaining unfilled quantity</td></tr>
+<tr><td>6</td><td>AvgPx</td><td>O</td><td>decimal</td><td>Average fill price</td></tr>
+<tr><td>31</td><td>LastPx</td><td>O</td><td>decimal</td><td>Price of last fill</td></tr>
+<tr><td>32</td><td>LastQty</td><td>O</td><td>decimal</td><td>Quantity of last fill</td></tr>
+<tr><td>58</td><td>Text</td><td>O</td><td>String</td><td>Human-readable note (rejection reason, etc.)</td></tr>
+</tbody>
+</table>
+</div>
+<p><strong>Wire example (Order Accepted):</strong></p>
+<pre><code>8=FIX.4.2|9=xxx|35=8|49=NADATRADE|56=CLIENT|34=5|37=&lt;uuid&gt;|11=ord-001|55=PETR4|54=1|39=0|150=0|38=1000|151=1000|44=38.50|10=CCC|
+</code></pre>
+<p><strong>Wire example (Fill):</strong></p>
+<pre><code>8=FIX.4.2|9=xxx|35=8|49=NADATRADE|56=CLIENT|34=6|37=&lt;uuid&gt;|11=ord-001|55=PETR4|54=1|39=2|150=2|38=1000|151=0|44=38.50|14=1000|6=38.50|31=38.50|32=1000|10=CCC|
+</code></pre>
+<p><strong>Wire example (Rejected):</strong></p>
+<pre><code>8=FIX.4.2|9=xxx|35=8|49=NADATRADE|56=CLIENT|34=7|11=ord-bad|55=PETR4|54=1|39=8|150=8|38=0|151=0|44=0|58=UnknownInstrument|10=CCC|
+</code></pre>
+<p><strong>ExecType to ExchangeEvent mapping:</strong></p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>ExecType</th><th>Code</th><th>ExchangeEvent</th></tr>
+</thead>
+<tbody>
+<tr><td>New</td><td>0</td><td>OrderAccepted</td></tr>
+<tr><td>Partial Fill</td><td>1</td><td>OrderPartiallyFilled</td></tr>
+<tr><td>Fill</td><td>2</td><td>OrderFilled</td></tr>
+<tr><td>Done/New</td><td>3</td><td>(not currently used)</td></tr>
+<tr><td>Cancelled</td><td>4</td><td>OrderCancelled</td></tr>
+<tr><td>Replaced</td><td>5</td><td>OrderReplaced</td></tr>
+<tr><td>Rejected</td><td>8</td><td>OrderRejected, CancelRejected</td></tr>
+<tr><td>Expired</td><td>C</td><td>OrderExpired</td></tr>
+</tbody>
+</table>
+</div>
+<p><strong>OrdStatus to ExchangeEvent mapping:</strong></p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>OrdStatus</th><th>Code</th><th>ExchangeEvent</th></tr>
+</thead>
+<tbody>
+<tr><td>New</td><td>0</td><td>OrderAccepted, OrderReplaced</td></tr>
+<tr><td>Partially Filled</td><td>1</td><td>OrderPartiallyFilled</td></tr>
+<tr><td>Filled</td><td>2</td><td>OrderFilled</td></tr>
+<tr><td>Cancelled</td><td>4</td><td>OrderCancelled</td></tr>
+<tr><td>Rejected</td><td>8</td><td>OrderRejected, CancelRejected</td></tr>
+<tr><td>Expired</td><td>C</td><td>OrderExpired</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="cancelreject-359"><a class="header" href="#cancelreject-359">CancelReject (35=9)</a></h3>
+<p>Sent when a cancel or cancel/replace request cannot be honoured. NadaTrade generates these from <code>ExchangeEvent::CancelRejected</code>.</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Tag</th><th>Name</th><th>R/O</th><th>Format</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td>11</td><td>ClOrdID</td><td>R</td><td>String</td><td>Client order ID</td></tr>
+<tr><td>41</td><td>OrigClOrdID</td><td>R</td><td>String</td><td>Original order ID from the cancel request</td></tr>
+<tr><td>37</td><td>OrderID</td><td>R</td><td>String</td><td>Exchange-assigned order ID (set to <code>NONE</code> if none)</td></tr>
+<tr><td>39</td><td>OrdStatus</td><td>R</td><td>char</td><td>Always <code>8</code> (Rejected)</td></tr>
+<tr><td>434</td><td>CxlRejResponseTo</td><td>R</td><td>char</td><td><code>1</code> = Cancel request, <code>2</code> = Cancel/Replace request</td></tr>
+<tr><td>58</td><td>Text</td><td>O</td><td>String</td><td>Reason (Debug-format of CancelRejectReason)</td></tr>
+<tr><td>102</td><td>CxlRejReason</td><td>O</td><td>int</td><td>Reason code (see §7)</td></tr>
+</tbody>
+</table>
+</div>
+<p><strong>Wire example:</strong></p>
+<pre><code>8=FIX.4.2|9=xxx|35=9|49=NADATRADE|56=CLIENT|34=10|37=NONE|11=ord-1|41=ord-1|39=8|434=1|58=UnknownOrder|10=CCC|
+</code></pre>
+<hr>
+<h2 id="5-market-data-messages"><a class="header" href="#5-market-data-messages">5. Market Data Messages</a></h2>
+<h3 id="marketdatarequest-35v"><a class="header" href="#marketdatarequest-35v">MarketDataRequest (35=V)</a></h3>
+<p>Subscribes to or unsubscribes from market data for an instrument. NadaTrade enforces session roles: a session configured as <code>OrderEntry</code>-only cannot send this message (it will receive a SessionReject).</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Tag</th><th>Name</th><th>R/O</th><th>Format</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td>262</td><td>MDReqID</td><td>R</td><td>String</td><td>Unique request identifier</td></tr>
+<tr><td>263</td><td>SubscriptionRequestType</td><td>R</td><td>char</td><td><code>0</code> = Snapshot only, <code>1</code> = Snapshot + Updates, <code>2</code> = Unsubscribe</td></tr>
+<tr><td>264</td><td>MarketDepth</td><td>O</td><td>int</td><td>Maximum book depth (not currently enforced)</td></tr>
+<tr><td>267</td><td>NoMDEntryTypes</td><td>R</td><td>int</td><td>Number of entry types in repeating group</td></tr>
+<tr><td>269</td><td>MDEntryType</td><td>R</td><td>char</td><td>Repeating: <code>0</code> = Bid, <code>1</code> = Ask, <code>2</code> = Trade</td></tr>
+<tr><td>146</td><td>NoRelatedSym</td><td>R</td><td>int</td><td>Number of symbols (always 1 in NadaTrade)</td></tr>
+<tr><td>55</td><td>Symbol</td><td>R</td><td>String</td><td>Instrument identifier (in repeating group)</td></tr>
+</tbody>
+</table>
+</div>
+<p><strong>Wire example:</strong></p>
+<pre><code>8=FIX.4.2|9=100|35=V|49=BOT001|56=NADATRADE|34=11|262=MDREQ1|55=PETR4|263=1|10=CCC|
+</code></pre>
+<h3 id="marketdatasnapshotfullrefresh-35w"><a class="header" href="#marketdatasnapshotfullrefresh-35w">MarketDataSnapshotFullRefresh (35=W)</a></h3>
+<p>Full order book snapshot, sent when a client subscribes or when the book changes for a subscribed instrument. Uses repeating groups for bid/ask entries.</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Tag</th><th>Name</th><th>R/O</th><th>Format</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td>262</td><td>MDReqID</td><td>R</td><td>String</td><td>Echo of MDReqID from the subscription</td></tr>
+<tr><td>55</td><td>Symbol</td><td>R</td><td>String</td><td>Instrument identifier</td></tr>
+<tr><td>268</td><td>NoMDEntries</td><td>R</td><td>int</td><td>Total number of price-level entries</td></tr>
+<tr><td>269</td><td>MDEntryType</td><td>R</td><td>char</td><td>Repeating: <code>0</code> = Bid, <code>1</code> = Ask</td></tr>
+<tr><td>270</td><td>MDEntryPx</td><td>R</td><td>decimal</td><td>Price for this level</td></tr>
+<tr><td>271</td><td>MDEntrySize</td><td>R</td><td>decimal</td><td>Total quantity at this level</td></tr>
+</tbody>
+</table>
+</div>
+<p><strong>Wire example (book with 1 bid + 1 ask):</strong></p>
+<pre><code>8=FIX.4.2|9=xxx|35=W|49=NADATRADE|56=BOT001|34=12|262=MDREQ1|55=PETR4|269=0|270=38.50|271=1000|269=1|270=38.51|271=500|268=2|10=CCC|
+</code></pre>
+<p>Bids are listed first (descending price), then asks (ascending).</p>
+<h3 id="marketdataincrementalrefresh-35x"><a class="header" href="#marketdataincrementalrefresh-35x">MarketDataIncrementalRefresh (35=X)</a></h3>
+<p>Sent when a trade occurs on a subscribed instrument.</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Tag</th><th>Name</th><th>R/O</th><th>Format</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td>262</td><td>MDReqID</td><td>R</td><td>String</td><td>Echo of MDReqID from the subscription</td></tr>
+<tr><td>55</td><td>Symbol</td><td>R</td><td>String</td><td>Instrument identifier</td></tr>
+<tr><td>268</td><td>NoMDEntries</td><td>R</td><td>int</td><td>Number of entries (typically <code>1</code>)</td></tr>
+<tr><td>269</td><td>MDEntryType</td><td>R</td><td>char</td><td><code>2</code> = Trade</td></tr>
+<tr><td>270</td><td>MDEntryPx</td><td>R</td><td>decimal</td><td>Trade price</td></tr>
+<tr><td>271</td><td>MDEntrySize</td><td>R</td><td>decimal</td><td>Trade quantity</td></tr>
+<tr><td>279</td><td>MDUpdateAction</td><td>O</td><td>char</td><td><code>0</code> = New, <code>1</code> = Change, <code>2</code> = Delete</td></tr>
+</tbody>
+</table>
+</div>
+<p><strong>Wire example:</strong></p>
+<pre><code>8=FIX.4.2|9=xxx|35=X|49=NADATRADE|56=BOT001|34=13|262=MDREQ1|55=PETR4|268=1|269=2|270=38.50|271=100|10=CCC|
+</code></pre>
+<h3 id="subscription-tracking"><a class="header" href="#subscription-tracking">Subscription Tracking</a></h3>
+<p>The acceptor maintains a <code>HashMap&lt;String, MdSubscription&gt;</code> per connection. Subscriptions are identified by instrument. On <code>SubscriptionRequestType=2</code> (unsubscribe), the entry is removed. Market data events (<code>BookUpdated</code>, <code>TradePrinted</code>) are dispatched only to connections subscribing to the relevant instrument.</p>
+<hr>
+<h2 id="6-common-tag-catalog"><a class="header" href="#6-common-tag-catalog">6. Common Tag Catalog</a></h2>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Tag</th><th>Name</th><th>Format</th><th>Description</th><th>Used In</th></tr>
+</thead>
+<tbody>
+<tr><td>6</td><td>AvgPx</td><td>decimal</td><td>Average fill price</td><td>35=8</td></tr>
+<tr><td>7</td><td>BeginSeqNo</td><td>u64</td><td>Start of resend range</td><td>35=2</td></tr>
+<tr><td>8</td><td>BeginString</td><td>String</td><td>Always <code>FIX.4.2</code></td><td>All</td></tr>
+<tr><td>9</td><td>BodyLength</td><td>int</td><td>Byte length of message body</td><td>All</td></tr>
+<tr><td>10</td><td>CheckSum</td><td>int</td><td>Mod-256 checksum, 3-digit zero-padded</td><td>All</td></tr>
+<tr><td>11</td><td>ClOrdID</td><td>String</td><td>Client-assigned order ID</td><td>35=D, F, G, H, 8, 9</td></tr>
+<tr><td>14</td><td>CumQty</td><td>decimal</td><td>Cumulative filled quantity</td><td>35=8</td></tr>
+<tr><td>16</td><td>EndSeqNo</td><td>u64</td><td>End of resend range; <code>0</code> = infinity</td><td>35=2</td></tr>
+<tr><td>17</td><td>ExecID</td><td>String</td><td>Execution identifier</td><td>35=8</td></tr>
+<tr><td>31</td><td>LastPx</td><td>decimal</td><td>Price of last fill</td><td>35=8</td></tr>
+<tr><td>32</td><td>LastQty</td><td>decimal</td><td>Quantity of last fill</td><td>35=8</td></tr>
+<tr><td>34</td><td>MsgSeqNum</td><td>u64</td><td>Sequence number</td><td>All</td></tr>
+<tr><td>35</td><td>MsgType</td><td>String</td><td>Message type code</td><td>All</td></tr>
+<tr><td>36</td><td>NewSeqNo</td><td>u64</td><td>New sequence number after reset</td><td>35=4</td></tr>
+<tr><td>37</td><td>OrderID</td><td>String</td><td>Exchange-assigned order ID</td><td>35=8, 9, F, H</td></tr>
+<tr><td>38</td><td>OrderQty</td><td>decimal</td><td>Order total quantity</td><td>35=D, G, 8</td></tr>
+<tr><td>39</td><td>OrdStatus</td><td>char</td><td>Order status</td><td>35=8, 9</td></tr>
+<tr><td>40</td><td>OrdType</td><td>char</td><td>Order type</td><td>35=D</td></tr>
+<tr><td>41</td><td>OrigClOrdID</td><td>String</td><td>Original client order ID being cancelled/replaced</td><td>35=F, G, 9</td></tr>
+<tr><td>44</td><td>Price</td><td>decimal</td><td>Limit price</td><td>35=D, G, 8</td></tr>
+<tr><td>45</td><td>RefSeqNum</td><td>u64</td><td>Sequence number of referenced message</td><td>35=3</td></tr>
+<tr><td>49</td><td>SenderCompID</td><td>String</td><td>Sender identifier</td><td>All</td></tr>
+<tr><td>52</td><td>SendingTime</td><td>UTCTimestamp</td><td>Time message was sent</td><td>35=A</td></tr>
+<tr><td>54</td><td>Side</td><td>char</td><td><code>1</code> = Buy, <code>2</code> = Sell</td><td>35=D, F, G, H, 8</td></tr>
+<tr><td>55</td><td>Symbol</td><td>String</td><td>Instrument identifier</td><td>35=D, F, G, H, 8, V, W, X</td></tr>
+<tr><td>56</td><td>TargetCompID</td><td>String</td><td>Recipient identifier</td><td>All</td></tr>
+<tr><td>58</td><td>Text</td><td>String</td><td>Human-readable text</td><td>35=3, 5, 8, 9</td></tr>
+<tr><td>59</td><td>TimeInForce</td><td>char</td><td>Time-in-force qualifier</td><td>35=D</td></tr>
+<tr><td>96</td><td>RawData</td><td>data</td><td>Custom authentication data</td><td>35=A</td></tr>
+<tr><td>98</td><td>EncryptMethod</td><td>int</td><td>Always <code>0</code> (none)</td><td>35=A</td></tr>
+<tr><td>99</td><td>StopPx</td><td>decimal</td><td>Stop/trigger price</td><td>35=D, G</td></tr>
+<tr><td>102</td><td>CxlRejReason</td><td>int</td><td>Cancel reject reason code</td><td>35=9</td></tr>
+<tr><td>108</td><td>HeartBtInt</td><td>int</td><td>Heartbeat interval in seconds</td><td>35=A</td></tr>
+<tr><td>112</td><td>TestReqID</td><td>String</td><td>Test request identifier</td><td>35=1, 0</td></tr>
+<tr><td>123</td><td>GapFillFlag</td><td>Y/N</td><td><code>Y</code> = gap fill, <code>N</code> = hard reset</td><td>35=4</td></tr>
+<tr><td>126</td><td>ExpireTime</td><td>UTCTimestamp</td><td>GTD expiry timestamp</td><td>35=D</td></tr>
+<tr><td>141</td><td>ResetSeqNumFlag</td><td>Y/N</td><td>Reset sequence numbers</td><td>35=A</td></tr>
+<tr><td>146</td><td>NoRelatedSym</td><td>int</td><td>Number of symbols in repeating group</td><td>35=V</td></tr>
+<tr><td>150</td><td>ExecType</td><td>char</td><td>Execution type</td><td>35=8</td></tr>
+<tr><td>151</td><td>LeavesQty</td><td>decimal</td><td>Remaining unfilled quantity</td><td>35=8</td></tr>
+<tr><td>210</td><td>MaxFloor</td><td>decimal</td><td><strong>NadaTrade custom.</strong> Display quantity for iceberg orders</td><td>35=D</td></tr>
+<tr><td>262</td><td>MDReqID</td><td>String</td><td>Market data request identifier</td><td>35=V, W, X</td></tr>
+<tr><td>263</td><td>SubscriptionRequestType</td><td>char</td><td><code>0</code> = snapshot, <code>1</code> = snapshot+updates, <code>2</code> = unsubscribe</td><td>35=V</td></tr>
+<tr><td>264</td><td>MarketDepth</td><td>int</td><td>Maximum book depth</td><td>35=V</td></tr>
+<tr><td>267</td><td>NoMDEntryTypes</td><td>int</td><td>Number of MD entry types requested</td><td>35=V</td></tr>
+<tr><td>268</td><td>NoMDEntries</td><td>int</td><td>Number of entries in repeating group</td><td>35=W, X</td></tr>
+<tr><td>269</td><td>MDEntryType</td><td>char</td><td><code>0</code> = Bid, <code>1</code> = Ask, <code>2</code> = Trade</td><td>35=V (repeating), W, X</td></tr>
+<tr><td>270</td><td>MDEntryPx</td><td>decimal</td><td>Price of this book level</td><td>35=W, X</td></tr>
+<tr><td>271</td><td>MDEntrySize</td><td>decimal</td><td>Quantity at this book level</td><td>35=W, X</td></tr>
+<tr><td>279</td><td>MDUpdateAction</td><td>char</td><td><code>0</code> = New, <code>1</code> = Change, <code>2</code> = Delete</td><td>35=X</td></tr>
+<tr><td>371</td><td>RefTagID</td><td>int</td><td>Tag that caused the rejection</td><td>35=3</td></tr>
+<tr><td>372</td><td>RefMsgType</td><td>String</td><td>MsgType that caused the rejection</td><td>35=3</td></tr>
+<tr><td>373</td><td>SessionRejectReason</td><td>int</td><td>Error code for session-level reject</td><td>35=3</td></tr>
+<tr><td>434</td><td>CxlRejResponseTo</td><td>char</td><td><code>1</code> = cancel, <code>2</code> = replace request</td><td>35=9</td></tr>
+<tr><td>553</td><td>Username</td><td>String</td><td><strong>Custom tag.</strong> Participant username for FIX logon</td><td>35=A</td></tr>
+<tr><td>554</td><td>Password</td><td>String</td><td><strong>Custom tag.</strong> Participant password for FIX logon</td><td>35=A</td></tr>
+<tr><td>7928</td><td>StpMode</td><td>char</td><td><strong>NadaTrade custom tag.</strong> Self-trade prevention mode</td><td>35=D, G</td></tr>
+</tbody>
+</table>
+</div>
+<hr>
+<h2 id="7-error-codes"><a class="header" href="#7-error-codes">7. Error Codes</a></h2>
+<h3 id="sessionrejectreason-tag-373"><a class="header" href="#sessionrejectreason-tag-373">SessionRejectReason (tag 373)</a></h3>
+<p>Values returned in tag 373 of a SessionReject (35=3) message.</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Code</th><th>Name</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td>0</td><td>InvalidTag</td><td>Tag is not valid in this message context</td></tr>
+<tr><td>1</td><td>RequiredTagMissing</td><td>A required tag is absent</td></tr>
+<tr><td>2</td><td>TagNotDefined</td><td>Tag number is not defined in the FIX specification</td></tr>
+<tr><td>3</td><td>TagSpecifiedWithoutValue</td><td>Tag present but no value provided</td></tr>
+<tr><td>4</td><td>ValueIncorrect</td><td>Tag value is out of range or semantically wrong</td></tr>
+<tr><td>5</td><td>IncorrectDataFormat</td><td>Value does not match expected data type</td></tr>
+<tr><td>6</td><td>InvalidTag</td><td>Tag value is not accepted (duplicate of 0)</td></tr>
+<tr><td>9</td><td>CompIDProblem</td><td>SenderCompID or TargetCompID mismatch</td></tr>
+<tr><td>10</td><td>SendingTimeAccuracy</td><td>SendingTime precision issue</td></tr>
+<tr><td>11</td><td>InvalidMsgType</td><td>Message type not supported</td></tr>
+<tr><td>13</td><td>TagAppearsMultipleTimes</td><td>Tag appears more than once in the message</td></tr>
+<tr><td>99</td><td>Other</td><td>Catch-all for unspecified errors</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="cxlrejreason-tag-102"><a class="header" href="#cxlrejreason-tag-102">CxlRejReason (tag 102)</a></h3>
+<p>Values used in tag 102 of a CancelReject (35=9) message.</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Code</th><th>Name</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td>0</td><td>TooLate</td><td>Order already in terminal state</td></tr>
+<tr><td>1</td><td>UnknownOrder</td><td>Order does not exist</td></tr>
+<tr><td>3</td><td>OrderAlreadyPending</td><td>Another cancel/replace is in progress</td></tr>
+<tr><td>99</td><td>Other</td><td>Other reason (details in tag 58)</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="role-enforcement"><a class="header" href="#role-enforcement">Role Enforcement</a></h3>
+<p>NadaTrade enforces session roles at the protocol level:</p>
+<ul>
+<li><strong>MarketData-only sessions</strong>: Reject <code>35=D</code>, <code>35=F</code>, <code>35=G</code> with SessionReject (35=3).</li>
+<li><strong>OrderEntry-only sessions</strong>: Reject <code>35=V</code> with SessionReject (35=3).</li>
+<li><strong>Both (default)</strong>: All message types accepted.</li>
+</ul>
+<hr>
+<h2 id="8-nadatrade-custom-tags"><a class="header" href="#8-nadatrade-custom-tags">8. NadaTrade Custom Tags</a></h2>
+<p>NadaTrade uses several tags outside the standard FIX 4.2 tag space for features not covered by the base specification.</p>
+<h3 id="tag-7928--stpmode-self-trade-prevention"><a class="header" href="#tag-7928--stpmode-self-trade-prevention">Tag 7928 — StpMode (Self-Trade Prevention)</a></h3>
+<p>Custom tag used on <code>35=D</code> (NewOrderSingle) and <code>35=G</code> (CancelReplaceRequest). Controls how self-trade prevention is applied.</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Value</th><th>STP Mode</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>0</code></td><td>CancelAggressive</td><td>Cancel the aggressive (incoming) order if it matches a resting order from the same participant. <strong>Default.</strong></td></tr>
+<tr><td><code>1</code></td><td>CancelResting</td><td>Cancel the resting order; let the aggressive order through</td></tr>
+<tr><td><code>2</code></td><td>CancelBoth</td><td>Cancel both the resting and aggressive orders</td></tr>
+<tr><td><code>3</code></td><td>None</td><td>Disable self-trade prevention for this order</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="tag-210--maxfloor-display-qty--iceberg"><a class="header" href="#tag-210--maxfloor-display-qty--iceberg">Tag 210 — MaxFloor (Display Qty / Iceberg)</a></h3>
+<p>Standard FIX tag repurposed by NadaTrade to specify the visible (display) quantity for iceberg orders. When set, the order’s total quantity (tag 38) is hidden; only the display quantity (tag 210) is visible in the order book. The remaining quantity is replenished from the hidden reserve as the visible portion is filled.</p>
+<h3 id="tags-553554--username--password"><a class="header" href="#tags-553554--username--password">Tags 553/554 — Username / Password</a></h3>
+<p>Custom tags for FIX session authentication. These are validated against the participant credentials configured in the system. If <code>credentials</code> is non-empty on the session, logon is rejected for:</p>
+<ul>
+<li>Unknown usernames (no match in credentials map)</li>
+<li>Incorrect passwords</li>
+<li>Empty usernames</li>
+</ul>
+<hr>
+<h2 id="9-session-state-machine"><a class="header" href="#9-session-state-machine">9. Session State Machine</a></h2>
+<p>A FIX session goes through the following states:</p>
+<ol>
+<li><strong>Disconnected</strong>: No TCP connection. The acceptor waits for connections.</li>
+<li><strong>Connected, not logged on</strong>: TCP established. All non-Logon messages are rejected with a SessionReject (35=3) containing <code>58=Session not logged on; send Logon first</code>.</li>
+<li><strong>Logged on</strong>: A valid Logon has been received. All message types flow according to the session role.</li>
+<li><strong>Logout received / connection dropped</strong>: Session returns to disconnected state.</li>
+</ol>
+<p>During the logged-on state:</p>
+<ul>
+<li><strong>Heartbeats</strong> are sent at the configured interval (<code>heartbeat_interval_secs</code>, default 30s).</li>
+<li><strong>Sequence number gaps</strong> in inbound messages trigger automatic ResendRequests.</li>
+<li><strong>MessageStore</strong> persistence is initialized after a successful logon, storing outbound messages in append-only <code>.fixlog</code> files.</li>
+</ul>
+<h2 id="10-messagestore-persistence"><a class="header" href="#10-messagestore-persistence">10. MessageStore Persistence</a></h2>
+<p>Each FIX session stores outbound messages in a file named <code>{sender}-{target}.fixlog</code> in the configured store directory. The file format is:</p>
+<pre><code>{"last_seq_in":&lt;u64&gt;,"last_seq_out":&lt;u64&gt;}
+{"seq":&lt;u64&gt;,"msg":"&lt;escaped fix message&gt;"}
+{"seq":&lt;u64&gt;,"msg":"&lt;escaped fix message&gt;"}
+...
+</code></pre>
+<ul>
+<li><strong>Line 1</strong>: JSON header with last known sequence numbers (used for recovery).</li>
+<li><strong>Subsequent lines</strong>: One JSON entry per outbound message, with the sequence number and the full FIX message string.</li>
+<li>The in-memory buffer holds up to <code>cap</code> (default 1000) messages in a <code>VecDeque</code>.</li>
+<li>ResendRequest (35=2) replays from this buffer, filtering by the <code>(BeginSeqNo, EndSeqNo)</code> range.</li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../reference/config-keys.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                            </a>
+
+                            <a rel="next prefetch" href="../reference/ws-protocol.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../reference/config-keys.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                    </a>
+
+                    <a rel="next prefetch" href="../reference/ws-protocol.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                    </a>
+            </nav>
+
+        </div>
+
+        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
+        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
+        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
+        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
+        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr-ef4e11c1.min.js"></script>
+        <script src="../mark-09e88c2c.min.js"></script>
+        <script src="../searcher-09f2665d.js"></script>
+
+        <script src="../clipboard-1626706a.min.js"></script>
+        <script src="../highlight-abc7f01d.js"></script>
+        <script src="../book-c22b7243.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+
+    </div>
+    </body>
+</html>

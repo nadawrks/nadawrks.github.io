@@ -1,0 +1,712 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>FIX 4.2 Gateway - NadaTrade Documentation</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon-de23e50b.svg">
+        <link rel="shortcut icon" href="../favicon-8114d1fc.png">
+        <link rel="stylesheet" href="../css/variables-8adf115d.css">
+        <link rel="stylesheet" href="../css/general-0392ca55.css">
+        <link rel="stylesheet" href="../css/chrome-fc474251.css">
+        <link rel="stylesheet" href="../css/print-9e4910d8.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../fonts/fonts-9644e21d.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="mdbook-highlight-css" href="../highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="../tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight-3fdfc3ac.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../searchindex-8fb08360.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc-00c5fce9.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="mdbook-body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="mdbook-page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="mdbook-menu-bar-hover-placeholder"></div>
+                <div id="mdbook-menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
+                        </label>
+                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
+                        </button>
+                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-ayu">Ayu</button></li>
+                        </ul>
+                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">NadaTrade Documentation</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/nadawrks/nadatrade" title="Git repository" aria-label="Git repository">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/nadawrks/nadatrade/edit/main/docs/book/./user-guide/fix-gateway.md" title="Suggest an edit" aria-label="Suggest an edit" rel="edit">
+                            <span class=fa-svg id="git-edit-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M421.7 220.3l-11.3 11.3-22.6 22.6-205 205c-6.6 6.6-14.8 11.5-23.8 14.1L30.8 511c-8.4 2.5-17.5 .2-23.7-6.1S-1.5 489.7 1 481.2L38.7 353.1c2.6-9 7.5-17.2 14.1-23.8l205-205 22.6-22.6 11.3-11.3 33.9 33.9 62.1 62.1 33.9 33.9zM96 353.9l-9.3 9.3c-.9 .9-1.6 2.1-2 3.4l-25.3 86 86-25.3c1.3-.4 2.5-1.1 3.4-2l9.3-9.3H112c-8.8 0-16-7.2-16-16V353.9zM453.3 19.3l39.4 39.4c25 25 25 65.5 0 90.5l-14.5 14.5-22.6 22.6-11.3 11.3-33.9-33.9-62.1-62.1L314.3 67.7l11.3-11.3 22.6-22.6 14.5-14.5c25-25 65.5-25 90.5 0z"/></svg></span>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="mdbook-search-wrapper" class="hidden">
+                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                        <ul id="mdbook-searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="mdbook-content" class="content">
+                    <main>
+                        <h1 id="fix-42-gateway"><a class="header" href="#fix-42-gateway">FIX 4.2 Gateway</a></h1>
+<p>The FIX 4.2 gateway provides an industry-standard Financial Information eXchange protocol interface for order entry, cancel/replace, market data, and session-level control. It listens for TCP connections, authenticates participants via username/password on logon, and translates between FIX wire messages and the internal NadaTrade command/event model.</p>
+<h2 id="architecture"><a class="header" href="#architecture">Architecture</a></h2>
+<p>The gateway consists of four components:</p>
+<ul>
+<li><strong><code>FixAcceptor</code></strong> (<code>crates/nadatrade-fix/src/acceptor.rs</code>) — binds a TCP listener on the configured <code>listen_address</code> (default <code>0.0.0.0:9823</code>). On each inbound connection, it spawns a <code>handle_connection</code> task that owns the TCP stream for the lifetime of that session.</li>
+<li><strong><code>FixSession</code></strong> (<code>crates/nadatrade-fix/src/session.rs</code>) — per-connection state machine. Parses inbound FIX messages, validates session-level rules (logon, sequence gaps, role enforcement), and produces <code>OrderCommand</code> values for the matching engine or <code>MdSubscription</code> records for market data.</li>
+<li><strong><code>codec</code></strong> (<code>crates/nadatrade-fix/src/codec.rs</code>) — pure-function builders and parsers for FIX message wire format (tag=value pairs separated by SOH, BodyLength, CheckSum).</li>
+<li><strong><code>MessageStore</code></strong> (<code>crates/nadatrade-fix/src/store.rs</code>) — file-backed append-only journal used for ResendRequest replay.</li>
+</ul>
+<p>Data flows through the gateway in two directions:</p>
+<pre><code>TCP client ──► FixSession.handle_message() ──► OrderCommand ──► cmd_tx ──► MatchingEngine
+                                                                     │
+broadcast event_rx ◄── ExchangeEvent ◄── MatchingEngine             │
+        │                                                             │
+        ▼                                                             │
+  event_to_fix_bytes() / MD snapshot builders                         │
+        │                                                             │
+        ▼                                                             │
+  TCP writer (ExecutionReport / MD snapshot) ──► TCP client
+</code></pre>
+<p>The gateway subscribes to the global event bus (<code>broadcast::Receiver&lt;Arc&lt;SequencedEvent&gt;&gt;</code>) and filters events relevant to each session (by <code>client_order_id</code> or <code>participant</code> identity) to produce unsolicited <code>ExecutionReport</code> (35=8) messages. Market data subscriptions cause <code>BookUpdated</code> events to be translated into <code>MarketDataSnapshot</code> (35=W) and <code>TradePrinted</code> events into <code>MarketDataIncrementalRefresh</code> (35=X).</p>
+<h2 id="connection-lifecycle"><a class="header" href="#connection-lifecycle">Connection Lifecycle</a></h2>
+<h3 id="tcp-framing"><a class="header" href="#tcp-framing">TCP Framing</a></h3>
+<p>Every FIX message is a sequence of <code>tag=value</code> pairs separated by the SOH character (<code>\x01</code>). The message is framed by:</p>
+<ol>
+<li><strong>BeginString</strong> — tag 8, always <code>FIX.4.2</code>.</li>
+<li><strong>BodyLength</strong> — tag 9, the number of bytes between the delimiter after <code>9=&lt;n&gt;</code> and the delimiter preceding <code>10=</code>. The codec uses a sentinel placeholder (<code>__BODY_LEN__</code>) during construction and substitutes the computed length before checksum calculation.</li>
+<li><strong>CheckSum</strong> — tag 10, computed as the sum of all preceding bytes (including SOH delimiters) modulo 256, formatted as a 3-digit zero-padded number. The message terminates with a trailing SOH after the checksum.</li>
+</ol>
+<p>The acceptor’s <code>extract_complete_messages</code> function scans the accumulated TCP buffer for <code>8=FIX.4.2\x01</code>, parses the BodyLength to determine the message extent, then slices complete messages from the stream. Incomplete frames are retained in the buffer for the next <code>read()</code> cycle.</p>
+<h3 id="heartbeat-timer"><a class="header" href="#heartbeat-timer">Heartbeat Timer</a></h3>
+<p>A dedicated task spawned per connection sends server-initiated Heartbeat (35=0) messages every <code>heartbeat_secs</code> seconds (configurable, default 30). Each heartbeat carries the current outgoing sequence number (34) and the sender/target comp IDs (49/56). If the client does not respond, the TCP connection will eventually be detected as broken by the OS.</p>
+<h2 id="logon-35a"><a class="header" href="#logon-35a">Logon (35=A)</a></h2>
+<p>Before any order or market data message is accepted, the client must send a Logon message. The gateway enforces this: any message with type other than <code>A</code> received before logon is rejected with a SessionReject (35=3) containing <code>58=Session not logged on; send Logon first</code>.</p>
+<h3 id="required-tags"><a class="header" href="#required-tags">Required Tags</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Tag</th><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>8</td><td>BeginString</td><td><code>FIX.4.2</code></td></tr>
+<tr><td>9</td><td>BodyLength</td><td>computed</td></tr>
+<tr><td>35</td><td>MsgType</td><td><code>A</code> (Logon)</td></tr>
+<tr><td>49</td><td>SenderCompID</td><td>client’s identifier (used as <code>participant</code> in orders)</td></tr>
+<tr><td>56</td><td>TargetCompID</td><td>server’s identifier (typically <code>NADATRADE</code>)</td></tr>
+<tr><td>34</td><td>MsgSeqNum</td><td>client’s outgoing sequence number</td></tr>
+<tr><td>52</td><td>SendingTime</td><td>UTC timestamp</td></tr>
+<tr><td>98</td><td>EncryptMethod</td><td><code>0</code> (none required)</td></tr>
+<tr><td>108</td><td>HeartBtInt</td><td>heartbeat interval in seconds</td></tr>
+<tr><td>553</td><td>Username</td><td>participant username</td></tr>
+<tr><td>554</td><td>Password</td><td>participant password</td></tr>
+</tbody>
+</table>
+</div>
+<p>The server’s Logon response echoes the agreed parameters:</p>
+<pre><code>8=FIX.4.2\x019=&lt;len&gt;\x0135=A\x0134=&lt;seq&gt;\x0149=NADATRADE\x0156=&lt;SenderCompID&gt;\x01108=30\x0198=0\x0110=&lt;cksum&gt;\x01
+</code></pre>
+<h3 id="authentication-flow"><a class="header" href="#authentication-flow">Authentication Flow</a></h3>
+<ol>
+<li>The client sends 35=A with 553 (Username) and 554 (Password).</li>
+<li>If <code>credentials</code> is not configured (an empty <code>HashMap</code>), the logon is accepted unconditionally — <code>SenderCompID</code> and <code>TargetCompID</code> are set from the message, and the session transitions to <code>connected = true</code>.</li>
+<li>If <code>credentials</code> are configured, the gateway looks up the username in the map:
+<ul>
+<li><strong>Unknown username</strong> → Logon rejected. Server sends a Reject (35=3) with <code>58=Unknown participant</code>. Session remains disconnected.</li>
+<li><strong>Password mismatch</strong> → Logon rejected. Server sends a Reject (35=3) with <code>58=Invalid credentials</code>. Session remains disconnected.</li>
+<li><strong>Match</strong> → Logon accepted as above.</li>
+</ul>
+</li>
+<li>On successful logon, the server’s <code>component_id</code> and <code>sender_comp_id</code> are set to the client’s <code>SenderCompID</code> from the logon message.</li>
+</ol>
+<h2 id="logout-355"><a class="header" href="#logout-355">Logout (35=5)</a></h2>
+<p>A Logout message (35=5) sets <code>connected = false</code> on the session. No response is sent; the server stops accepting orders. The TCP write task will eventually terminate because the event stream forwarding loop breaks when connection errors occur.</p>
+<pre><code>8=FIX.4.2\x019=&lt;len&gt;\x0135=5\x0134=&lt;seq&gt;\x0149=&lt;SenderCompID&gt;\x0156=&lt;TargetCompID&gt;\x0110=&lt;cksum&gt;\x01
+</code></pre>
+<h2 id="heartbeat-350-and-testrequest-351"><a class="header" href="#heartbeat-350-and-testrequest-351">Heartbeat (35=0) and TestRequest (35=1)</a></h2>
+<h3 id="heartbeat"><a class="header" href="#heartbeat">Heartbeat</a></h3>
+<p>The gateway sends server-initiated Heartbeat messages at the configured interval. The message format:</p>
+<pre><code>8=FIX.4.2\x019=&lt;len&gt;\x0135=0\x0134=&lt;seq&gt;\x0149=NADATRADE\x0156=&lt;SenderCompID&gt;\x0110=&lt;cksum&gt;\x01
+</code></pre>
+<p>Client-initiated Heartbeats (35=0) received while connected are silently acknowledged (no response). If the session is not connected, a client Heartbeat or TestRequest is rejected with a SessionReject (35=3).</p>
+<h3 id="testrequest"><a class="header" href="#testrequest">TestRequest</a></h3>
+<p>When the client sends a TestRequest (35=1), the server responds with a Heartbeat (35=0). The TestReqID in tag 112 is not echoed in the current implementation.</p>
+<pre><code>8=FIX.4.2\x019=&lt;len&gt;\x0135=1\x0134=&lt;seq&gt;\x0149=&lt;SenderCompID&gt;\x0156=&lt;TargetCompID&gt;\x01112=&lt;test-req-id&gt;\x0110=&lt;cksum&gt;\x01
+</code></pre>
+<h2 id="newordersingle-35d"><a class="header" href="#newordersingle-35d">NewOrderSingle (35=D)</a></h2>
+<p>The gateway parses NewOrderSingle messages into <code>OrderCommand::New</code>. All tag values are strings on the wire and parsed into the internal domain types.</p>
+<h3 id="tags-parsed"><a class="header" href="#tags-parsed">Tags Parsed</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Tag</th><th>Name</th><th>Values</th><th>Notes</th></tr>
+</thead>
+<tbody>
+<tr><td>11</td><td>ClOrdID</td><td>any string</td><td>required; mapped to <code>client_order_id</code></td></tr>
+<tr><td>55</td><td>Symbol</td><td>instrument ID string</td><td>required; mapped to <code>instrument</code></td></tr>
+<tr><td>54</td><td>Side</td><td><code>1</code>=Buy, <code>2</code>=Sell</td><td>required</td></tr>
+<tr><td>38</td><td>OrderQty</td><td>decimal string</td><td>mapped to <code>qty</code></td></tr>
+<tr><td>40</td><td>OrdType</td><td><code>1</code>=Market, <code>2</code>=Limit, <code>3</code>=Stop, <code>4</code>=StopLimit, <code>K</code>=MarketToLimit</td><td>default: Limit</td></tr>
+<tr><td>44</td><td>Price</td><td>decimal string</td><td>optional; for limit orders</td></tr>
+<tr><td>99</td><td>StopPx</td><td>decimal string</td><td>optional; for stop/stop-limit orders</td></tr>
+<tr><td>59</td><td>TimeInForce</td><td><code>0</code>=Day, <code>1</code>=GTC, <code>2</code>=AtOpen, <code>3</code>=IOC, <code>4</code>=FOK, <code>6</code>=GTD, <code>7</code>=AtClose</td><td>default: Day</td></tr>
+<tr><td>126</td><td>ExpireTime</td><td><code>YYYYMMDD-HH:MM:SS</code></td><td>parsed only when 59=6 (GTD)</td></tr>
+<tr><td>210</td><td>MaxFloor</td><td>decimal string</td><td>optional; iceberg display quantity (<code>display_qty</code>)</td></tr>
+<tr><td>7928</td><td>STPMode</td><td><code>0</code>=CancelAggressive, <code>1</code>=CancelResting, <code>2</code>=CancelBoth, <code>3</code>=None</td><td>custom tag; default: CancelAggressive</td></tr>
+<tr><td>49</td><td>SenderCompID</td><td>string</td><td>mapped to <code>participant</code></td></tr>
+</tbody>
+</table>
+</div>
+<p>A new UUIDv4 is generated for each order’s <code>id</code> field. <code>received_at</code> is set to <code>chrono::Utc::now()</code> at parse time.</p>
+<h3 id="full-wire-example"><a class="header" href="#full-wire-example">Full Wire Example</a></h3>
+<p>Buy 1,000 shares of PETR4, limit 38.50, Day:</p>
+<pre><code>8=FIX.4.2\x019=123\x0135=D\x0134=2\x0149=BOT001\x0156=NADATRADE\x0152=20260611-14:30:00\x0111=ord-001\x0155=PETR4\x0154=1\x0138=1000\x0140=2\x0144=38.50\x0159=0\x0110=123\x01
+</code></pre>
+<p>Sell 500 shares of VALE3, stop at 68.00, GTC:</p>
+<pre><code>8=FIX.4.2\x019=140\x0135=D\x0134=3\x0149=BOT001\x0156=NADATRADE\x0111=ord-002\x0155=VALE3\x0154=2\x0138=500\x0140=3\x0199=68.00\x0159=1\x0110=045\x01
+</code></pre>
+<p>Buy 1,000 shares iceberg (display 100), limit 38.50, Day, STP CancelResting:</p>
+<pre><code>8=FIX.4.2\x019=155\x0135=D\x0134=4\x0149=BOT001\x0156=NADATRADE\x0111=ord-ice\x0155=PETR4\x0154=1\x0138=1000\x0140=2\x0144=38.50\x0159=0\x01210=100\x017928=1\x0110=012\x01
+</code></pre>
+<h2 id="ordercancelrequest-35f"><a class="header" href="#ordercancelrequest-35f">OrderCancelRequest (35=F)</a></h2>
+<p>Cancels an existing order by <code>OrigClOrdID</code>. The gateway builds <code>OrderCommand::Cancel</code>.</p>
+<h3 id="required-tags-1"><a class="header" href="#required-tags-1">Required Tags</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Tag</th><th>Name</th><th>Notes</th></tr>
+</thead>
+<tbody>
+<tr><td>11</td><td>ClOrdID</td><td>new client ID for the cancel request (not currently used by the engine)</td></tr>
+<tr><td>41</td><td>OrigClOrdID</td><td>the <code>client_order_id</code> of the order to cancel</td></tr>
+<tr><td>55</td><td>Symbol</td><td>instrument</td></tr>
+<tr><td>49</td><td>SenderCompID</td><td>mapped to <code>participant</code></td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="wire-example"><a class="header" href="#wire-example">Wire Example</a></h3>
+<pre><code>8=FIX.4.2\x019=100\x0135=F\x0134=5\x0149=BOT001\x0156=NADATRADE\x0111=can-001\x0141=ord-001\x0155=PETR4\x0110=099\x01
+</code></pre>
+<h2 id="cancelreplacerequest-35g"><a class="header" href="#cancelreplacerequest-35g">CancelReplaceRequest (35=G)</a></h2>
+<p>Replaces an existing order. The gateway builds <code>OrderCommand::Replace</code>. The <code>new_client_id</code> defaults to <code>orig_client_id</code> if tag 11 is absent from the request.</p>
+<h3 id="tags"><a class="header" href="#tags">Tags</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Tag</th><th>Name</th><th>Notes</th></tr>
+</thead>
+<tbody>
+<tr><td>41</td><td>OrigClOrdID</td><td>the original order’s <code>client_order_id</code></td></tr>
+<tr><td>11</td><td>ClOrdID</td><td>new client ID for the replacement (optional; falls back to OrigClOrdID)</td></tr>
+<tr><td>55</td><td>Symbol</td><td>instrument</td></tr>
+<tr><td>38</td><td>OrderQty</td><td>new quantity (optional)</td></tr>
+<tr><td>44</td><td>Price</td><td>new price (optional)</td></tr>
+<tr><td>49</td><td>SenderCompID</td><td>mapped to <code>participant</code></td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="replace-semantics"><a class="header" href="#replace-semantics">Replace Semantics</a></h3>
+<p>The matching engine interprets replacements as follows:</p>
+<ul>
+<li><strong>Price-only decrease</strong> (same or lower qty) — the order retains its position in the book (time priority).</li>
+<li><strong>Quantity increase</strong> or <strong>price change to a worse level</strong> — the order is removed and re-enters the book at the tail of the new price level.</li>
+<li>Neither <code>new_qty</code> nor <code>new_price</code> is required; the engine preserves unchanged fields from the original order.</li>
+</ul>
+<h3 id="wire-example-1"><a class="header" href="#wire-example-1">Wire Example</a></h3>
+<p>Reduce quantity to 500, no price change:</p>
+<pre><code>8=FIX.4.2\x019=120\x0135=G\x0134=6\x0149=BOT001\x0156=NADATRADE\x0141=ord-001\x0155=PETR4\x0138=500\x0111=ord-002\x0110=088\x01
+</code></pre>
+<h2 id="executionreport-358"><a class="header" href="#executionreport-358">ExecutionReport (35=8)</a></h2>
+<p>ExecutionReports are generated in response to order lifecycle events. They may be <strong>solicited</strong> (direct response to a New/Cancel/Replace) or <strong>unsolicited</strong> (triggered by external events like fills against resting orders or expiry).</p>
+<h3 id="tags-in-outbound-executionreport"><a class="header" href="#tags-in-outbound-executionreport">Tags in Outbound ExecutionReport</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Tag</th><th>Name</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td>8</td><td>BeginString</td><td><code>FIX.4.2</code></td></tr>
+<tr><td>9</td><td>BodyLength</td><td>computed</td></tr>
+<tr><td>35</td><td>MsgType</td><td><code>8</code> (ExecutionReport)</td></tr>
+<tr><td>34</td><td>MsgSeqNum</td><td>server’s outgoing sequence number</td></tr>
+<tr><td>49</td><td>SenderCompID</td><td><code>NADATRADE</code></td></tr>
+<tr><td>56</td><td>TargetCompID</td><td><code>CLIENT</code></td></tr>
+<tr><td>37</td><td>OrderID</td><td>server-assigned UUID</td></tr>
+<tr><td>11</td><td>ClOrdID</td><td>client’s order ID</td></tr>
+<tr><td>55</td><td>Symbol</td><td>instrument</td></tr>
+<tr><td>54</td><td>Side</td><td><code>1</code>=Buy, <code>2</code>=Sell</td></tr>
+<tr><td>39</td><td>OrdStatus</td><td>see below</td></tr>
+<tr><td>150</td><td>ExecType</td><td>see below</td></tr>
+<tr><td>38</td><td>OrderQty</td><td>original or fill quantity</td></tr>
+<tr><td>151</td><td>LeavesQty</td><td>unfilled quantity remaining</td></tr>
+<tr><td>44</td><td>Price</td><td>order price</td></tr>
+<tr><td>58</td><td>Text</td><td>optional; human-readable reason</td></tr>
+<tr><td>14</td><td>CumQty</td><td>optional; cumulative filled quantity</td></tr>
+<tr><td>6</td><td>AvgPx</td><td>optional; average fill price</td></tr>
+<tr><td>31</td><td>LastPx</td><td>optional; last fill price</td></tr>
+<tr><td>32</td><td>LastQty</td><td>optional; last fill quantity</td></tr>
+</tbody>
+</table>
+</div>
+<p><strong>Note:</strong> Tags 14, 6, 31, and 32 are optional and included only when the corresponding <code>Decimal</code> value is <code>Some(...)</code> in the builder call. In the current acceptor integration, these are not populated (passed as <code>None</code>).</p>
+<h3 id="exectype--ordstatus-mapping"><a class="header" href="#exectype--ordstatus-mapping">ExecType / OrdStatus Mapping</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>ExchangeEvent</th><th>ExecType (150)</th><th>OrdStatus (39)</th><th>Notes</th></tr>
+</thead>
+<tbody>
+<tr><td><code>OrderAccepted</code></td><td><code>0</code> (New)</td><td><code>0</code> (New)</td><td></td></tr>
+<tr><td><code>OrderPartiallyFilled</code></td><td><code>1</code> (Partial Fill)</td><td><code>1</code> (Partially Filled)</td><td></td></tr>
+<tr><td><code>OrderFilled</code></td><td><code>2</code> (Filled)</td><td><code>2</code> (Filled)</td><td></td></tr>
+<tr><td><code>OrderCancelled</code></td><td><code>4</code> (Cancelled)</td><td><code>4</code> (Cancelled)</td><td>58=Cancelled</td></tr>
+<tr><td><code>OrderReplaced</code></td><td><code>5</code> (Replaced)</td><td><code>0</code> (New)</td><td>orig order replaced; new order is accepted</td></tr>
+<tr><td><code>OrderRejected</code></td><td><code>8</code> (Rejected)</td><td><code>8</code> (Rejected)</td><td>58=reason text</td></tr>
+<tr><td><code>CancelRejected</code></td><td><code>8</code> (Rejected)</td><td><code>8</code> (Rejected)</td><td>delivered as CancelReject (35=9), not ExecutionReport</td></tr>
+<tr><td><code>OrderExpired</code></td><td><code>C</code> (Expired)</td><td><code>C</code> (Expired)</td><td>58=Expired</td></tr>
+</tbody>
+</table>
+</div>
+<p>Non-order events (<code>BookUpdated</code>, <code>TradePrinted</code>, <code>SessionStateChanged</code>, etc.) produce no ExecutionReport.</p>
+<h3 id="solicited-vs-unsolicited"><a class="header" href="#solicited-vs-unsolicited">Solicited vs. Unsolicited</a></h3>
+<ul>
+<li><strong>Solicited:</strong> The matching engine processes an incoming command and emits the corresponding event on the event bus in the same processing cycle. The FIX acceptor receives the event via <code>event_rx</code> and translates it to a FIX message.</li>
+<li><strong>Unsolicited:</strong> A resting order is filled by an incoming aggressive order from a <em>different</em> participant. The resting order’s participant receives an ExecutionReport even though they sent no new message.</li>
+</ul>
+<p>The <code>event_concerns_session</code> function filters events by matching <code>client_order_id</code> and <code>participant</code> against the session’s tracked set of known order IDs and its logged-in participant identity.</p>
+<h3 id="full-wire-example-fill"><a class="header" href="#full-wire-example-fill">Full Wire Example (Fill)</a></h3>
+<pre><code>8=FIX.4.2\x019=175\x0135=8\x0134=7\x0149=NADATRADE\x0156=CLIENT\x0137=abc-def-1234\x0111=ord-001\x0155=PETR4\x0154=1\x0139=2\x01150=2\x0138=500\x01151=0\x0144=38.50\x0158=\x0110=045\x01
+</code></pre>
+<h2 id="cancelreject-359"><a class="header" href="#cancelreject-359">CancelReject (35=9)</a></h2>
+<p>When a cancel or replace request is rejected (e.g., unknown order, order already filled/cancelled), the gateway builds a CancelReject (35=9) instead of an ExecutionReport.</p>
+<h3 id="tags-1"><a class="header" href="#tags-1">Tags</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Tag</th><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>11</td><td>ClOrdID</td><td>original client order ID</td></tr>
+<tr><td>37</td><td>OrderID</td><td><code>NONE</code> (order was never assigned an ID)</td></tr>
+<tr><td>39</td><td>OrdStatus</td><td><code>8</code> (Rejected)</td></tr>
+<tr><td>41</td><td>OrigClOrdID</td><td>same as ClOrdID</td></tr>
+<tr><td>58</td><td>Text</td><td><code>{:?}</code> of the <code>CancelRejectReason</code> enum</td></tr>
+<tr><td>434</td><td>CxlRejResponseTo</td><td><code>1</code> (response to OrderCancelRequest)</td></tr>
+</tbody>
+</table>
+</div>
+<p>CancelRejectReason variants serialized in tag 58 include: <code>UnknownOrder</code>, <code>AlreadyClosed</code>, and others defined in <code>nadatrade-core</code>.</p>
+<h3 id="wire-example-2"><a class="header" href="#wire-example-2">Wire Example</a></h3>
+<pre><code>8=FIX.4.2\x019=145\x0135=9\x0134=8\x0149=NADATRADE\x0156=CLIENT\x0137=NONE\x0111=ord-001\x0141=ord-001\x0139=8\x01434=1\x0158=UnknownOrder\x0110=123\x01
+</code></pre>
+<h2 id="marketdatarequest-35v"><a class="header" href="#marketdatarequest-35v">MarketDataRequest (35=V)</a></h2>
+<p>The gateway accepts MarketDataRequest messages to subscribe or unsubscribe from instrument-level market data.</p>
+<h3 id="tags-parsed-1"><a class="header" href="#tags-parsed-1">Tags Parsed</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Tag</th><th>Name</th><th>Values</th></tr>
+</thead>
+<tbody>
+<tr><td>262</td><td>MDReqID</td><td>request identifier string</td></tr>
+<tr><td>263</td><td>SubscriptionRequestType</td><td><code>0</code>=Snapshot only, <code>1</code>=Snapshot + Updates, <code>2</code>=Unsubscribe</td></tr>
+<tr><td>55</td><td>Symbol</td><td>instrument ID</td></tr>
+</tbody>
+</table>
+</div>
+<p>When <code>SubscriptionRequestType</code> is <code>2</code> (unsubscribe), the subscription is removed from the session’s tracking map. Otherwise, a new <code>MdSubscription</code> record is stored keyed by instrument, and the gateway begins forwarding <code>BookUpdated</code> and <code>TradePrinted</code> events as FIX market data messages.</p>
+<p><strong>Note:</strong> The current implementation parses a simplified MDR format. Repeating groups (<code>NoMDEntryTypes</code> / <code>NoRelatedSym</code>) are not parsed; only the instrument in tag 55 is read. The subscription always delivers full book snapshots and trade prints for that instrument.</p>
+<h3 id="wire-example-3"><a class="header" href="#wire-example-3">Wire Example</a></h3>
+<p>Subscribe to PETR4 with updates:</p>
+<pre><code>8=FIX.4.2\x019=100\x0135=V\x0134=9\x0149=BOT001\x0156=NADATRADE\x01262=MDREQ1\x0155=PETR4\x01263=1\x0110=088\x01
+</code></pre>
+<h2 id="marketdatasnapshot-35w"><a class="header" href="#marketdatasnapshot-35w">MarketDataSnapshot (35=W)</a></h2>
+<p>Full order book snapshots are sent as 35=W whenever a <code>BookUpdated</code> event is received for a subscribed instrument.</p>
+<h3 id="structure"><a class="header" href="#structure">Structure</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Tag</th><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>262</td><td>MDReqID</td><td>echoed from the subscription</td></tr>
+<tr><td>55</td><td>Symbol</td><td>instrument</td></tr>
+<tr><td>268</td><td>NoMDEntries</td><td>total number of bid + ask entries</td></tr>
+<tr><td>269</td><td>MDEntryType</td><td><code>0</code>=Bid, <code>1</code>=Ask (repeating per entry)</td></tr>
+<tr><td>270</td><td>MDEntryPx</td><td>price (repeating per entry)</td></tr>
+<tr><td>271</td><td>MDEntrySize</td><td>quantity (repeating per entry)</td></tr>
+</tbody>
+</table>
+</div>
+<p>Bids are emitted first (in the order they appear in the <code>bids</code> vector, best-to-worst), followed by asks.</p>
+<h3 id="wire-example-4"><a class="header" href="#wire-example-4">Wire Example</a></h3>
+<p>Book with 2 bids and 1 ask:</p>
+<pre><code>8=FIX.4.2\x019=&lt;len&gt;\x0135=W\x0149=NADATRADE\x0156=CLIENT\x0134=10\x01262=MDREQ1\x0155=PETR4\x01269=0\x01270=38.50\x01271=1000\x01269=0\x01270=38.45\x01271=500\x01269=1\x01270=38.55\x01271=300\x01268=3\x0110=&lt;cksum&gt;\x01
+</code></pre>
+<h2 id="marketdataincrementalrefresh-35x"><a class="header" href="#marketdataincrementalrefresh-35x">MarketDataIncrementalRefresh (35=X)</a></h2>
+<p>Individual trade prints are sent as 35=X. Each message contains a single entry.</p>
+<h3 id="tags-2"><a class="header" href="#tags-2">Tags</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Tag</th><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>262</td><td>MDReqID</td><td>echoed from subscription</td></tr>
+<tr><td>55</td><td>Symbol</td><td>instrument</td></tr>
+<tr><td>268</td><td>NoMDEntries</td><td>always <code>1</code></td></tr>
+<tr><td>269</td><td>MDEntryType</td><td><code>2</code>=Trade</td></tr>
+<tr><td>270</td><td>MDEntryPx</td><td>trade price</td></tr>
+<tr><td>271</td><td>MDEntrySize</td><td>trade quantity</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="wire-example-5"><a class="header" href="#wire-example-5">Wire Example</a></h3>
+<pre><code>8=FIX.4.2\x019=&lt;len&gt;\x0135=X\x0149=NADATRADE\x0156=CLIENT\x0134=11\x01262=MDREQ1\x0155=PETR4\x01268=1\x01269=2\x01270=38.50\x01271=100\x0110=&lt;cksum&gt;\x01
+</code></pre>
+<h2 id="session-control-messages"><a class="header" href="#session-control-messages">Session Control Messages</a></h2>
+<h3 id="resendrequest-352"><a class="header" href="#resendrequest-352">ResendRequest (35=2)</a></h3>
+<p>When the server detects a sequence number gap (the received <code>MsgSeqNum</code> is greater than <code>last_seq_num_in + 1</code>), it sends a ResendRequest asking the client to retransmit missing messages.</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Tag</th><th>Name</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>7</td><td>BeginSeqNo</td><td>expected sequence number (<code>last_seq_num_in</code>)</td></tr>
+<tr><td>16</td><td>EndSeqNo</td><td><code>0</code> (unbounded — request all messages from BeginSeqNo)</td></tr>
+</tbody>
+</table>
+</div>
+<p>The gap is detected in <code>handle_message</code> before any message-type-specific processing: if <code>msg_seq_num &gt; self.last_seq_num_in</code>, a ResendRequest is sent immediately and the message is dropped.</p>
+<p><strong>Client-to-server ResendRequest:</strong> When the <em>client</em> sends 35=2, the server replays messages from the <code>MessageStore</code>. It reads tags 7 (BeginSeqNo) and 16 (EndSeqNo; 0 means “all from BeginSeqNo”) and returns matching outbound messages as a <code>FixSessionResponse::Resend</code> batch. If no <code>MessageStore</code> is initialized (no store directory configured), an empty list is returned.</p>
+<h3 id="reject-353--sessionreject"><a class="header" href="#reject-353--sessionreject">Reject (35=3) / SessionReject</a></h3>
+<p>The gateway sends 35=3 messages for protocol-level errors:</p>
+<ul>
+<li><strong><code>build_reject</code></strong> — simple reject with <code>RefSeqNum</code> (45) and <code>Text</code> (58). Used for logon credential failures.</li>
+<li><strong><code>build_session_reject</code></strong> — richer reject with <code>Text</code> (58), <code>RefTagID</code> (371), and <code>RefMsgType</code> (372). Used for unknown message types, role violations, and pre-logon messages.</li>
+</ul>
+<h3 id="sequencereset-354"><a class="header" href="#sequencereset-354">SequenceReset (35=4)</a></h3>
+<p>Built by <code>build_sequence_reset</code>, supports:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Tag</th><th>Name</th><th>Values</th></tr>
+</thead>
+<tbody>
+<tr><td>36</td><td>NewSeqNo</td><td>the new sequence number</td></tr>
+<tr><td>123</td><td>GapFillFlag</td><td><code>Y</code>=gap fill (replay the gap from store), <code>N</code>=hard reset</td></tr>
+</tbody>
+</table>
+</div>
+<p>This message is available in the codec but not automatically triggered by the acceptor. It is intended for administrative use during recovery scenarios.</p>
+<h2 id="sequence-numbers"><a class="header" href="#sequence-numbers">Sequence Numbers</a></h2>
+<p>Each FIX session maintains two independent sequence number streams:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Stream</th><th>Source</th><th>Tracker</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>Inbound</strong></td><td>tag 34 on client messages</td><td><code>FixSession::last_seq_num_in</code> (starts at 1)</td></tr>
+<tr><td><strong>Outbound</strong></td><td>tag 34 on server messages</td><td><code>Arc&lt;AtomicU64&gt;</code> incremented atomically per message</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="gap-detection"><a class="header" href="#gap-detection">Gap Detection</a></h3>
+<p>On each inbound message, the server compares <code>msg_seq_num</code> against <code>last_seq_num_in</code>:</p>
+<ol>
+<li><strong><code>msg_seq_num &gt; last_seq_num_in</code></strong> — A gap is detected. The server sends a ResendRequest (35=2) with <code>BeginSeqNo = last_seq_num_in</code> and <code>EndSeqNo = 0</code>. The message with the out-of-sequence number is discarded.</li>
+<li><strong><code>msg_seq_num == last_seq_num_in</code> or <code>msg_seq_num &lt; last_seq_num_in</code></strong> — The message is accepted. <code>last_seq_num_in</code> is advanced to <code>msg_seq_num + 1</code>.</li>
+</ol>
+<p>The outbound sequence number is incremented atomically (<code>fetch_add(1, SeqCst)</code>) on every message sent by the server — ExecutionReports, heartbeats, MD snapshots, session control messages, and resend replays all consume a sequence number.</p>
+<h2 id="message-store"><a class="header" href="#message-store">Message Store</a></h2>
+<p>The <code>MessageStore</code> is a file-backed append-only journal that persists outbound messages for ResendRequest replay.</p>
+<h3 id="format"><a class="header" href="#format">Format</a></h3>
+<p>Each session’s store is a file at <code>&lt;store_dir&gt;/&lt;sender_comp_id&gt;-&lt;target_comp_id&gt;.fixlog</code>. The file is newline-delimited JSON:</p>
+<pre><code>{"last_seq_in":0,"last_seq_out":5}
+{"seq":1,"msg":"8=FIX.4.2\x019=...\x0135=0\x01..."}
+{"seq":2,"msg":"8=FIX.4.2\x019=...\x0135=8\x01..."}
+</code></pre>
+<ul>
+<li><strong>Line 1:</strong> <code>StoreHeader</code> — <code>last_seq_in</code> and <code>last_seq_out</code> counters, persisted on every mutation.</li>
+<li><strong>Lines 2+:</strong> <code>MessageEntry</code> — one per outbound message, with sequence number and full FIX wire string.</li>
+</ul>
+<h3 id="initialization"><a class="header" href="#initialization">Initialization</a></h3>
+<p>The store is lazily initialized on the first successful logon message received <em>after</em> the session is connected. It is loaded from disk if the <code>.fixlog</code> file exists (recovering prior <code>last_seq_in</code>/<code>last_seq_out</code> and reloading the latest messages up to <code>cap</code> entries). If the file does not exist, a fresh store is created.</p>
+<h3 id="capacity"><a class="header" href="#capacity">Capacity</a></h3>
+<p>The in-memory outbound buffer is capped at <code>store_cap</code> entries (default 1000). When the cap is exceeded, the oldest entry is evicted from memory. The on-disk journal retains all messages for the session’s lifetime.</p>
+<h3 id="replay"><a class="header" href="#replay">Replay</a></h3>
+<p><code>record_outbound</code> adds a message to both the in-memory <code>VecDeque</code> and the on-disk journal file. <code>replay(from_seq, to_seq)</code> returns messages where <code>seq &gt;= from_seq</code> and (if <code>to_seq &gt; 0</code>) <code>seq &lt; to_seq</code>. A <code>to_seq</code> of <code>0</code> means “unbounded.”</p>
+<h2 id="error-handling"><a class="header" href="#error-handling">Error Handling</a></h2>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Condition</th><th>Response</th><th>Details</th></tr>
+</thead>
+<tbody>
+<tr><td>Not logged on</td><td>SessionReject (35=3)</td><td><code>58=Session not logged on; send Logon first</code></td></tr>
+<tr><td>Invalid credentials</td><td>Reject (35=3) via <code>build_reject</code></td><td><code>58=Invalid credentials</code> or <code>58=Unknown participant</code></td></tr>
+<tr><td>Empty username</td><td>No response</td><td>Logon silently fails; session stays disconnected</td></tr>
+<tr><td>Unknown message type</td><td>SessionReject (35=3)</td><td><code>58=Unknown message type: &lt;type&gt;</code>, <code>371=35</code>, <code>372=&lt;type&gt;</code></td></tr>
+<tr><td>Role violation</td><td>SessionReject (35=3)</td><td><code>58=Orders not allowed on market-data session</code> or <code>58=MD requests not allowed on order-entry session</code></td></tr>
+<tr><td>Sequence gap</td><td>ResendRequest (35=2)</td><td><code>7=&lt;expected&gt;</code>, <code>16=0</code>; offending message dropped</td></tr>
+<tr><td>Heartbeat timeout</td><td>None</td><td>No explicit timeout check; client disconnection detected by TCP</td></tr>
+<tr><td>Invalid UTF-8</td><td>Dropped</td><td><code>parse_fix_message</code> returns <code>None</code>; message silently ignored</td></tr>
+<tr><td>Parse failure (missing critical tag)</td><td>Dropped</td><td>Parse functions return <code>None</code>; no response sent</td></tr>
+<tr><td>Malformed message</td><td>Dropped</td><td>Messages with non-numeric tags or empty msg_type are discarded</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="role-enforcement"><a class="header" href="#role-enforcement">Role Enforcement</a></h3>
+<p>Each session has a <code>SessionRole</code>:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Role</th><th>Allowed Messages</th><th>Blocked Messages</th></tr>
+</thead>
+<tbody>
+<tr><td><code>OrderEntry</code></td><td>D (NewOrder), F (Cancel), G (Replace), A, 5, 0, 1, 2</td><td>V (MarketDataRequest)</td></tr>
+<tr><td><code>MarketData</code></td><td>V (MarketDataRequest), A, 5, 0, 1, 2</td><td>D, F, G</td></tr>
+<tr><td><code>Both</code></td><td>All message types</td><td>None</td></tr>
+</tbody>
+</table>
+</div>
+<p>Violations produce a SessionReject (35=3) with descriptive text.</p>
+<h2 id="configuration"><a class="header" href="#configuration">Configuration</a></h2>
+<p>The FIX gateway is configured in two TOML sections. See <code>reference/config-keys.md</code> for the complete reference.</p>
+<h3 id="server-section"><a class="header" href="#server-section"><code>[server]</code> Section</a></h3>
+<p>Controls the TCP listener:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Key</th><th>Type</th><th>Default</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>fix_listen_addr</code></td><td>string</td><td><code>0.0.0.0:9823</code></td><td>IP:port for the FIX TCP listener</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="fix-section"><a class="header" href="#fix-section"><code>[fix]</code> Section</a></h3>
+<p>Controls session behavior and persistence:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Key</th><th>Type</th><th>Default</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>store_dir</code></td><td>string</td><td><code>data/fix_store</code></td><td>Directory for <code>.fixlog</code> journal files</td></tr>
+<tr><td><code>default_role</code></td><td>string</td><td><code>both</code></td><td>Session role: <code>bothe</code>, <code>orderentry</code>, or <code>marketdata</code></td></tr>
+<tr><td><code>reset_on_logon</code></td><td>bool</td><td><code>false</code></td><td>If true, clears prior session state on logon</td></tr>
+<tr><td><code>heartbeat_secs</code></td><td>u64</td><td><code>30</code></td><td>Interval in seconds between server heartbeats</td></tr>
+<tr><td><code>store_cap</code></td><td>usize</td><td><code>1000</code></td><td>Max in-memory outbound messages per session</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="example-configuration"><a class="header" href="#example-configuration">Example Configuration</a></h3>
+<pre><code class="language-toml">[server]
+fix_listen_addr = "0.0.0.0:9823"
+
+[fix]
+store_dir = "data/fix_store"
+default_role = "both"
+heartbeat_secs = 30
+store_cap = 1000
+</code></pre>
+<h3 id="network-considerations"><a class="header" href="#network-considerations">Network Considerations</a></h3>
+<ul>
+<li>The listener binds to all interfaces by default (<code>0.0.0.0</code>). For production, restrict to a specific interface or place behind a reverse proxy.</li>
+<li>No TLS is provided at the FIX layer. Use a VPN or stunnel for encrypted transport.</li>
+<li>There is no explicit <code>max_connections</code> limit; the acceptor spawns a task per connection. Use OS-level limits (<code>ulimit -n</code>) or a connection-counting gauge to manage resource consumption.</li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../getting-started/first-bot.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                            </a>
+
+                            <a rel="next prefetch" href="../user-guide/ws-gateway.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../getting-started/first-bot.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                    </a>
+
+                    <a rel="next prefetch" href="../user-guide/ws-gateway.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                    </a>
+            </nav>
+
+        </div>
+
+        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
+        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
+        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
+        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
+        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr-ef4e11c1.min.js"></script>
+        <script src="../mark-09e88c2c.min.js"></script>
+        <script src="../searcher-09f2665d.js"></script>
+
+        <script src="../clipboard-1626706a.min.js"></script>
+        <script src="../highlight-abc7f01d.js"></script>
+        <script src="../book-c22b7243.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+
+    </div>
+    </body>
+</html>

@@ -1,0 +1,17 @@
+[book]
+title = "NadaTrade Documentation"
+authors = ["NadaTrade contributors"]
+language = "en"
+src = "."
+
+[build]
+build-dir = "book"
+create-missing = true
+
+[output.html]
+git-repository-url = "https://github.com/nadawrks/nadatrade"
+edit-url-template = "https://github.com/nadawrks/nadatrade/edit/main/docs/book/{path}"
+default-theme = "light"
+preferred-dark-theme = "navy"
+[output.html.search]
+enable = true
