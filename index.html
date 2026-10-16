@@ -12,15 +12,13 @@
   <meta name="twitter:title" content="nada_works">
   <meta name="twitter:description" content="FIX/WS matching engines, trading systems, and screenwriting software for the rest of us.">
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="preload" href="WebPlus_IBM_VGA_8x16.woff" as="font" type="font/woff" crossorigin>
   <title>nada_works</title>
   <style>
     @font-face {
-      font-family: 'IBM VGA 9x16';
-      src: url(WebPlus_IBM_VGA_9x16.woff) format('woff');
-    }
-    @font-face {
       font-family: 'IBM VGA 8x16';
       src: url(WebPlus_IBM_VGA_8x16.woff) format('woff');
+      font-display: block;
     }
 
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -31,16 +29,16 @@
       --c-bright:   #FFFFFF;
       --c-dim:      #888888;
       --c-dark:     #555555;
-      --c-green:    #00AA00;
       --c-brgreen:  #55FF55;
       --c-cyan:     #00AAAA;
-      --c-yellow:   #FFFF55;
-      --ff-vga9:    'IBM VGA 9x16', monospace;
       --ff-vga8:    'IBM VGA 8x16', monospace;
       --cell-h:     16px;
       --cell-w:     8px;
       --cols:       80;
+      --rows:       31;
     }
+
+    ::selection { color: var(--c-bg); background: var(--c-text); text-shadow: none; }
 
     html {
       height: 100%;
@@ -109,68 +107,44 @@
       background: repeating-linear-gradient(
         to bottom,
         transparent 0px,
-        transparent 15px,
-        rgba(0,0,0,0.09) 15px,
-        rgba(0,0,0,0.09) 16px
+        transparent 2px,
+        rgba(0,0,0,0.22) 2px,
+        rgba(0,0,0,0.22) 3px
       );
-    }
-
-    .crt-flicker {
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: 9;
-      background: rgba(255,255,255,0.008);
-      animation: flicker 8s infinite;
-      opacity: 0;
-    }
-    @keyframes flicker {
-      0%,100%{opacity:0} 2%{opacity:.05} 3%{opacity:0} 49%{opacity:0} 50%{opacity:.03} 51%{opacity:0} 87%{opacity:0} 88%{opacity:.04} 89%{opacity:0}
-    }
-
-    .cursor-glow {
-      position: fixed;
-      pointer-events: none;
-      z-index: 4;
-      width: 500px; height: 500px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(200,200,200,.015) 0%, rgba(140,140,140,.008) 40%, transparent 65%);
-      transform: translate(-50%,-50%);
-      transition: opacity 1.5s ease;
-      will-change: left, top;
-      opacity: 0;
     }
 
     .glyph-field {
       position: fixed;
       inset: 0;
       z-index: 0;
-      display: grid;
-      grid-template-columns: repeat(24, 1fr);
-      padding: 16px 24px;
-      font-family: var(--ff-vga8);
-      font-size: 9px;
-      line-height: 1;
-      color: #080808;
-      user-select: none;
+      width: 100%;
+      height: 100%;
       pointer-events: none;
-      align-content: start;
-      overflow: hidden;
+      image-rendering: pixelated;
+      -webkit-mask-image: radial-gradient(ellipse at center, transparent 35%, #000 90%);
+              mask-image: radial-gradient(ellipse at center, transparent 35%, #000 90%);
     }
 
     .screen {
       position: relative;
       z-index: 2;
       width: min(calc(var(--cols) * var(--cell-w)), 100vw - 2rem);
-      border: 2px solid;
-      border-color: var(--c-bright) var(--c-dark) var(--c-dark) var(--c-bright);
-      outline: 1px solid #222222;
-      outline-offset: 2px;
+      height: min(calc(var(--rows) * var(--cell-h) + 3em + 2px), 100dvh - 2rem);
+      overflow-y: auto;
+      border: 1px solid #2a2a2a;
+      border-radius: 10px;
+      box-shadow:
+        inset 0 0 80px rgba(255,255,255,0.035),
+        inset 0 0 12px rgba(255,255,255,0.03),
+        0 0 0 7px #0b0b0b,
+        0 0 0 8px #1e1e1e,
+        0 0 60px rgba(170,170,170,0.06);
       padding: 2em 2ch 1em;
       font-family: var(--ff-vga8);
       font-size: var(--cell-h);
       line-height: 1;
       background: var(--c-bg);
+      text-shadow: 0 0 3px rgba(170,170,170,0.22);
     }
 
     .t-name    { color: var(--c-bright);    text-shadow: 0 0 1px rgba(255,255,255,0.30); }
@@ -179,11 +153,24 @@
     .t-desc    { color: var(--c-text); }
     .t-dim     { color: var(--c-dim); }
     .t-rule    { color: var(--c-dark); }
-    .t-link    { color: var(--c-cyan); text-decoration: none; cursor: pointer; transition: background-color 0.12s, color 0.12s; }
+    .t-link    { color: var(--c-cyan); text-decoration: none; cursor: pointer; transition: background-color 0.12s, color 0.12s; text-shadow: 0 0 3px rgba(0,170,170,0.35); }
     .t-link:hover { color: var(--c-bg); background: var(--c-cyan); text-shadow: none; }
     .t-link:focus-visible { outline: 2px solid var(--c-cyan); outline-offset: 2px; }
     .t-hang     { display: inline-block; vertical-align: top; max-width: calc(100% - 13ch); }
-    .t-ok       { color: var(--c-bright);   text-shadow: 0 0 2px rgba(255,255,255,0.40); }
+    .t-cmd      { color: var(--c-text); }
+    .t-hint     { color: var(--c-dark); text-shadow: none; }
+
+    .ln { white-space: pre-wrap; overflow-wrap: anywhere; min-height: var(--cell-h); }
+
+    .cmd-input {
+      position: absolute;
+      left: 0; bottom: 0;
+      width: 1px; height: var(--cell-h);
+      opacity: 0;
+      border: 0; padding: 0;
+      font-size: 16px;
+      caret-color: transparent;
+    }
 
     .blink-cursor {
       display: inline-block;
@@ -232,11 +219,12 @@
     }
 
     @media (max-width: 768px) {
+      :root { --rows: 33; }
       .glyph-field { display: none; }
-      .screen { padding: 1em 1ch 0.5em; outline-offset: 1px; }
+      .screen { padding: 1em 1ch 0.5em; }
     }
     @media (prefers-reduced-motion: reduce) {
-      .glyph-field, .crt-flicker { display: none; }
+      .glyph-field { display: none; }
       body { animation: none; }
       .power-led::before { animation: none; }
       .blink-cursor::after { animation: none; opacity: 1; }
@@ -246,105 +234,332 @@
 <body>
   <div class="crt-vignette" aria-hidden="true"></div>
   <div class="scanlines" aria-hidden="true"></div>
-  <div class="crt-flicker" aria-hidden="true"></div>
   <div class="crt-noise" aria-hidden="true"></div>
-  <div class="cursor-glow" id="cursor-glow" aria-hidden="true"></div>
-  <div class="glyph-field" id="glyph-field" aria-hidden="true"></div>
+  <canvas class="glyph-field" id="glyph-field" aria-hidden="true"></canvas>
 
   <main>
-  <div class="screen">
-
-    <span class="t-dim">Phoenix 80286 ROM BIOS PLUS Version 1.10 00</span><br><br>
-
-    <span class="t-dim">00640 KB Base Memory</span>  <span class="t-dim"> — </span>  <span class="t-dim">OK</span><br>
-    <span class="t-dim">02048 KB Extended</span>     <span class="t-dim"> — </span>  <span class="t-dim">OK</span><br><br>
-
-    <span class="t-dim">Fixed Disk 0 : Type 47 — 20 MB</span><br>
-    <span class="t-dim">Floppy Diskette A : 1.44M, 3.5 in.</span><br><br>
-
-    <span class="t-dim">Starting MS-DOS...</span><br><br>
-
-    <span class="t-dim">C:\&gt;nadaworks</span><br><br>
-
-    <span class="t-dim">┌─────────────────────┐</span><br>
-    <span class="t-dim">│</span><span class="t-name"> n a d a _ w o r k s </span><span class="t-dim">│</span><br>
-    <span class="t-dim">└─────────────────────┘</span><br>
-
-    <span class="t-dim">(c) 2026 nada.works — all rights reversed.</span><br>
-    <span class="t-dim">640K RAM OK • DOS 3.30 • System ready.</span><br><br>
-
-    <span class="t-label">Products</span><br>
-    <span class="t-rule">────────────────────────────────────</span><br><br>
-
-    <span class="t-name">nadatrade</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="t-desc">FIX/WS matching engine</span><br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="t-link" href="https://nada.works/trade">nada.works/trade</a><br><br>
-
-    <span class="t-name">hollydraft</span>&nbsp;&nbsp;&nbsp;<span class="t-desc t-hang">screenwriting software for the rest of us</span><br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="t-link" href="https://nada.works/hollydraft/">nada.works/hollydraft</a><br><br>
-
-    <span class="t-dim">C:\&gt;</span> <span class="t-tagline" id="tagline"></span><span class="blink-cursor" id="tagline-cursor"></span><br>
-    &nbsp;
+  <div class="screen" id="screen">
+    <div class="ln t-dim" data-wait="500">Phoenix 80286 ROM BIOS PLUS Version 1.10 00</div>
+    <div class="ln"></div>
+    <div class="ln t-dim" data-wait="250"><span class="js-count" data-to="640" data-step="32">00640</span> KB Base Memory <span class="js-after">— OK</span></div>
+    <div class="ln t-dim" data-wait="150"><span class="js-count" data-to="2048" data-step="128">02048</span> KB Extended    <span class="js-after">— OK</span></div>
+    <div class="ln"></div>
+    <div class="ln t-dim" data-wait="350">Fixed Disk 0 : Type 47 — 20 MB</div>
+    <div class="ln t-dim" data-wait="200">Floppy Diskette A : 1.44M, 3.5 in.</div>
+    <div class="ln"></div>
+    <div class="ln t-dim" data-wait="400">Starting MS-DOS...</div>
+    <div class="ln"></div>
+    <div class="ln t-dim" data-wait="600">C:\&gt;<span class="js-type" data-wait="300" data-speed="55">nadaworks</span></div>
+    <div class="ln"></div>
+    <div class="ln t-dim" data-prog data-wait="200" aria-hidden="true">┌─────────────────────┐</div>
+    <div class="ln t-dim" data-prog role="heading" aria-level="1" aria-label="nada_works">│<span class="t-name"> n a d a _ w o r k s </span>│</div>
+    <div class="ln t-dim" data-prog aria-hidden="true">└─────────────────────┘</div>
+    <div class="ln t-dim" data-prog>(c) 2026 nada.works — all rights reversed.</div>
+    <div class="ln t-dim" data-prog>640K RAM OK • DOS 3.30 • System ready.</div>
+    <div class="ln" data-prog></div>
+    <div class="ln t-label" data-prog>Products</div>
+    <div class="ln t-rule" data-prog aria-hidden="true">────────────────────────────────────</div>
+    <div class="ln" data-prog></div>
+    <div class="ln" data-prog><span class="t-name">nadatrade</span>    <span class="t-desc">FIX/WS matching engine</span></div>
+    <div class="ln" data-prog>             <a class="t-link" href="https://nada.works/trade">nada.works/trade</a></div>
+    <div class="ln" data-prog></div>
+    <div class="ln" data-prog><span class="t-name">hollydraft</span>   <span class="t-desc t-hang">screenwriting software for the rest of us</span></div>
+    <div class="ln" data-prog>             <a class="t-link" href="https://nada.works/hollydraft/">nada.works/hollydraft</a></div>
+    <div class="ln" data-prog></div>
+    <div class="ln" data-prog data-wait="200"><span class="t-tagline js-type" id="tagline" data-wait="500" data-speed="80">we are here.</span><span class="blink-cursor" id="cursor"></span></div>
+    <div class="ln" data-prog></div>
   </div>
   </main>
 
   <div class="power-led">POWER</div>
 
   <script>
+    // stray memory: a dim field of CP437 glyphs around the screen, flipping slowly
     (function () {
-      var COLS = 24, ROWS = 18;
       var CP = '\u2591\u2592\u2593\u2588\u2580\u2584\u258C\u2590\u2500\u2502\u250C\u2510\u2514\u2518\u251C\u2524\u252C\u2534\u253C\u2550\u2551!@#$%^&*()-_=+[]{}|;:,.<>?/~`0123456789abcdefABCDEF';
-      var MIN_I = 150, MAX_I = 650, PER_TICK = 4;
+      var CW = 8, CH = 16, COLOR = '#0c0c0c';
+      var MIN_I = 120, MAX_I = 420, PER_TICK = 6;
       var field = document.getElementById('glyph-field');
-      if (!field) return;
+      if (!field || !field.getContext) return;
       if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-      var cells = [];
-      for (var i = 0; i < COLS * ROWS; i++) {
-        var span = document.createElement('span');
-        span.textContent = CP[Math.floor(Math.random() * CP.length)];
-        field.appendChild(span);
-        cells.push(span);
+      if (window.matchMedia('(max-width: 768px)').matches) return;
+      var ctx = field.getContext('2d'), cols, rows;
+
+      function glyph() { return CP[Math.floor(Math.random() * CP.length)]; }
+      function cell(c, r) {
+        ctx.clearRect(c * CW, r * CH, CW, CH);
+        ctx.fillText(glyph(), c * CW, r * CH);
+      }
+      function draw() {
+        cols = Math.ceil(innerWidth / CW);
+        rows = Math.ceil(innerHeight / CH);
+        field.width = cols * CW;
+        field.height = rows * CH;
+        ctx.font = CH + "px 'IBM VGA 8x16', monospace";
+        ctx.textBaseline = 'top';
+        ctx.fillStyle = COLOR;
+        for (var r = 0; r < rows; r++)
+          for (var c = 0; c < cols; c++)
+            if (Math.random() < 0.4) cell(c, r);
       }
       function tick() {
         for (var i = 0; i < PER_TICK; i++) {
-          var idx = Math.floor(Math.random() * cells.length);
-          cells[idx].textContent = CP[Math.floor(Math.random() * CP.length)];
+          var c = Math.floor(Math.random() * cols), r = Math.floor(Math.random() * rows);
+          if (Math.random() < 0.3) ctx.clearRect(c * CW, r * CH, CW, CH);
+          else cell(c, r);
         }
         setTimeout(tick, MIN_I + Math.random() * (MAX_I - MIN_I));
       }
-      tick();
 
-      var glow = document.getElementById('cursor-glow');
-      if (glow && !('ontouchstart' in window)) {
-        var raf, mx = -1000, my = -1000;
-        document.addEventListener('mousemove', function (e) {
-          mx = e.clientX; my = e.clientY;
-          if (!raf) raf = requestAnimationFrame(function () {
-            glow.style.left = mx + 'px';
-            glow.style.top = my + 'px';
-            glow.style.opacity = '1';
-            raf = null;
-          });
-        });
-        document.addEventListener('mouseleave', function () {
-          glow.style.opacity = '0';
+      var resizing;
+      window.addEventListener('resize', function () {
+        clearTimeout(resizing);
+        resizing = setTimeout(draw, 150);
+      });
+      document.fonts.load(CH + "px 'IBM VGA 8x16'").then(function () { draw(); tick(); });
+    })();
+
+    (function () {
+      var screen = document.getElementById('screen');
+      var cursor = document.getElementById('cursor');
+      if (!screen || !cursor) return;
+      var lines = Array.prototype.slice.call(screen.querySelectorAll('.ln'));
+      var prog = lines.filter(function (l) { return l.hasAttribute('data-prog'); })
+                      .map(function (l) {
+                        l = l.cloneNode(true);
+                        each(l, '.blink-cursor', function (c) { c.remove(); });
+                        each(l, '[id]', function (n) { n.removeAttribute('id'); });
+                        return l;
+                      });
+
+      // boot plays once per session; any key or tap skips it
+      var skipped = false, ready = false, wakers = [];
+      try {
+        skipped = sessionStorage.getItem('nw-booted') === '1';
+        sessionStorage.setItem('nw-booted', '1');
+      } catch (e) {}
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) skipped = true;
+
+      function sleep(ms) {
+        return new Promise(function (resolve) {
+          if (skipped) return resolve();
+          var t = setTimeout(resolve, ms);
+          wakers.push(function () { clearTimeout(t); resolve(); });
         });
       }
+      function skip() {
+        skipped = true;
+        wakers.splice(0).forEach(function (wake) { wake(); });
+      }
+      function pad(n, w) {
+        n = String(n);
+        while (n.length < w) n = '0' + n;
+        return n;
+      }
+      function each(root, sel, fn) {
+        Array.prototype.forEach.call(root.querySelectorAll(sel), fn);
+      }
 
-      (function typewriter() {
-        var el = document.getElementById('tagline');
-        var cur = document.getElementById('tagline-cursor');
-        if (!el) return;
-        var text = ' we are here.';
-        var i = 0;
-        function type() {
-          if (i < text.length) {
-            el.textContent += text[i];
-            i++;
-            setTimeout(type, 80 + Math.random() * 60);
+      async function boot() {
+        if (!skipped) lines.forEach(function (l) {
+          l.hidden = true;
+          each(l, '.js-after', function (a) { a.hidden = true; });
+          each(l, '.js-type', function (t) { t.dataset.text = t.textContent; t.textContent = ''; });
+        });
+
+        for (var i = 0; i < lines.length; i++) {
+          var l = lines[i];
+          await sleep(+l.dataset.wait || 40);
+          l.hidden = false;
+          l.appendChild(cursor);
+          screen.scrollTop = screen.scrollHeight;
+
+          var count = l.querySelector('.js-count');
+          if (count) {
+            var to = +count.dataset.to, step = +count.dataset.step;
+            for (var v = 0; v < to; v += step) {
+              count.textContent = pad(v, 5);
+              await sleep(12);
+            }
+            count.textContent = pad(to, 5);
+            await sleep(120);
+          }
+          each(l, '.js-after', function (a) { a.hidden = false; });
+
+          var type = l.querySelector('.js-type');
+          if (type && type.dataset.text) {
+            var text = type.dataset.text, speed = +type.dataset.speed || 80;
+            await sleep(+type.dataset.wait || 0);
+            for (var j = type.textContent.length; j < text.length; j++) {
+              type.textContent += text[j];
+              await sleep(speed + Math.random() * speed * 0.75);
+            }
+            type.textContent = text;
           }
         }
-        setTimeout(type, 1200);
-      })();
+
+        await sleep(600);
+        ready = true;
+        screen.setAttribute('role', 'log');
+        newPrompt();
+        hint = document.createElement('span');
+        hint.className = 't-hint';
+        hint.textContent = ' type help';
+        hint.setAttribute('aria-hidden', 'true');
+        cmdEl.parentNode.appendChild(hint);
+      }
+
+      // interactive prompt
+      var input = document.createElement('input');
+      input.className = 'cmd-input';
+      input.setAttribute('aria-label', 'command');
+      input.setAttribute('autocomplete', 'off');
+      input.setAttribute('autocapitalize', 'off');
+      input.setAttribute('spellcheck', 'false');
+      input.maxLength = 60;
+      screen.appendChild(input);
+
+      var cmdEl = null, hint = null, history = [], hpos = 0;
+
+      var HELP = [
+        'DIR         Lists files.',
+        'NADATRADE   Opens nadatrade.',
+        'HOLLYDRAFT  Opens hollydraft.',
+        'NADAWORKS   Runs nadaworks.',
+        'VER         Shows DOS version.',
+        'CLS         Clears the screen.',
+        'REBOOT      Restarts.'
+      ];
+      var DIR = [
+        ' Volume in drive C is NADA_WORKS',
+        ' Directory of  C:\\',
+        '',
+        'TRADE        <DIR>     10-16-26',
+        'HOLLYDFT     <DIR>     10-16-26',
+        'NADAWRKS EXE    31337  10-16-26',
+        '        3 File(s)    655360 bytes free'
+      ];
+
+      function print(text, cls) {
+        var l = document.createElement('div');
+        l.className = 'ln' + (cls ? ' ' + cls : '');
+        l.textContent = text;
+        screen.appendChild(l);
+      }
+      function newPrompt() {
+        var l = document.createElement('div');
+        l.className = 'ln';
+        l.innerHTML = '<span class="t-dim">C:\\&gt;</span><span class="t-cmd"></span>';
+        cmdEl = l.lastChild;
+        l.appendChild(cursor);
+        screen.appendChild(l);
+        input.value = '';
+        screen.scrollTop = screen.scrollHeight;
+      }
+      function sync() {
+        cmdEl.textContent = input.value;
+        if (hint) { hint.remove(); hint = null; }
+      }
+      function go(href, name) {
+        print('Loading ' + name + '...');
+        cmdEl = null;
+        setTimeout(function () { location.href = href; }, 500);
+      }
+
+      function run(raw) {
+        var line = raw.trim().replace(/^cd(?=[\\\/.])/i, 'cd ');
+        if (line) history.push(line);
+        hpos = history.length;
+
+        var m = line.match(/^(\S*)\s*(.*)$/);
+        var name = m[1].toLowerCase().replace(/^c:\\?/, '').replace(/\.(exe|com|bat)$/, '');
+        var arg = m[2];
+        if (name === 'cd' && arg) name = arg.toLowerCase().replace(/^[\\\/]+|[\\\/]+$/g, '');
+
+        var out;
+        switch (name) {
+          case '':
+          case 'exit':       newPrompt(); return;
+          case 'help':
+          case '?':          out = HELP; break;
+          case 'dir':        out = DIR; break;
+          case 'ver':        out = ['', 'MS-DOS Version 3.30']; break;
+          case 'cd':         out = ['C:\\']; break;
+          case 'echo':       out = [arg || 'ECHO is on']; break;
+          case 'cls':
+            each(screen, '.ln', function (l) { l.remove(); });
+            newPrompt();
+            return;
+          case 'nadaworks':
+            print('');
+            prog.forEach(function (l) { screen.appendChild(l.cloneNode(true)); });
+            newPrompt();
+            return;
+          case 'trade':
+          case 'nadatrade':  go('trade/', 'nadatrade'); return;
+          case 'hollydraft':
+          case 'hollydft':   go('hollydraft/', 'hollydraft'); return;
+          case 'reboot':
+            try { sessionStorage.removeItem('nw-booted'); } catch (e) {}
+            location.reload();
+            return;
+          default:           out = ['Bad command or file name'];
+        }
+        out.forEach(function (t) { print(t); });
+        print('');
+        newPrompt();
+      }
+
+      input.addEventListener('input', function () {
+        if (cmdEl) sync();
+        else input.value = '';
+      });
+
+      document.addEventListener('keydown', function (e) {
+        if (!ready) { skip(); return; }
+        if (e.target === input) {
+          if (!cmdEl) { e.preventDefault(); return; }
+          if (e.key === 'Enter') {
+            e.preventDefault();
+            var raw = input.value;
+            input.value = '';
+            run(raw);
+          } else if (e.key === 'ArrowUp' || e.key === 'ArrowDown') {
+            e.preventDefault();
+            hpos = Math.max(0, Math.min(history.length, hpos + (e.key === 'ArrowUp' ? -1 : 1)));
+            input.value = history[hpos] || '';
+            sync();
+          } else if (e.key === 'Escape') {
+            input.value = cmdEl.textContent = '';
+          } else if (e.ctrlKey && e.key === 'c') {
+            e.preventDefault();
+            cmdEl.textContent = input.value + '^C';
+            newPrompt();
+          } else if (/^(ArrowLeft|ArrowRight|Home|End)$/.test(e.key)) {
+            e.preventDefault();
+          }
+          return;
+        }
+        // typing anywhere goes to the prompt; the first key is inserted by hand
+        // since browsers disagree on where it lands after a focus change
+        if (e.key.length === 1 && !e.ctrlKey && !e.metaKey && !e.altKey && cmdEl) {
+          e.preventDefault();
+          input.focus({ preventScroll: true });
+          if (input.value.length < input.maxLength) input.value += e.key;
+          sync();
+        }
+      });
+
+      document.addEventListener('pointerdown', function () { if (!ready) skip(); });
+      document.addEventListener('click', function (e) {
+        if (!ready || e.target.closest('a') || String(window.getSelection())) return;
+        input.focus({ preventScroll: true });
+      });
+      window.addEventListener('pageshow', function (e) {
+        if (e.persisted && ready && !cmdEl) newPrompt();
+      });
+
+      boot();
     })();
   </script>
 </body>
