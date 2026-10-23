@@ -266,6 +266,9 @@
     <div class="ln" data-prog><span class="t-name">hollydraft</span>   <span class="t-desc t-hang">screenwriting software for the rest of us</span></div>
     <div class="ln" data-prog>             <a class="t-link" href="https://nada.works/hollydraft/">nada.works/hollydraft</a></div>
     <div class="ln" data-prog></div>
+    <div class="ln" data-prog><span class="t-name">nadacity</span>     <span class="t-desc t-hang">a 90s city builder in the browser</span></div>
+    <div class="ln" data-prog>             <a class="t-link" href="https://nada.works/city/">nada.works/city</a></div>
+    <div class="ln" data-prog></div>
     <div class="ln" data-prog data-wait="200"><span class="t-tagline js-type" id="tagline" data-wait="500" data-speed="80">we are here.</span><span class="blink-cursor" id="cursor"></span></div>
     <div class="ln" data-prog></div>
   </div>
@@ -425,6 +428,7 @@
         'DIR         Lists files.',
         'NADATRADE   Opens nadatrade.',
         'HOLLYDRAFT  Opens hollydraft.',
+        'NADACITY    Opens nadacity.',
         'NADAWORKS   Runs nadaworks.',
         'VER         Shows DOS version.',
         'CLS         Clears the screen.',
@@ -436,8 +440,9 @@
         '',
         'TRADE        <DIR>     10-16-26',
         'HOLLYDFT     <DIR>     10-16-26',
+        'CITY         <DIR>     10-23-26',
         'NADAWRKS EXE    31337  10-16-26',
-        '        3 File(s)    655360 bytes free'
+        '        4 File(s)    655360 bytes free'
       ];
 
       function print(text, cls) {
@@ -499,6 +504,8 @@
           case 'nadatrade':  go('trade/', 'nadatrade'); return;
           case 'hollydraft':
           case 'hollydft':   go('hollydraft/', 'hollydraft'); return;
+          case 'city':
+          case 'nadacity':   go('city/', 'nadacity'); return;
           case 'reboot':
             try { sessionStorage.removeItem('nw-booted'); } catch (e) {}
             location.reload();
